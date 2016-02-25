@@ -17,11 +17,12 @@
 
 #include "SFML\Graphics.hpp"
 #include "InputManager.h"
-
+#include "Player.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
+	Player::GetInstance()->Init(700, 450);
 
 	while (window.isOpen())
 	{
@@ -37,8 +38,10 @@ int main()
 		}
 
 		InputManager::GetInstance()->UpdateState();
+		Player::GetInstance()->Update();
+		
 		window.clear();
-
+		Player::GetInstance()->Draw(window);
 		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
