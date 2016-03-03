@@ -2,6 +2,7 @@
 #define _PLAYER_
 
 #include "SFML/Graphics.hpp" 
+#include "SFML/OpenGL.hpp"
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
 

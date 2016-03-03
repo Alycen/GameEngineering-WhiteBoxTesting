@@ -56,39 +56,49 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
-	// X Axis
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) {
+	//X-Axis
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
+	{
 		m_direction.x--;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::A)) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::A)) 
+	{
 		m_direction.x++;
 	}
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::D)) {
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::D)) 
+	{
 		m_direction.x++;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::D)) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::D)) 
+	{
 		m_direction.x--;
 	}
 
-	// Y Axis
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::W)) {
+	//Y-Axis
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::W)) 
+	{
 		m_direction.y--;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::W)) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::W)) 
+	{
 		m_direction.y++;
 	}
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::S)) {
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::S)) 
+	{
 		m_direction.y++;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::S)) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::S)) 
+	{
 		m_direction.y--;
 	}
 
 	// Run
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LShift)) {
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LShift)) 
+	{
 		m_running = true;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LShift)) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LShift)) 
+	{
 		m_running = false;
 	}
 	// Modify Speed if Player is running or not
@@ -115,7 +125,8 @@ void Player::Update()
 	//Normalise direction
 	float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 
-	if (length > 0) {
+	if (length > 0) 
+	{
 		sf::Vector2f normalised = m_direction / length;
 		m_position += normalised * m_speed;
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
@@ -126,7 +137,8 @@ void Player::Update()
 	}
 }
 
-void Player::Smell() {
+void Player::Smell() 
+{
 	//smellCircle.setOrigin(position);
 	m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
 	m_smellCircle.setRadius(0.0f);
@@ -139,13 +151,18 @@ void Player::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
-	if (m_smell)
+	
+	if (m_smell)  
+	{
 		win.draw(m_smellCircle);
-	if (m_smellCircle.getRadius() < m_radius) {
-		m_smellCircle.setRadius(m_smellCircle.getRadius() + .15f);
-		m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
-	}
-	else if (m_smellCircle.getRadius() >= m_radius) {
-		m_smell = false;
+		if (m_smellCircle.getRadius() < m_radius) 
+		{
+			m_smellCircle.setRadius(m_smellCircle.getRadius() + .15f);
+			m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
+		}
+		else if (m_smellCircle.getRadius() >= m_radius) 
+		{
+			m_smell = false;
+		}
 	}
 }
