@@ -22,6 +22,8 @@ private:
 
 	MainMenuScene() {}
 public:
+	bool gameSelected, settingsSelected, exitSelected;
+
 	static MainMenuScene* GetInstance();
 
 	void Init();

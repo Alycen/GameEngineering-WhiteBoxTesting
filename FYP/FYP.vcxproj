@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FYP.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="Player.cpp" />

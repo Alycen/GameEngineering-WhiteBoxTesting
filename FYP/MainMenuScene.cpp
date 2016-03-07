@@ -19,7 +19,12 @@ MainMenuScene* MainMenuScene::GetInstance()
 
 void MainMenuScene::Init()
 {
-	if (!m_font.loadFromFile("Assets/Fonts/VINERITC.TTF")) {
+	gameSelected = false;
+	settingsSelected = false;
+	exitSelected = false;
+
+	if (!m_font.loadFromFile("Assets/Fonts/VINERITC.TTF")) 
+	{
 		//handle error
 	}
 	m_menu[0].setFont(m_font);
@@ -57,15 +62,17 @@ void MainMenuScene::Update()
 		{
 		case 0:
 			cout << "PLAY PRESSED" << endl;
-			//SceneManager::GetInstance()->set("GAME");
+			//gameSelected = true;
+			//settingsSelected = false;
 			break;
 		case 1:
 			cout << "SETTINGS PRESSED" << endl;
-			//SceneManager::GetInstance()->set("MAINMENU");
+			//settingsSelected = true;
+			//gameSelected = false;
 			break;
 		case 2:
 			cout << "EXIT PRESSED" << endl;
-			//SceneManager::GetInstance()->set("MAINMENU");
+			//exitSelected = true;
 			break;
 		}
 	}
@@ -73,14 +80,16 @@ void MainMenuScene::Update()
 
 void MainMenuScene::Draw(sf::RenderWindow &win)
 {
-	for (int i = 0; i < NUM_OF_ELEMENTS; i++) {
+	for (int i = 0; i < NUM_OF_ELEMENTS; i++) 
+	{
 		win.draw(m_menu[i]);
 	}
 }
 
 void MainMenuScene::MoveUp()
 {
-	if (m_selectedItemIndex - 1 >= 0) {
+	if (m_selectedItemIndex - 1 >= 0) 
+	{
 		m_menu[m_selectedItemIndex].setColor(sf::Color::White);
 		m_selectedItemIndex--;
 		m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
@@ -89,7 +98,8 @@ void MainMenuScene::MoveUp()
 
 void MainMenuScene::MoveDown()
 {
-	if (m_selectedItemIndex + 1 < NUM_OF_ELEMENTS) {
+	if (m_selectedItemIndex + 1 < NUM_OF_ELEMENTS) 
+	{
 		m_menu[m_selectedItemIndex].setColor(sf::Color::White);
 		m_selectedItemIndex++;
 		m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);

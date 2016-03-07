@@ -20,6 +20,7 @@
 #include "InputManager.h"
 #include "Player.h"
 #include "MainMenuScene.h"
+#include "GameScene.h"
 
 int main()
 {
@@ -27,6 +28,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
 
 	MainMenuScene::GetInstance()->Init();
+	GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -41,13 +43,19 @@ int main()
 				window.close();
 		}
 
-		MainMenuScene::GetInstance()->Update();
+		//MainMenuScene::GetInstance()->Update();
+		//if (MainMenuScene::GetInstance()->exitSelected)
+		//{
+		//	window.close();
+		//}
+		GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
 
-		MainMenuScene::GetInstance()->Draw(window);
+		//MainMenuScene::GetInstance()->Draw(window);
+		GameScene::GetInstance()->Draw(window);
 		window.display();
 	}
 
