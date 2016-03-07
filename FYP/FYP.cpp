@@ -16,12 +16,15 @@
 #pragma comment(lib,"glu32.lib") 
 
 #include "SFML\Graphics.hpp"
+#include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
-
+#include "Player.h"
 
 int main()
 {
+	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
+	Player::GetInstance()->Init(700, 450);
 
 	while (window.isOpen())
 	{
@@ -36,9 +39,11 @@ int main()
 				window.close();
 		}
 
+		Player::GetInstance()->Update();
 		InputManager::GetInstance()->UpdateState();
+		
 		window.clear();
-
+		Player::GetInstance()->Draw(window);
 		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
