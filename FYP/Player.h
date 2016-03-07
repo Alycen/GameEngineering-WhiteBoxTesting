@@ -5,6 +5,7 @@
 #include "SFML/OpenGL.hpp"
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
+#include "Camera.h"
 
 #define DistanceOfNeck 35.5
 

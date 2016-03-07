@@ -21,6 +21,7 @@
 #include "Player.h"
 #include "MainMenuScene.h"
 #include "GameScene.h"
+#include "Camera.h"
 
 int main()
 {
@@ -56,6 +57,7 @@ int main()
 
 		//MainMenuScene::GetInstance()->Draw(window);
 		GameScene::GetInstance()->Draw(window);
+		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 

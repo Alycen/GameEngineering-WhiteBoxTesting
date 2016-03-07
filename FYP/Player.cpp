@@ -135,6 +135,8 @@ void Player::Update()
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
+
+	Camera::GetInstance()->setViewPosition(m_position);
 }
 
 void Player::Smell() 

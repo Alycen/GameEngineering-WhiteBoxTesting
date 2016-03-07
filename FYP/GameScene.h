@@ -6,6 +6,7 @@
 
 #include "Player.h"
 #include "NPC_Kanine.h"
+#include "Camera.h"
 #include <list>
 
 class GameScene
