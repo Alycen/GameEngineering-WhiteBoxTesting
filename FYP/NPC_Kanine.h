@@ -3,6 +3,7 @@
 
 #include "SFML/Graphics.hpp" 
 #include "SFML/OpenGL.hpp" 
+#include "Pvector.h"
 
 #define DistanceOfNeck 35.5
 
@@ -14,8 +15,8 @@ private:
 	sf::Sprite m_bodySprite;
 	sf::Sprite m_headSprite;
 
-	sf::Vector2f m_position;
-	sf::Vector2f m_direction;
+	Pvector m_position;
+	Pvector m_direction;
 
 	float m_rotation;
 public:
@@ -26,8 +27,8 @@ public:
 	void Draw(sf::RenderWindow&);
 	void Move();
 
-	void SetPosition(sf::Vector2f pos) { m_position = pos; }
-	sf::Vector2f GetPosition() { return m_position; }
+	void SetPosition(Pvector pos) { m_position = pos; }
+	Pvector GetPosition() { return m_position; }
 	void SetX(float x) { m_position.x = x; }
 	float GetX() { return m_position.x; }
 	void SetY(float y) { m_position.y = y; }

@@ -13,7 +13,7 @@ Kanine::Kanine(float x, float y)
 	m_bodySprite.setTexture(m_bodyTexture);
 	m_bodySprite.setOrigin(m_bodySprite.getLocalBounds().width / 2, m_bodySprite.getLocalBounds().height / 2);
 	m_bodySprite.setRotation(0);
-	m_bodySprite.setPosition(m_position);
+	m_bodySprite.setPosition(m_position.x, m_position.y);
 	
 	m_headTexture.loadFromFile("Assets/Graphics/NPC/headKanineNPC.png");
 	m_headTexture.setSmooth(true);
@@ -25,7 +25,7 @@ Kanine::Kanine(float x, float y)
 
 void Kanine::Update()
 {
-	m_bodySprite.setPosition(m_position);
+	m_bodySprite.setPosition(m_position.x, m_position.y);
 	Move();
 }
 
