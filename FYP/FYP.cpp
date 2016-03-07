@@ -19,12 +19,14 @@
 #include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
 #include "Player.h"
+#include "MainMenuScene.h"
 
 int main()
 {
 	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
-	Player::GetInstance()->Init(700, 450);
+
+	MainMenuScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -39,12 +41,13 @@ int main()
 				window.close();
 		}
 
-		Player::GetInstance()->Update();
+		MainMenuScene::GetInstance()->Update();
+
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
-		Player::GetInstance()->Draw(window);
-		//window.setView(Camera::GetInstance()->getView());
+
+		MainMenuScene::GetInstance()->Draw(window);
 		window.display();
 	}
 
