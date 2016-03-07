@@ -42,12 +42,12 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-
 		//MainMenuScene::GetInstance()->Update();
 		//if (MainMenuScene::GetInstance()->exitSelected)
 		//{
 		//	window.close();
 		//}
+
 		GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();

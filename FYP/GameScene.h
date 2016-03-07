@@ -5,6 +5,7 @@
 #include "SFML/OpenGL.hpp" 
 
 #include "Player.h"
+#include "NPC_Kanine.h"
 #include <list>
 
 class GameScene
@@ -15,6 +16,7 @@ private:
 	GameScene() { }
 
 	sf::Music m_backgroundMusic;
+	Kanine* testKanine;
 public:
 	static GameScene* GetInstance();
 	~GameScene()

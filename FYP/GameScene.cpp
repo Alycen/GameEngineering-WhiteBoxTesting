@@ -28,14 +28,17 @@ void GameScene::Init()
 	m_backgroundMusic.setLoop(true);
 
 	Player::GetInstance()->Init(700,450);
+	testKanine = new Kanine(700,400);
 }
 
 void GameScene::Update()
 {
 	Player::GetInstance()->Update();
+	testKanine->Update();
 }
 
 void GameScene::Draw(sf::RenderWindow &win)
 {
 	Player::GetInstance()->Draw(win);
+	testKanine->Draw(win);
 }
