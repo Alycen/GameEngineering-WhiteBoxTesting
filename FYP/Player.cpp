@@ -51,7 +51,7 @@ void Player::Init(float x, float y)
 	//m_barkSound.setBuffer(m_barkBuffer);
 
 	// Smell Area Radius
-	m_radius = 500.0f;
+	m_radius = 950.0f;
 }
 
 void Player::Update()
@@ -103,10 +103,10 @@ void Player::Update()
 	}
 	// Modify Speed if Player is running or not
 	if (m_running) {
-		m_speed = 0.25f;
+		m_speed = 10.0f;
 	}
 	else {
-		m_speed = 0.115f;
+		m_speed = 4.5f;
 	}
 
 	// Smell
@@ -159,7 +159,7 @@ void Player::Draw(sf::RenderWindow &win)
 		win.draw(m_smellCircle);
 		if (m_smellCircle.getRadius() < m_radius) 
 		{
-			m_smellCircle.setRadius(m_smellCircle.getRadius() + .15f);
+			m_smellCircle.setRadius(m_smellCircle.getRadius() + 4.5f);
 			m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
 		}
 		else if (m_smellCircle.getRadius() >= m_radius) 

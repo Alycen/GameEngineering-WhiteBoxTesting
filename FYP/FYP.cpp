@@ -30,6 +30,8 @@ int main()
 
 	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
+	window.setFramerateLimit(60);
+	window.setVerticalSyncEnabled(true);
 
 	MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
