@@ -36,6 +36,8 @@ void GameScene::Update()
 {
 	Player::GetInstance()->Update();
 	testKanine->Update();
+	
+	// check player doesnt leave bounding area
 }
 
 void GameScene::Draw(sf::RenderWindow &win)
