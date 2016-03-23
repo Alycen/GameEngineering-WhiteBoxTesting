@@ -136,6 +136,9 @@ void Player::Update()
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 
+	m_pvecPosition.x = m_position.x;
+	m_pvecPosition.y = m_position.y;
+
 	Camera::GetInstance()->setViewPosition(m_position);
 }
 

@@ -27,7 +27,7 @@ void GameScene::Init()
 	//m_backgroundMusic.play();
 	//m_backgroundMusic.setLoop(true);
 
-	Player::GetInstance()->Init(700,450);
+	Player::GetInstance()->Init(3000,2500);
 	Camera::GetInstance()->Init(1400,900);
 	testKanine = new Kanine(700,400);
 }

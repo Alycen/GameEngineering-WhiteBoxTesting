@@ -27,6 +27,8 @@ void Kanine::Update()
 {
 	m_bodySprite.setPosition(m_position.x, m_position.y);
 	Move();
+	m_pvecPosition.x = m_position.x;
+	m_pvecPosition.y = m_position.y;
 }
 
 void Kanine::Draw(sf::RenderWindow &win)
