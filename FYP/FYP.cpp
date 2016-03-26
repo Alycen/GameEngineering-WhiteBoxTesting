@@ -23,6 +23,7 @@
 #include "GameScene.h"
 #include "Camera.h"
 #include "STP\TMXLoader.hpp"
+#include "Gamepad.h"
 
 int main()
 {
