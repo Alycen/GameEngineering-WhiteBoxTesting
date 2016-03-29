@@ -40,17 +40,17 @@ void Camera::setView(sf::View v) {
 void Camera::setViewPosition(sf::Vector2f pos) {
 	camView.setCenter(pos);
 
-	if (pos.x >= window_width / 2 && pos.x <= 1680)
+	if (pos.x >= window_width / 2.4 && pos.x <= 4800)
 		camView.setCenter(pos.x, camView.getCenter().y);
-	else if (pos.x < window_width / 2)
-		camView.setCenter(window_width / 2, camView.getCenter().y);
-	else if (pos.x > 1680)
-		camView.setCenter(1680, camView.getCenter().y);
+	else if (pos.x < window_width / 2.4)
+		camView.setCenter(window_width / 2.4, camView.getCenter().y);
+	else if (pos.x > 4800)
+		camView.setCenter(4800, camView.getCenter().y);
 
-	if (pos.y >= window_height / 2 && pos.y <= 1350)
+	if (pos.y >= window_height / 2.4 && pos.y <= 5100)
 		camView.setCenter(camView.getCenter().x, pos.y);
-	else if (pos.y < window_height / 2)
-		camView.setCenter(camView.getCenter().x, window_height / 2);
-	else if (pos.y > 1350)
-		camView.setCenter(camView.getCenter().x, 1350);
+	else if (pos.y < window_height / 2.4)
+		camView.setCenter(camView.getCenter().x, window_height / 2.4);
+	else if (pos.y > 5100)
+		camView.setCenter(camView.getCenter().x, 5100);
 }

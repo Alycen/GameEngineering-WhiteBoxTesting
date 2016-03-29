@@ -6,6 +6,7 @@
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
 #include "Camera.h"
+#include "Pvector.h"
 
 #define DistanceOfNeck 35.5
 
@@ -23,6 +24,7 @@ private:
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
+
 	float m_speed;
 	bool m_running = false;
 	bool m_smell = false;
@@ -46,6 +48,8 @@ public:
 		delete instance;
 		instanceFlag = false;
 	}
+
+	Pvector m_pvecPosition;
 };
 
 #endif

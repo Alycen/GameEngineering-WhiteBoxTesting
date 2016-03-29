@@ -24,10 +24,10 @@ void GameScene::Init()
 		// handle error
 	}
 	m_backgroundMusic.setVolume(10);
-	m_backgroundMusic.play();
-	m_backgroundMusic.setLoop(true);
+	//m_backgroundMusic.play();
+	//m_backgroundMusic.setLoop(true);
 
-	Player::GetInstance()->Init(700,450);
+	Player::GetInstance()->Init(3000,2500);
 	Camera::GetInstance()->Init(1400,900);
 	testKanine = new Kanine(700,400);
 }
@@ -36,6 +36,8 @@ void GameScene::Update()
 {
 	Player::GetInstance()->Update();
 	testKanine->Update();
+	
+	// check player doesnt leave bounding area
 }
 
 void GameScene::Draw(sf::RenderWindow &win)
