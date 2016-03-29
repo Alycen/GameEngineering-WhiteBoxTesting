@@ -102,25 +102,32 @@ void Player::Update()
 		m_running = false;
 	}
 	// Modify Speed if Player is running or not
-	if (m_running) {
+	if (m_running) 
+	{
 		m_speed = 10.0f;
 	}
-	else {
+	else if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Space)))
+	{
+		m_speed = 22.0f;
+	}
+	else
+	{
 		m_speed = 4.5f;
 	}
 
 	// Smell
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) {
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) 
+	{
 		Smell();
 	}
-	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) {
+	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) 
+	{
 		m_smell = true;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || m_smellCircle.getRadius() >= m_radius) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || m_smellCircle.getRadius() >= m_radius) 
+	{
 		m_smell = false;
 	}
-
-	// if (m_smell) {}
 
 	//Normalise direction
 	float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
@@ -150,6 +157,11 @@ void Player::Smell()
 	m_smellCircle.setFillColor(sf::Color::Transparent);
 	m_smellCircle.setOutlineColor(sf::Color::White);
 	m_smellCircle.setOutlineThickness(3);
+}
+
+void Player::Dash()
+{
+	
 }
 
 void Player::Draw(sf::RenderWindow &win)

@@ -9,6 +9,7 @@
 #include "Pvector.h"
 
 #define DistanceOfNeck 35.5
+#define DistanceOfTail 100
 
 class Player
 {
@@ -42,6 +43,7 @@ public:
 	void Draw(sf::RenderWindow&);
 
 	void Smell();
+	void Dash();
 
 	~Player()
 	{

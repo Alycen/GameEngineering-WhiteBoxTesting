@@ -26,7 +26,7 @@
 
 int main()
 {
-	tmx::TileMap map("Assets/Tiled/test.tmx");
+	//tmx::TileMap map("Assets/Tiled/test.tmx");
 
 	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
@@ -61,7 +61,7 @@ int main()
 		window.clear();
 
 		//MainMenuScene::GetInstance()->Draw(window);
-		window.draw(map);
+		//window.draw(map);
 		GameScene::GetInstance()->Draw(window);
 		window.setView(Camera::GetInstance()->getView());
 		window.display();

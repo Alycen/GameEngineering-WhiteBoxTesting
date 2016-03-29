@@ -8,6 +8,7 @@
 #include "NPC_Kanine.h"
 #include "Camera.h"
 #include <list>
+#include "STP\TMXLoader.hpp"
 
 class GameScene
 {
@@ -18,6 +19,8 @@ private:
 
 	sf::Music m_backgroundMusic;
 	Kanine* testKanine;
+
+	tmx::TileMap* m_map;
 public:
 	static GameScene* GetInstance();
 	~GameScene()

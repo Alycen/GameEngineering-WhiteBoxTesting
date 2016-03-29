@@ -23,6 +23,8 @@ void GameScene::Init()
 	{
 		// handle error
 	}
+	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
+
 	m_backgroundMusic.setVolume(10);
 	//m_backgroundMusic.play();
 	//m_backgroundMusic.setLoop(true);
@@ -42,6 +44,7 @@ void GameScene::Update()
 
 void GameScene::Draw(sf::RenderWindow &win)
 {
+	win.draw(*m_map);
 	Player::GetInstance()->Draw(win);
 	testKanine->Draw(win);
 }
