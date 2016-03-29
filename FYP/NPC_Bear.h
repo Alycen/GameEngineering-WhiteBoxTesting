@@ -1,6 +1,8 @@
 #ifndef _NPC_BEAR_
 #define _NPC_BEAR_
 
+#include "stdafx.h"
+
 class Bear
 {
 private:
