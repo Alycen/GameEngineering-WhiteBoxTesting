@@ -51,7 +51,7 @@ void Player::Init(float x, float y)
 	//m_barkSound.setBuffer(m_barkBuffer);
 
 	// Smell Area Radius
-	m_radius = 500.0f;
+	m_radius = 950.0f;
 }
 
 void Player::Update()
@@ -102,25 +102,32 @@ void Player::Update()
 		m_running = false;
 	}
 	// Modify Speed if Player is running or not
-	if (m_running) {
-		m_speed = 0.25f;
+	if (m_running) 
+	{
+		m_speed = 10.0f;
 	}
-	else {
-		m_speed = 0.115f;
+	else if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Space)))
+	{
+		m_speed = 22.0f;
+	}
+	else
+	{
+		m_speed = 4.5f;
 	}
 
 	// Smell
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) {
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) 
+	{
 		Smell();
 	}
-	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) {
+	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) 
+	{
 		m_smell = true;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || m_smellCircle.getRadius() >= m_radius) {
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || m_smellCircle.getRadius() >= m_radius) 
+	{
 		m_smell = false;
 	}
-
-	// if (m_smell) {}
 
 	//Normalise direction
 	float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
@@ -135,6 +142,11 @@ void Player::Update()
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
+
+	m_pvecPosition.x = m_position.x;
+	m_pvecPosition.y = m_position.y;
+
+	Camera::GetInstance()->setViewPosition(m_position);
 }
 
 void Player::Smell() 
@@ -147,6 +159,11 @@ void Player::Smell()
 	m_smellCircle.setOutlineThickness(3);
 }
 
+void Player::Dash()
+{
+	
+}
+
 void Player::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
@@ -157,7 +174,7 @@ void Player::Draw(sf::RenderWindow &win)
 		win.draw(m_smellCircle);
 		if (m_smellCircle.getRadius() < m_radius) 
 		{
-			m_smellCircle.setRadius(m_smellCircle.getRadius() + .15f);
+			m_smellCircle.setRadius(m_smellCircle.getRadius() + 4.5f);
 			m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
 		}
 		else if (m_smellCircle.getRadius() >= m_radius) 

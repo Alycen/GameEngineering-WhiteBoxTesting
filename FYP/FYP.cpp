@@ -19,12 +19,22 @@
 #include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
 #include "Player.h"
+#include "MainMenuScene.h"
+#include "GameScene.h"
+#include "Camera.h"
+#include "STP\TMXLoader.hpp"
 
 int main()
 {
+	//tmx::TileMap map("Assets/Tiled/test.tmx");
+
 	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
-	Player::GetInstance()->Init(700, 450);
+	window.setFramerateLimit(60);
+	window.setVerticalSyncEnabled(true);
+
+	MainMenuScene::GetInstance()->Init();
+	GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -38,13 +48,22 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
+		//MainMenuScene::GetInstance()->Update();
+		//if (MainMenuScene::GetInstance()->exitSelected)
+		//{
+		//	window.close();
+		//}
 
-		Player::GetInstance()->Update();
+		GameScene::GetInstance()->Update();
+
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
-		Player::GetInstance()->Draw(window);
-		//window.setView(Camera::GetInstance()->getView());
+
+		//MainMenuScene::GetInstance()->Draw(window);
+		//window.draw(map);
+		GameScene::GetInstance()->Draw(window);
+		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
