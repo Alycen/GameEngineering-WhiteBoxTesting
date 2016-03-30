@@ -31,6 +31,9 @@ private:
 
 	sf::SoundBuffer m_barkBuffer;
 	sf::Sound m_barkSound;
+	
+	int m_health;
+	int m_stamina;
 public:
 	static Player* GetInstance();
 	void Init(float, float);
