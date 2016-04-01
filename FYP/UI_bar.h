@@ -6,6 +6,7 @@
 class UI_bar
 {
 private:
+	//Border
 	sf::Vector2f m_left_pos;
 	sf::Vector2f m_right_pos;
 	sf::Vector2f m_mid_pos;
@@ -19,6 +20,21 @@ private:
 	sf::Sprite m_mid_sprite;
 
 	float m_length;
+
+	// Filling
+	sf::Vector2f m_left_filling_pos;
+	sf::Vector2f m_right_filling_pos;
+	sf::Vector2f m_mid_filling_pos;
+
+	sf::Texture m_left_filling_tex;
+	sf::Texture m_right_filling_tex;
+	sf::Texture m_mid_filling_tex;
+
+	sf::Sprite m_left_filling_sprite;
+	sf::Sprite m_right_filling_sprite;
+	sf::Sprite m_mid_filling_sprite;
+
+	float m_filling_length;
 	
 	bool isVisible;
 public:
