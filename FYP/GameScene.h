@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include <list>
 #include "STP\TMXLoader.hpp"
+#include "UI_bar.h"
 
 class GameScene
 {
@@ -21,6 +22,8 @@ private:
 	Kanine* testKanine;
 
 	tmx::TileMap* m_map;
+
+	UI_bar* temp_healtbar;
 public:
 	static GameScene* GetInstance();
 	~GameScene()
