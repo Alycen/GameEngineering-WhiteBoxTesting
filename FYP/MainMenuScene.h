@@ -21,6 +21,9 @@ private:
 	sf::Text m_menu[NUM_OF_ELEMENTS];
 
 	MainMenuScene() {}
+
+	sf::Texture m_logoTexture;
+	sf::Sprite m_logoSprite;
 public:
 	bool gameSelected, settingsSelected, exitSelected;
 

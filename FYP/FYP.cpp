@@ -47,20 +47,20 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-		//MainMenuScene::GetInstance()->Update();
-		//if (MainMenuScene::GetInstance()->exitSelected)
-		//{
-		//	window.close();
-		//}
+		MainMenuScene::GetInstance()->Update();
+		if (MainMenuScene::GetInstance()->exitSelected)
+		{
+			window.close();
+		}
 
-		GameScene::GetInstance()->Update();
+		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
-
-		GameScene::GetInstance()->Draw(window);
-		window.setView(Camera::GetInstance()->getView());
+		MainMenuScene::GetInstance()->Draw(window);
+		//GameScene::GetInstance()->Draw(window);
+		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
