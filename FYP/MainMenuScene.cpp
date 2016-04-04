@@ -46,7 +46,8 @@ void MainMenuScene::Init()
 	
 
 	m_logoTexture.loadFromFile("Assets/Graphics/Menu/logo.png");
-	
+	m_logoTexture.setSmooth(true);
+
 	m_logoSprite.setTexture(m_logoTexture);
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	m_logoSprite.setPosition(sf::Vector2f(desktop.width - 600, 100));
