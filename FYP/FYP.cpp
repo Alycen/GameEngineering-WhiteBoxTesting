@@ -23,6 +23,7 @@
 #include "GameScene.h"
 #include "Camera.h"
 #include "STP\TMXLoader.hpp"
+#include "SplashScene.h"
 
 int main()
 {
@@ -33,6 +34,7 @@ int main()
 
 	MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
+	SplashScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -46,19 +48,20 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-
+		SplashScene::GetInstance()->Update();
 		/*MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
 		}*/
-		GameScene::GetInstance()->Update();
+		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
+		SplashScene::GetInstance()->Draw(window);
 		//MainMenuScene::GetInstance()->Draw(window);
-		GameScene::GetInstance()->Draw(window);
+		//GameScene::GetInstance()->Draw(window);
 		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}

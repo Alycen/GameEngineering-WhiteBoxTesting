@@ -182,6 +182,7 @@
     <ClCompile Include="NPC_Kanine.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pvector.cpp" />
+    <ClCompile Include="SplashScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="UI_bar.cpp" />
   </ItemGroup>
