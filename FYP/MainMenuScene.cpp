@@ -48,6 +48,27 @@ void MainMenuScene::Init()
 	m_menu[2].setString("Exit");
 	m_menu[2].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 4));
 
+	m_menu[3].setFont(m_font);
+	m_menu[3].setScale(sf::Vector2f(1.5, 1.5));
+	m_menu[3].setStyle(sf::Text::Bold);
+	m_menu[3].setColor(sf::Color::White);
+	m_menu[3].setString("New Game");
+	m_menu[3].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 1));
+
+	m_menu[4].setFont(m_font);
+	m_menu[4].setScale(sf::Vector2f(1.5, 1.5));
+	m_menu[4].setStyle(sf::Text::Bold);
+	m_menu[4].setColor(sf::Color::White);
+	m_menu[4].setString("Load Game");
+	m_menu[4].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 2.5));
+
+	m_menu[5].setFont(m_font);
+	m_menu[5].setScale(sf::Vector2f(1.5, 1.5));
+	m_menu[5].setStyle(sf::Text::Bold);
+	m_menu[5].setColor(sf::Color::White);
+	m_menu[5].setString("Back");
+	m_menu[5].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 4));
+
 	m_selectedItemIndex = 0;
 	
 	m_logoTexture.loadFromFile("Assets/Graphics/Menu/logo.png");
@@ -75,11 +96,10 @@ void MainMenuScene::Update()
 		{
 		case 0:
 			cout << "PLAY PRESSED" << endl;
+			m_selectedItemIndex = 3;
+			first_scene = false;
 			//gameSelected = true;
 			//settingsSelected = false;
-			m_menu[0].setString("New Game");
-			m_menu[1].setString("Load Game");
-			m_menu[2].setString("Back");
 			break;
 		case 1:
 			cout << "SETTINGS PRESSED" << endl;
@@ -90,36 +110,81 @@ void MainMenuScene::Update()
 			cout << "EXIT PRESSED" << endl;
 			//exitSelected = true;
 			break;
+		case 3:
+			cout << "NEW GAME PRESSED" << endl;
+			break;
+		case 4:
+			cout << "LOAD GAME PRESSED" << endl;
+			break;
+		case 5:
+			cout << "BACK PRESSED" << endl;
+			m_selectedItemIndex = 0;
+			first_scene = true;
+			break;
 		}
 	}
 }
 
 void MainMenuScene::Draw(sf::RenderWindow &win)
 {
-	for (int i = 0; i < NUM_OF_ELEMENTS; i++) 
+	if (first_scene)
 	{
-		win.draw(m_menu[i]);
+		for (int i = 0; i < 3; i++) 
+		{
+			win.draw(m_menu[i]);
+		}
+	}
+	else if (!first_scene)
+	{
+		for (int i = 3; i < 6; i++)
+		{
+			win.draw(m_menu[i]);
+		}
 	}
 	win.draw(m_logoSprite);
 }
 
 void MainMenuScene::MoveUp()
 {
-	if (m_selectedItemIndex - 1 >= 0) 
+	if (first_scene)
 	{
-		m_menu[m_selectedItemIndex].setColor(sf::Color::White);
-		m_selectedItemIndex--;
-		m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
+		if (m_selectedItemIndex - 1 >= 0) 
+		{
+			m_menu[m_selectedItemIndex].setColor(sf::Color::White);
+			m_selectedItemIndex--;
+			m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
+		}
+	}
+	else
+	{
+		if (m_selectedItemIndex - 1 >= 3)
+		{
+			m_menu[m_selectedItemIndex].setColor(sf::Color::White);
+			m_selectedItemIndex--;
+			m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
+		}
 	}
 }
 
 void MainMenuScene::MoveDown()
 {
-	if (m_selectedItemIndex + 1 < NUM_OF_ELEMENTS) 
+	if (first_scene)
 	{
-		m_menu[m_selectedItemIndex].setColor(sf::Color::White);
-		m_selectedItemIndex++;
-		m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
+		if (m_selectedItemIndex + 1 < 3) 
+		{
+			m_menu[m_selectedItemIndex].setColor(sf::Color::White);
+			m_selectedItemIndex++;
+			m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
+		}
+	}
+	else 
+	{
+		if (m_selectedItemIndex + 1 < 6)
+		{
+			m_menu[m_selectedItemIndex].setColor(sf::Color::White);
+			m_selectedItemIndex++;
+			m_menu[m_selectedItemIndex].setColor(sf::Color::Cyan);
+		}
 	}
 }
 
