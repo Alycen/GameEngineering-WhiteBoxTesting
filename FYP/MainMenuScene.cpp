@@ -43,6 +43,14 @@ void MainMenuScene::Init()
 	m_menu[2].setPosition(sf::Vector2f(100 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 3));
 
 	m_selectedItemIndex = 0;
+	
+
+	m_logoTexture.loadFromFile("Assets/Graphics/Menu/logo.png");
+	m_logoTexture.setSmooth(true);
+
+	m_logoSprite.setTexture(m_logoTexture);
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	m_logoSprite.setPosition(sf::Vector2f(desktop.width - 600, 100));
 }
 
 void MainMenuScene::Update()
@@ -84,6 +92,7 @@ void MainMenuScene::Draw(sf::RenderWindow &win)
 	{
 		win.draw(m_menu[i]);
 	}
+	win.draw(m_logoSprite);
 }
 
 void MainMenuScene::MoveUp()

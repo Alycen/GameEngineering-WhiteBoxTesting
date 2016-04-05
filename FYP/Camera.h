@@ -2,6 +2,7 @@
 #define _CAMERA_
 
 #include "SFML\Graphics.hpp"
+#include "UI_bar.h"
 
 class Camera
 {
