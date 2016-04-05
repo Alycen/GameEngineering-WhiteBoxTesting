@@ -19,7 +19,7 @@ Bear::Bear(float x, float y)
 	m_headTexture.setSmooth(true);
 
 	m_headSprite.setTexture(m_headTexture);
-	m_headSprite.setOrigin(30.0f, 65.0f);
+	m_headSprite.setOrigin(28.0f, 56.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 }
 
