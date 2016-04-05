@@ -26,7 +26,6 @@
 
 int main()
 {
-
 	srand(time(NULL));
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
 	window.setFramerateLimit(60);
@@ -47,20 +46,20 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-		MainMenuScene::GetInstance()->Update();
+
+		/*MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
-		}
-
-		//GameScene::GetInstance()->Update();
+		}*/
+		GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
-		MainMenuScene::GetInstance()->Draw(window);
-		//GameScene::GetInstance()->Draw(window);
-		//window.setView(Camera::GetInstance()->getView());
+		//MainMenuScene::GetInstance()->Draw(window);
+		GameScene::GetInstance()->Draw(window);
+		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
