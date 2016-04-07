@@ -32,9 +32,9 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
-	MainMenuScene::GetInstance()->Init();
+	//SplashScene::GetInstance()->Init();
+	//MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
-	SplashScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -49,20 +49,20 @@ int main()
 				window.close();
 		}
 		//SplashScene::GetInstance()->Update();
-		MainMenuScene::GetInstance()->Update();
+		/*MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
-		}
-		//GameScene::GetInstance()->Update();
+		}*/
+		GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
 		//SplashScene::GetInstance()->Draw(window);
-		MainMenuScene::GetInstance()->Draw(window);
-		//GameScene::GetInstance()->Draw(window);
-		//window.setView(Camera::GetInstance()->getView());
+		//MainMenuScene::GetInstance()->Draw(window);
+		GameScene::GetInstance()->Draw(window);
+		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
