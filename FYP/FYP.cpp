@@ -42,6 +42,7 @@ int main()
 		while (window.pollEvent(Event))
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
+			
 			if (Event.type == sf::Event::Closed)
 				window.close();
 

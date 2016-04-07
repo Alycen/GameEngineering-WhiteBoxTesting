@@ -1,4 +1,7 @@
 #include "Player.h"
+#include <iostream>
+
+using namespace std;
 
 bool Player::instanceFlag = false;
 Player* Player::instance = NULL;
@@ -139,12 +142,15 @@ void Player::Update()
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
 		m_bodySprite.setPosition(m_position);
-		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
-		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
-	}
 
-	m_pvecPosition.x = m_position.x;
-	m_pvecPosition.y = m_position.y;
+		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+	}
+	float dx = InputManager::GetInstance()->GetMousePos().x - (m_headSprite.getGlobalBounds().width / 2); // Wrong points for head
+	float dy = InputManager::GetInstance()->GetMousePos().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
+
+	cout << "Mouse X : " + std::to_string(InputManager::GetInstance()->GetMousePos().x) + ", Mouse Y : " + std::to_string(InputManager::GetInstance()->GetMousePos().y) << endl;
+
+	m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
 
 	Camera::GetInstance()->setViewPosition(m_position);
 }

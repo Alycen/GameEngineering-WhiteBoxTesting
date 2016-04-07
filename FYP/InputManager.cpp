@@ -168,3 +168,13 @@ sf::Vector2f InputManager::GetMousePos()
 {
 	return mousePos;
 }
+
+sf::Vector2f InputManager::GetMousePosWorld()
+{
+	return mousePosWorld;
+}
+
+void InputManager::GetWindow(sf::Event e, sf::RenderWindow &win)
+{
+	mousePosWorld
+}

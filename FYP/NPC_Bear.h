@@ -2,7 +2,6 @@
 #define _NPC_BEAR_
 
 #include "stdafx.h"
-#include "Pvector.h"
 
 #define DistanceOfNeck 60.5
 
@@ -34,8 +33,6 @@ public:
 	float GetY() { return m_position.y; }
 
 	Bear::~Bear() {};
-
-	Pvector m_pvecPosition;
 };
 
 #endif

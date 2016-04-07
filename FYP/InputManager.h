@@ -22,6 +22,9 @@ public:
 	bool IsMouseButtonHeld(int mouseButtonIndex);
 	bool IsMouseButtonReleased(int mouseButtonIndex);
 	sf::Vector2f GetMousePos();
+	sf::Vector2f GetMousePosWorld();
+
+	void GetWindow(sf::Event, sf::RenderWindow&);
 
 	//Variables
 
@@ -48,6 +51,7 @@ private:
 	std::list<int> heldClicks;
 	std::list<int> releasedClicks;
 	sf::Vector2f mousePos;
+	sf::Vector2f mousePosWorld;
 
 	static bool instanceFlag;
 	static InputManager *instance;

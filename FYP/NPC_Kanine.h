@@ -3,7 +3,6 @@
 
 #include "SFML/Graphics.hpp" 
 #include "SFML/OpenGL.hpp" 
-#include "Pvector.h"
 
 #define DistanceOfNeck 35.5
 
@@ -35,8 +34,6 @@ public:
 	float GetY() { return m_position.y; }
 
 	Kanine::~Kanine() {};
-
-	Pvector m_pvecPosition;
 };
 
 #endif
