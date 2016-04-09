@@ -59,6 +59,8 @@ public:
 	float GetX() { return m_position.x; }
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
+	void SetHealth(float h) { m_health = h; }
+	float GetHealth() { return m_health; }
 
 	~Player()
 	{

@@ -55,6 +55,9 @@ void Player::Init(float x, float y)
 
 	// Smell Area Radius
 	m_radius = 950.0f;
+
+	// Stats
+	m_health = 100;
 }
 
 void Player::Update()

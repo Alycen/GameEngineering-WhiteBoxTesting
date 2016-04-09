@@ -5,14 +5,14 @@ UI_bar::UI_bar()
 
 }
 
-UI_bar::UI_bar(float x, float y, string type, float legnth)
+UI_bar::UI_bar(float y, string type, float legnth)
 {
 	//m_left_pos.y = y;
 	//m_mid_pos.y = y;
 	//m_right_pos.y = y;
-
-	m_mid_pos.x = 10;
-	m_right_pos.x = 164;
+	m_length = 100;
+	m_scale = .12f;
+	m_y = y;
 
 	m_left_tex.loadFromFile("Assets/UI/bar_left.png");
 	m_mid_tex.loadFromFile("Assets/UI/bar_mid.png");
@@ -23,18 +23,18 @@ UI_bar::UI_bar(float x, float y, string type, float legnth)
 	m_right_filling_tex.loadFromFile("Assets/UI/" + type + "_right.png");
 
 	m_left_sprite.setTexture(m_left_tex);
-	m_left_sprite.setScale(.1, .1);
+	m_left_sprite.setScale(m_scale, m_scale);
 	m_mid_sprite.setTexture(m_mid_tex);
-	m_mid_sprite.setScale(7, .1);
+	m_mid_sprite.setScale(m_length / 10, m_scale);
 	m_right_sprite.setTexture(m_right_tex);
-	m_right_sprite.setScale(.1, .1);
+	m_right_sprite.setScale(m_scale, m_scale);
 
 	m_left_filling_sprite.setTexture(m_left_filling_tex);
-
+	m_left_filling_sprite.setScale(m_scale, m_scale);
 	m_mid_filling_sprite.setTexture(m_mid_filling_tex);
-
+	m_mid_filling_sprite.setScale(m_length / 10, m_scale);
 	m_right_filling_sprite.setTexture(m_right_filling_tex);
-
+	m_right_filling_sprite.setScale(m_scale, m_scale);
 
 	isVisible = true;
 }
@@ -44,6 +44,10 @@ void UI_bar::Update()
 	m_left_sprite.setPosition(m_left_pos);
 	m_mid_sprite.setPosition(m_mid_pos);
 	m_right_sprite.setPosition(m_right_pos);
+
+	m_left_filling_sprite.setPosition(m_left_filling_pos);
+	m_mid_filling_sprite.setPosition(m_mid_filling_pos);
+	m_right_filling_sprite.setPosition(m_right_filling_pos);
 }
 
 void UI_bar::Draw(sf::RenderWindow &win)
@@ -51,13 +55,23 @@ void UI_bar::Draw(sf::RenderWindow &win)
 	sf::Vector2f windowCentre = win.getView().getCenter();
 	sf::Vector2f windowSize = win.getView().getSize();
 
-	m_left_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 20), windowCentre.y - ((windowSize.y / 2) - 20));
+	m_left_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 20), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_mid_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_right_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
+
+	m_left_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 22), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_mid_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_right_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
 
 	if (isVisible)
 	{
+		win.draw(m_left_filling_sprite);
+		win.draw(m_mid_filling_sprite);
+		win.draw(m_right_filling_sprite);
+
 		win.draw(m_left_sprite);
-		//win.draw(m_mid_sprite);
-		//win.draw(m_right_sprite);
+		win.draw(m_mid_sprite);
+		win.draw(m_right_sprite);
 	}
 	else
 	{

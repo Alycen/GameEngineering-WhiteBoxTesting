@@ -34,7 +34,7 @@ void GameScene::Init()
 	testKanine = new Kanine(700,400);
 	testBear = new Bear(2900, 2700);
 
-	temp_healtbar = new UI_bar(3000, 2500, "Health", 70);
+	temp_healtbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
 }
 
 void GameScene::Update()
