@@ -57,6 +57,9 @@
     <ClInclude Include="SplashScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NPC_Deer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
