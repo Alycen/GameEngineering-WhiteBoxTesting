@@ -55,10 +55,12 @@ void UI_bar::Draw(sf::RenderWindow &win)
 	sf::Vector2f windowCentre = win.getView().getCenter();
 	sf::Vector2f windowSize = win.getView().getSize();
 
+	//Leave border positions as is
 	m_left_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 20), windowCentre.y - ((windowSize.y / 2) - m_y));
 	m_mid_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
 	m_right_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
 
+	// Need modifiable Length variable for here
 	m_left_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 22), windowCentre.y - ((windowSize.y / 2) - m_y));
 	m_mid_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
 	m_right_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
