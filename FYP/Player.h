@@ -45,8 +45,10 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow&);
 
-	void Smell();
-	void Dash();
+	void Smell(); // Alt Key / Left Bumper
+	void Dash(); // Space Bar / Right bumper?
+	void Bite(); // Right Click / Right Trigger
+	void Slash(); // Left Click / Left Trigger
 
 	~Player()
 	{

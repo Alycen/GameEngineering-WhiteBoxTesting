@@ -164,6 +164,16 @@ void Player::Dash()
 	
 }
 
+void Player::Bite()
+{
+
+}
+
+void Player::Slash()
+{
+
+}
+
 void Player::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
