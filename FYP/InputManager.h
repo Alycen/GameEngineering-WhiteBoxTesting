@@ -24,7 +24,7 @@ public:
 	sf::Vector2f GetMousePos();
 	sf::Vector2f GetMousePosWorld();
 
-	void GetWindow(sf::Event, sf::RenderWindow&);
+	void GetWindow(sf::Mouse, sf::RenderWindow&);
 
 	//Variables
 

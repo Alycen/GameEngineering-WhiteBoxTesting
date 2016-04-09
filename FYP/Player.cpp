@@ -148,7 +148,8 @@ void Player::Update()
 	float dx = InputManager::GetInstance()->GetMousePos().x - (m_headSprite.getGlobalBounds().width / 2); // Wrong points for head
 	float dy = InputManager::GetInstance()->GetMousePos().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
 
-	cout << "Mouse X : " + std::to_string(InputManager::GetInstance()->GetMousePos().x) + ", Mouse Y : " + std::to_string(InputManager::GetInstance()->GetMousePos().y) << endl;
+	//cout << "Mouse X : " + std::to_string(InputManager::GetInstance()->GetMousePosWorld().x) + ", Mouse Y : " + std::to_string(InputManager::GetInstance()->GetMousePosWorld().y) << endl;
+	cout << "Mouse X : " << (m_headSprite.getLocalBounds().width / 2) << ", Mouse Y : " << (m_headSprite.getLocalBounds().height - m_headTexture.getSize().y) << endl;
 
 	m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
 

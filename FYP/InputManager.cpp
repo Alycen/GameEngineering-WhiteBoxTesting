@@ -174,7 +174,8 @@ sf::Vector2f InputManager::GetMousePosWorld()
 	return mousePosWorld;
 }
 
-void InputManager::GetWindow(sf::Event e, sf::RenderWindow &win)
+void InputManager::GetWindow(sf::Mouse m, sf::RenderWindow &win)
 {
-	mousePosWorld;
+	sf::Vector2i mouse = m.getPosition(win);
+	mousePosWorld = win.mapPixelToCoords(m.getPosition());
 }

@@ -39,10 +39,14 @@ int main()
 	while (window.isOpen())
 	{
 		sf::Event Event;
+		sf::Mouse mouse;
 		while (window.pollEvent(Event))
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
-			
+
+			if (Event.type == sf::Event::MouseMoved)
+				InputManager::GetInstance()->GetWindow(mouse, window);
+
 			if (Event.type == sf::Event::Closed)
 				window.close();
 
