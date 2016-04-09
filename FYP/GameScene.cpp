@@ -41,7 +41,7 @@ void GameScene::Update()
 {
 	Player::GetInstance()->Update();
 	testKanine->Update();
-	testBear->Update();
+	testBear->Update(Player::GetInstance()->GetPosition());
 
 	// check player doesnt leave bounding area
 }

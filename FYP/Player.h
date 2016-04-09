@@ -52,6 +52,14 @@ public:
 	void Bite(); // Right Click / Right Trigger
 	void Slash(); // Left Click / Left Trigger
 
+	// Get / Sets
+	void SetPosition(sf::Vector2f pos) { m_position = pos; }
+	sf::Vector2f GetPosition() { return m_position; }
+	void SetX(float x) { m_position.x = x; }
+	float GetX() { return m_position.x; }
+	void SetY(float y) { m_position.y = y; }
+	float GetY() { return m_position.y; }
+
 	~Player()
 	{
 		delete instance;
