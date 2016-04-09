@@ -24,6 +24,7 @@ private:
 	Bear* testBear;
 
 	UI_bar* temp_healtbar;
+	UI_bar* temp_staminabar;
 
 	tmx::TileMap* m_map;
 public:
