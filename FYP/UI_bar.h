@@ -2,6 +2,7 @@
 #define _UI_BAR_
 
 #include "stdafx.h"
+#include "Camera.h"
 
 class UI_bar
 {

@@ -48,11 +48,16 @@ void UI_bar::Update()
 
 void UI_bar::Draw(sf::RenderWindow &win)
 {
+	sf::Vector2f windowCentre = win.getView().getCenter();
+	sf::Vector2f windowSize = win.getView().getSize();
+
+	m_left_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 20), windowCentre.y - ((windowSize.y / 2) - 20));
+
 	if (isVisible)
 	{
 		win.draw(m_left_sprite);
-		win.draw(m_mid_sprite);
-		win.draw(m_right_sprite);
+		//win.draw(m_mid_sprite);
+		//win.draw(m_right_sprite);
 	}
 	else
 	{

@@ -33,7 +33,7 @@ void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
 	//Move();
-	Flee(target);
+	//Flee(target);
 }
 
 void Bear::Draw(sf::RenderWindow &win)

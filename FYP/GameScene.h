@@ -23,6 +23,8 @@ private:
 	Kanine* testKanine;
 	Bear* testBear;
 
+	UI_bar* temp_healtbar;
+
 	tmx::TileMap* m_map;
 public:
 	static GameScene* GetInstance();
