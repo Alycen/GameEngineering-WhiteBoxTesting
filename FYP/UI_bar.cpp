@@ -62,6 +62,7 @@ void UI_bar::Draw(sf::RenderWindow &win)
 
 	// Need modifiable Length variable for here
 	m_left_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 22), windowCentre.y - ((windowSize.y / 2) - m_y));
+	//Below needs modifying
 	m_mid_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
 	m_right_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
 
