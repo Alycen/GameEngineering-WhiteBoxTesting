@@ -32,13 +32,17 @@ void GameScene::Init()
 	Player::GetInstance()->Init(3000,2500);
 	Camera::GetInstance()->Init(1400,900);
 	testKanine = new Kanine(700,400);
+	testBear = new Bear(2900, 2700);
+
+	//temp_healtbar = new UI_bar(3000, 2500, "Health", 70);
 }
 
 void GameScene::Update()
 {
 	Player::GetInstance()->Update();
 	testKanine->Update();
-	
+	testBear->Update();
+
 	// check player doesnt leave bounding area
 }
 
@@ -47,4 +51,5 @@ void GameScene::Draw(sf::RenderWindow &win)
 	win.draw(*m_map);
 	Player::GetInstance()->Draw(win);
 	testKanine->Draw(win);
+	testBear->Draw(win);
 }

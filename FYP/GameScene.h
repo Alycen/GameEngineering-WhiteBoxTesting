@@ -6,9 +6,11 @@
 
 #include "Player.h"
 #include "NPC_Kanine.h"
+#include "NPC_Bear.h"
 #include "Camera.h"
 #include <list>
 #include "STP\TMXLoader.hpp"
+#include "UI_bar.h"
 
 class GameScene
 {
@@ -19,6 +21,7 @@ private:
 
 	sf::Music m_backgroundMusic;
 	Kanine* testKanine;
+	Bear* testBear;
 
 	tmx::TileMap* m_map;
 public:

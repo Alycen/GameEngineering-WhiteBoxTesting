@@ -6,7 +6,6 @@
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
 #include "Camera.h"
-#include "Pvector.h"
 
 #define DistanceOfNeck 35.5
 #define DistanceOfTail 100
@@ -25,6 +24,9 @@ private:
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
+
+	sf::Vector2f m_headTarget;
+	sf::Vector2f m_headPoint;
 
 	float m_speed;
 	bool m_running = false;
@@ -55,8 +57,6 @@ public:
 		delete instance;
 		instanceFlag = false;
 	}
-
-	Pvector m_pvecPosition;
 };
 
 #endif

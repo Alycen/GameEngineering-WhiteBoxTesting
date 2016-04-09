@@ -23,6 +23,7 @@
 #include "GameScene.h"
 #include "Camera.h"
 #include "STP\TMXLoader.hpp"
+#include "SplashScene.h"
 
 int main()
 {
@@ -31,7 +32,8 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
-	MainMenuScene::GetInstance()->Init();
+	//SplashScene::GetInstance()->Init();
+	//MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
@@ -40,24 +42,25 @@ int main()
 		while (window.pollEvent(Event))
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
+			
 			if (Event.type == sf::Event::Closed)
 				window.close();
 
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-		//MainMenuScene::GetInstance()->Update();
-		//if (MainMenuScene::GetInstance()->exitSelected)
-		//{
-		//	window.close();
-		//}
-
+		//SplashScene::GetInstance()->Update();
+		/*MainMenuScene::GetInstance()->Update();
+		if (MainMenuScene::GetInstance()->exitSelected)
+		{
+			window.close();
+		}*/
 		GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
-
+		//SplashScene::GetInstance()->Draw(window);
 		//MainMenuScene::GetInstance()->Draw(window);
 		GameScene::GetInstance()->Draw(window);
 		window.setView(Camera::GetInstance()->getView());

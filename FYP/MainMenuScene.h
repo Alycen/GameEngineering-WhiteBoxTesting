@@ -6,7 +6,7 @@
 #include "InputManager.h"
 #include <iostream>
 
-#define NUM_OF_ELEMENTS 3
+#define NUM_OF_ELEMENTS 6
 
 using namespace std;
 
@@ -21,6 +21,10 @@ private:
 	sf::Text m_menu[NUM_OF_ELEMENTS];
 
 	MainMenuScene() {}
+
+	sf::Texture m_logoTexture;
+	sf::Sprite m_logoSprite;
+	bool first_scene = true;
 public:
 	bool gameSelected, settingsSelected, exitSelected;
 

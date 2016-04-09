@@ -3,6 +3,8 @@
 
 #include "stdafx.h"
 
+#define DistanceOfNeck 60.5
+
 class Bear
 {
 private:
@@ -19,7 +21,18 @@ public:
 	Bear();
 	Bear(float, float);
 
-	~Bear();
+	void Update();
+	void Draw(sf::RenderWindow&);
+	void Move();
+
+	void SetPosition(sf::Vector2f pos) { m_position = pos; }
+	sf::Vector2f GetPosition() { return m_position; }
+	void SetX(float x) { m_position.x = x; }
+	float GetX() { return m_position.x; }
+	void SetY(float y) { m_position.y = y; }
+	float GetY() { return m_position.y; }
+
+	Bear::~Bear() {};
 };
 
 #endif
