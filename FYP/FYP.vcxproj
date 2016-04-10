@@ -169,6 +169,7 @@
     <ClInclude Include="NPC_Rabbit.h" />
     <ClInclude Include="NPC_Stag.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Popup.h" />
     <ClInclude Include="Pvector.h" />
     <ClInclude Include="SplashScene.h" />
     <ClInclude Include="stdafx.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="NPC_Rabbit.cpp" />
     <ClCompile Include="NPC_Stag.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Popup.cpp" />
     <ClCompile Include="Pvector.cpp" />
     <ClCompile Include="SplashScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
