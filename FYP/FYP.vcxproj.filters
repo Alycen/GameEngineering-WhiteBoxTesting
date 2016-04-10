@@ -60,6 +60,12 @@
     <ClInclude Include="NPC_Deer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NPC_Stag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NPC_Doe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -99,6 +105,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SplashScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Stag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC_Doe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
