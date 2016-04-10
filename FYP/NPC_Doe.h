@@ -1,11 +1,11 @@
 #ifndef _NPC_DOE_
 #define _NPC_DOE_
 
-#include "NPC_Deer.h"
+#include "NPC_Critter.h"
 
 #define DistanceOfNeck 40
 
-class Doe : public Deer
+class Doe : public Critter
 {
 private:
 

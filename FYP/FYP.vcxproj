@@ -163,9 +163,10 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="NPC_Bear.h" />
-    <ClInclude Include="NPC_Deer.h" />
+    <ClInclude Include="NPC_Critter.h" />
     <ClInclude Include="NPC_Doe.h" />
     <ClInclude Include="NPC_Kanine.h" />
+    <ClInclude Include="NPC_Rabbit.h" />
     <ClInclude Include="NPC_Stag.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Pvector.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="NPC_Bear.cpp" />
     <ClCompile Include="NPC_Doe.cpp" />
     <ClCompile Include="NPC_Kanine.cpp" />
+    <ClCompile Include="NPC_Rabbit.cpp" />
     <ClCompile Include="NPC_Stag.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Pvector.cpp" />

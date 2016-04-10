@@ -9,6 +9,7 @@
 #include "NPC_Bear.h"
 #include "NPC_Stag.h"
 #include "NPC_Doe.h"
+#include "NPC_Rabbit.h"
 #include "Camera.h"
 #include <list>
 #include "STP\TMXLoader.hpp"
@@ -26,6 +27,7 @@ private:
 	Bear* testBear;
 	Stag* testStag;
 	Doe* bambisMom;
+	Rabbit* testBunny;
 
 	UI_bar* temp_healtbar;
 	UI_bar* temp_staminabar;

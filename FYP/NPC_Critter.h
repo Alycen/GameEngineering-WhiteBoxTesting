@@ -1,9 +1,9 @@
-#ifndef _NPC_DEER_
-#define _NPC_DEER_
+#ifndef _NPC_CRITTER_
+#define _NPC_CRITTER_
 
 #include "SFML\Graphics.hpp"
 
-class Deer
+class Critter
 {
 protected:
 	sf::Texture m_bodyTexture;
@@ -20,18 +20,18 @@ protected:
 	float m_attackDamage;
 	float m_health;
 public:
-	Deer::Deer() { }
-	Deer::~Deer() { }
+	Critter::Critter() { }
+	Critter::~Critter() { }
 
-	virtual void Deer::Update() 
+	virtual void Critter::Update()
 	{
 
 	}
-	virtual void Deer::Update(sf::Vector2f target) 
+	virtual void Critter::Update(sf::Vector2f target)
 	{
 
 	}
-	virtual void Deer::Draw(sf::RenderWindow &win)
+	virtual void Critter::Draw(sf::RenderWindow &win)
 	{
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
@@ -77,10 +77,10 @@ public:
 	// Get / Sets
 	void SetPosition(sf::Vector2f pos) { m_position = pos; }
 	sf::Vector2f GetPosition() { return m_position; }
-	
+
 	void SetX(float x) { m_position.x = x; }
 	float GetX() { return m_position.x; }
-	
+
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
 };

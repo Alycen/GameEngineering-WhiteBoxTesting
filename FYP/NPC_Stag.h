@@ -1,11 +1,11 @@
 #ifndef _NPC_STAG_
 #define _NPC_STAG_
 
-#include "NPC_Deer.h"
+#include "NPC_Critter.h"
 
 #define DistanceOfNeck 58
 
-class Stag : public Deer
+class Stag : public Critter
 {
 private:
 
