@@ -25,19 +25,6 @@
 #include "STP\TMXLoader.hpp"
 #include "SplashScene.h"
 
-// TO DO:
-// ------------------------------------------
-// Sound							|	 1 h
-// Scene Manager					|	 2 h
-// Settings							|	 2 h
-// Interactin with NPCs				|	 3 h
-// Particles						|	 2 h
-// Popups							|	 1 h
-// NPC AI							|	 3 h
-// Player stay within level bounds	|	 2 h
-// Level switch						|	 2 h
-// ------------------------------------------
-
 int main()
 {
 	srand(time(NULL));

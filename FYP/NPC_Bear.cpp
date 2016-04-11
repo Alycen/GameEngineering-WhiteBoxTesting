@@ -1,5 +1,8 @@
 #include "NPC_Bear.h"
 
+// look into exactly waht Flee() and other 
+// methods bar move, do with m_direction
+
 Bear::Bear() {}
 
 Bear::Bear(float x, float y) 
@@ -33,7 +36,7 @@ void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
 	//Move();
-	//Flee(target);
+	Flee(target);
 }
 
 void Bear::Draw(sf::RenderWindow &win)
