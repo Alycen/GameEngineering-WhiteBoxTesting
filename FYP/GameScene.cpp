@@ -58,13 +58,16 @@ void GameScene::Update()
 void GameScene::Draw(sf::RenderWindow &win)
 {
 	win.draw(*m_map);
-	Player::GetInstance()->Draw(win);
 	testKanine->Draw(win);
 	testBear->Draw(win);
 	testStag->Draw(win);
 	bambisMom->Draw(win);
 	testBunny->Draw(win);
 
+	Player::GetInstance()->Draw(win);
+
+	// restore the default view
+	win.setView(win.getDefaultView());
 	temp_healtbar->Draw(win);
 	temp_staminabar->Draw(win);
 }

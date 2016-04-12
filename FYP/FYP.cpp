@@ -36,6 +36,7 @@
 // NPC AI							|	 3 h
 // Player stay within level bounds	|	 2 h
 // Level switch						|	 2 h
+// Load / Save Level				|	 8 h
 // ------------------------------------------
 
 int main()
