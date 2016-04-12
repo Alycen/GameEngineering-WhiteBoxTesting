@@ -54,7 +54,7 @@ void Doe::Move()
 {
 	if (timer == 0) {
 		timer = 200;
-		dir = rand() % 10 + 1; // may want to tweak the probability here
+		dir = rand() % 8 + 1; // may want to tweak the probability here
 	}
 
 	if (dir == 2 && m_position.x < 790) { // Border limits need modifying

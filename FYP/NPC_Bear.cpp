@@ -50,7 +50,7 @@ void Bear::Move() // Wander - Needs modifying - find out how m_direction is used
 {
 	if (timer == 0) {
 		timer = 200;
-		dir = rand() % 10 + 1; // may want to tweak the probability here
+		dir = rand() % 8 + 1; // may want to tweak the probability here
 	}
 
 	if (dir == 2 && m_position.x < 790) { // Border limits need modifying
@@ -106,8 +106,14 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
 	if (diff.x*diff.x + diff.y*diff.y < 15000)
+	{
 		m_speed = 0;
-	else if (diff.x*diff.x + diff.y*diff.y >= 15000)
+	}
+	else if (diff.x*diff.x + diff.y*diff.y >= 150000)
+	{
+		Move();
+	}
+	else if (diff.x*diff.x + diff.y*diff.y >= 15000 && diff.x*diff.x + diff.y*diff.y < 150000)
 	{
 		m_speed = 3;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);

@@ -9,7 +9,7 @@ class Bear
 {
 private:
 	int timer = 200;
-	int dir = rand() % 10 + 1;
+	int dir = rand() % 8 + 1;
 
 	sf::Texture m_bodyTexture;
 	sf::Texture m_headTexture;
