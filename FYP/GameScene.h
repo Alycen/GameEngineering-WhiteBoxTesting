@@ -35,7 +35,7 @@ private:
 	tmx::TileMap* m_map;
 public:
 	static GameScene* GetInstance();
-	~GameScene()
+	GameScene::~GameScene()
 	{
 		delete instance;
 		instanceFlag = false;

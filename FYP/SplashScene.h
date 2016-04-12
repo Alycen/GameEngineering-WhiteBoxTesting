@@ -19,6 +19,11 @@ public:
 	void Init();
 	void Update();
 	void Draw(sf::RenderWindow&);
+	SplashScene::~SplashScene()
+	{
+		delete instance;
+		instanceFlag = false;
+	}
 };
 
 #endif
