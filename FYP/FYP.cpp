@@ -33,7 +33,7 @@ int main()
 	window.setVerticalSyncEnabled(true);
 
 	//SplashScene::GetInstance()->Init();
-	//MainMenuScene::GetInstance()->Init();
+	MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
@@ -50,20 +50,20 @@ int main()
 				window.close();
 		}
 		//SplashScene::GetInstance()->Update();
-		/*MainMenuScene::GetInstance()->Update();
+		MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
-		}*/
-		GameScene::GetInstance()->Update();
+		}
+		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
 		//SplashScene::GetInstance()->Draw(window);
-		//MainMenuScene::GetInstance()->Draw(window);
-		GameScene::GetInstance()->Draw(window);
-		window.setView(Camera::GetInstance()->getView());
+		MainMenuScene::GetInstance()->Draw(window);
+		//GameScene::GetInstance()->Draw(window);
+		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 

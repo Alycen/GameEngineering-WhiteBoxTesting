@@ -176,5 +176,5 @@ sf::Vector2f InputManager::GetMousePosWorld()
 
 void InputManager::GetWindow(sf::Event e, sf::RenderWindow &win)
 {
-	mousePosWorld
+	
 }
