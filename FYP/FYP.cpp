@@ -19,11 +19,13 @@
 #include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
 #include "Player.h"
-#include "MainMenuScene.h"
-#include "GameScene.h"
+//#include "MainMenuScene.h"
+//#include "GameScene.h"
 #include "Camera.h"
 #include "STP\TMXLoader.hpp"
-#include "SplashScene.h"
+//#include "SplashScene.h"
+
+#include "SceneManager.h"
 
 // TO DO:
 // ------------------------------------------
@@ -46,9 +48,11 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
+	SceneManager::GetInstance()->Init();
+
 	//SplashScene::GetInstance()->Init();
-	MainMenuScene::GetInstance()->Init();
-	GameScene::GetInstance()->Init();
+	//MainMenuScene::GetInstance()->Init();
+	//GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -68,19 +72,24 @@ int main()
 				window.close();
 		}
 
+		SceneManager::GetInstance()->Update();
+
 		//SplashScene::GetInstance()->Update();
-		MainMenuScene::GetInstance()->Update();
-		if (MainMenuScene::GetInstance()->exitSelected)
-		{
-			window.close();
-		}
+		//MainMenuScene::GetInstance()->Update();
+		//if (MainMenuScene::GetInstance()->exitSelected)
+		//{
+		//	window.close();
+		//}
 		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
+
+		SceneManager::GetInstance()->Draw(window);
+
 		//SplashScene::GetInstance()->Draw(window);
-		MainMenuScene::GetInstance()->Draw(window);
+		//MainMenuScene::GetInstance()->Draw(window);
 		//GameScene::GetInstance()->Draw(window);
 		//window.setView(Camera::GetInstance()->getView());
 		window.display();

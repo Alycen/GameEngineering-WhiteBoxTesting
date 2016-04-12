@@ -23,6 +23,8 @@ void MainMenuScene::Init()
 	settingsSelected = false;
 	exitSelected = false;
 
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+
 	if (!m_font.loadFromFile("Assets/Fonts/VINERITC.TTF")) 
 	{
 		//handle error
@@ -32,6 +34,7 @@ void MainMenuScene::Init()
 	m_menu[0].setStyle(sf::Text::Bold);
 	m_menu[0].setColor(sf::Color::Cyan);
 	m_menu[0].setString("Play");
+	//m_menu[0].setPosition(sf::Vector2f(desktop.width / 6 , (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 1));
 	m_menu[0].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 1));
 
 	m_menu[1].setFont(m_font);
@@ -75,7 +78,6 @@ void MainMenuScene::Init()
 	m_logoTexture.setSmooth(true);
 
 	m_logoSprite.setTexture(m_logoTexture);
-	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	m_logoSprite.setPosition(sf::Vector2f(desktop.width / 2, 100));
 }
 

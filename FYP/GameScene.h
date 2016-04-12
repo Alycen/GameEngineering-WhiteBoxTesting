@@ -35,14 +35,16 @@ private:
 	tmx::TileMap* m_map;
 public:
 	static GameScene* GetInstance();
-	~GameScene()
+
+	void Init();
+	void Update();
+	void Draw(sf::RenderWindow&);
+
+	GameScene::~GameScene()
 	{
 		delete instance;
 		instanceFlag = false;
 	}
-	void Init();
-	void Update();
-	void Draw(sf::RenderWindow&);
 };
 
 #endif
