@@ -25,6 +25,20 @@
 #include "STP\TMXLoader.hpp"
 #include "SplashScene.h"
 
+// TO DO:
+// ------------------------------------------
+// Sound							|	 1 h
+// Scene Manager					|	 2 h
+// Settings							|	 2 h
+// Interactin with NPCs				|	 3 h
+// Particles						|	 2 h
+// Popups							|	 1 h
+// NPC AI							|	 3 h
+// Player stay within level bounds	|	 2 h
+// Level switch						|	 2 h
+// Load / Save Level				|	 8 h
+// ------------------------------------------
+
 int main()
 {
 	srand(time(NULL));
@@ -33,7 +47,7 @@ int main()
 	window.setVerticalSyncEnabled(true);
 
 	//SplashScene::GetInstance()->Init();
-	//MainMenuScene::GetInstance()->Init();
+	MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
@@ -55,20 +69,20 @@ int main()
 		}
 
 		//SplashScene::GetInstance()->Update();
-		/*MainMenuScene::GetInstance()->Update();
+		MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
-		}*/
-		GameScene::GetInstance()->Update();
+		}
+		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
 		//SplashScene::GetInstance()->Draw(window);
-		//MainMenuScene::GetInstance()->Draw(window);
-		GameScene::GetInstance()->Draw(window);
-		window.setView(Camera::GetInstance()->getView());
+		MainMenuScene::GetInstance()->Draw(window);
+		//GameScene::GetInstance()->Draw(window);
+		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
