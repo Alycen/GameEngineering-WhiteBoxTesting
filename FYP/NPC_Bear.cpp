@@ -43,7 +43,7 @@ void Bear::Update(sf::Vector2f target)
 void Bear::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
-	win.draw(m_headSprite);
+	//win.draw(m_headSprite);
 }
 
 void Bear::Move() // Wander - Needs modifying - find out how m_direction is used in flee and modify for this

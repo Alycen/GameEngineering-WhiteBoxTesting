@@ -12,6 +12,9 @@ private:
 public:
 	Doe();
 	Doe(float, float);
+	void Update(sf::Vector2f);
+	void Flee(sf::Vector2f);
+	void Move();
 };
 
 #endif

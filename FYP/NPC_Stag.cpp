@@ -21,4 +21,50 @@ Stag::Stag(float x, float y)
 	m_headSprite.setTexture(m_headTexture);
 	m_headSprite.setOrigin(60.0f, 45.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
+
+	m_speed = 2.5;
+}
+
+void Stag::Update(sf::Vector2f target)
+{
+	m_bodySprite.setPosition(m_position);
+	Move();
+}
+
+void Stag::Move()
+{
+	if (timer == 0) {
+		timer = 200;
+		dir = rand() % 10 + 1; // may want to tweak the probability here
+	}
+
+	if (dir == 2 && m_position.x < 790) { // Border limits need modifying
+		m_direction.x++;
+	}
+	else if (dir == 1 && m_position.x > 10) {
+		m_direction.x--;
+	}
+	else if (dir == 4 && m_position.y < 590) {
+		m_direction.y++;
+	}
+	else if (dir == 3 && m_position.y > 10) {
+		m_direction.y--;
+	}
+	else {
+		m_direction.x = 0;
+		m_direction.y = 0;
+	}
+
+	float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+
+	if (length > 0) {
+		sf::Vector2f normalised = m_direction / length;
+		m_position += normalised * m_speed;
+		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_bodySprite.setPosition(m_position);
+		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+	}
+	timer--;
 }

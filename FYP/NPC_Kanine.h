@@ -18,6 +18,11 @@ private:
 	sf::Vector2f m_direction;
 
 	float m_rotation;
+
+	int timer = 200;
+	int dir = rand() % 7 + 1;
+
+	float m_speed = 3;
 public:
 	Kanine();
 	Kanine(float, float);
