@@ -19,7 +19,7 @@ private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
 
-	float m_speed = 2;
+	float m_speed = 3;
 	float m_rotation;
 
 	float m_attackDamage;

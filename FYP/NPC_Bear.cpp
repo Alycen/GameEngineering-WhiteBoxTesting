@@ -36,7 +36,8 @@ void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
 	//Move();
-	Flee(target);
+	//Flee(target);
+	Chase(target);
 }
 
 void Bear::Draw(sf::RenderWindow &win)
@@ -45,7 +46,7 @@ void Bear::Draw(sf::RenderWindow &win)
 	win.draw(m_headSprite);
 }
 
-void Bear::Move() // Wander
+void Bear::Move() // Wander - Needs modifying - find out how m_direction is used in flee and modify for this
 {
 	if (timer == 0) {
 		timer = 200;
@@ -91,17 +92,29 @@ void Bear::Flee(sf::Vector2f target)	// Run from target
 		m_speed = 0;
 	else
 	{
+		m_speed = 3;
 		m_rotation = atan2(diff.y, diff.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
-		m_speed = 2;
+		m_position += m_direction * m_speed;
+		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+		//Set position of Head and rotation 
 	}
 }
 
 void Bear::Chase(sf::Vector2f target)	// Chase target
 {
 	target = Closest(m_position, target);
-	m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
-	m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
+	sf::Vector2f diff = m_position - target;
+	if (diff.x*diff.x + diff.y*diff.y < 15000)
+		m_speed = 0;
+	else if (diff.x*diff.x + diff.y*diff.y >= 15000)
+	{
+		m_speed = 3;
+		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
+		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
+		m_position += m_direction * m_speed;
+		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+	}
 }
 
 void Bear::Attack()	//
