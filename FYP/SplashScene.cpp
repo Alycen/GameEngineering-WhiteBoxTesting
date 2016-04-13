@@ -29,6 +29,7 @@ void SplashScene::Update() {}
 
 void SplashScene::Draw(sf::RenderWindow &win)
 {
-	m_sprite.setPosition((win.getSize().x / 2) + (m_texture.getSize().x / 2), (win.getSize().y / 2) + (m_texture.getSize().y / 2));
+	win.setView(win.getDefaultView());
+	m_sprite.setPosition((win.getView().getSize().x / 2) + (m_texture.getSize().x / 2), (win.getView().getSize().x / 2) + (m_texture.getSize().y / 2));
 	win.draw(m_sprite);
 }

@@ -83,6 +83,7 @@ void MainMenuScene::Init()
 
 void MainMenuScene::Update()
 {
+	cout << std::to_string(m_menu[0].getPosition().x) << " : " << std::to_string(m_menu[0].getPosition().y) << endl;
 	if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::W) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::Up))
 	{
 		MoveUp();
@@ -129,6 +130,8 @@ void MainMenuScene::Update()
 
 void MainMenuScene::Draw(sf::RenderWindow &win)
 {
+	// restore the default view
+	win.setView(win.getDefaultView());
 	if (first_scene)
 	{
 		for (int i = 0; i < 3; i++) 

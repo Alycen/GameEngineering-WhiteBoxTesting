@@ -19,11 +19,12 @@
 #include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
 #include "Player.h"
-#include "MainMenuScene.h"
-#include "GameScene.h"
+//#include "MainMenuScene.h"
+//#include "GameScene.h"
 #include "Camera.h"
 #include "STP\TMXLoader.hpp"
-#include "SplashScene.h"
+//#include "SplashScene.h"
+#include "SceneManager.h"
 
 // TO DO:
 // ------------------------------------------
@@ -48,7 +49,7 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
-
+	SceneManager::GetInstance()->Init();
 
 	//SplashScene::GetInstance()->Init();
 	//MainMenuScene::GetInstance()->Init();
@@ -62,8 +63,8 @@ int main()
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
 
-			//if (Event.type == sf::Event::MouseMoved)
-				//InputManager::GetInstance()->GetWindow(mouse, window);
+			if (Event.type == sf::Event::MouseMoved)
+				InputManager::GetInstance()->GetWindow(mouse, window);
 
 			if (Event.type == sf::Event::Closed)
 				window.close();
@@ -71,6 +72,8 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
+
+		SceneManager::GetInstance()->Update();
 
 		//SplashScene::GetInstance()->Update();
 		/*MainMenuScene::GetInstance()->Update();
@@ -84,10 +87,12 @@ int main()
 		
 		window.clear();
 
+		SceneManager::GetInstance()->Draw(window);
+
 		//SplashScene::GetInstance()->Draw(window);
 		//MainMenuScene::GetInstance()->Draw(window);
 		//GameScene::GetInstance()->Draw(window);
-		window.setView(Camera::GetInstance()->getView());
+		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
