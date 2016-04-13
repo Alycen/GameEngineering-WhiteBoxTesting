@@ -1,4 +1,7 @@
 #include "Player.h"
+#include <iostream>
+
+using namespace std;
 
 bool Player::instanceFlag = false;
 Player* Player::instance = NULL;
@@ -52,6 +55,9 @@ void Player::Init(float x, float y)
 
 	// Smell Area Radius
 	m_radius = 950.0f;
+
+	// Stats
+	m_health = 100;
 }
 
 void Player::Update()
@@ -139,12 +145,15 @@ void Player::Update()
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
 		m_bodySprite.setPosition(m_position);
-		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
-		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
-	}
 
-	m_pvecPosition.x = m_position.x;
-	m_pvecPosition.y = m_position.y;
+		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+	}
+	float dx = InputManager::GetInstance()->GetMousePosWorld().x - (m_headSprite.getGlobalBounds().width / 2); // Wrong points for head
+	float dy = InputManager::GetInstance()->GetMousePosWorld().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
+
+	//cout << "Mouse X : " << (m_headSprite.getLocalBounds().width / 2) << ", Mouse Y : " << (m_headSprite.getLocalBounds().height - m_headTexture.getSize().y) << endl;
+
+	//m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
 
 	Camera::GetInstance()->setViewPosition(m_position);
 }
@@ -162,6 +171,16 @@ void Player::Smell()
 void Player::Dash()
 {
 	
+}
+
+void Player::Bite()
+{
+
+}
+
+void Player::Slash()
+{
+
 }
 
 void Player::Draw(sf::RenderWindow &win)

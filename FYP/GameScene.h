@@ -7,6 +7,9 @@
 #include "Player.h"
 #include "NPC_Kanine.h"
 #include "NPC_Bear.h"
+#include "NPC_Stag.h"
+#include "NPC_Doe.h"
+#include "NPC_Rabbit.h"
 #include "Camera.h"
 #include <list>
 #include "STP\TMXLoader.hpp"
@@ -22,18 +25,26 @@ private:
 	sf::Music m_backgroundMusic;
 	Kanine* testKanine;
 	Bear* testBear;
+	Stag* testStag;
+	Doe* bambisMom;
+	Rabbit* testBunny;
+
+	UI_bar* temp_healtbar;
+	UI_bar* temp_staminabar;
 
 	tmx::TileMap* m_map;
 public:
 	static GameScene* GetInstance();
-	~GameScene()
+
+	void Init();
+	void Update();
+	void Draw(sf::RenderWindow&);
+
+	GameScene::~GameScene()
 	{
 		delete instance;
 		instanceFlag = false;
 	}
-	void Init();
-	void Update();
-	void Draw(sf::RenderWindow&);
 };
 
 #endif

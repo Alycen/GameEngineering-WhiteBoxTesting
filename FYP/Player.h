@@ -6,7 +6,6 @@
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
 #include "Camera.h"
-#include "Pvector.h"
 
 #define DistanceOfNeck 35.5
 #define DistanceOfTail 100
@@ -25,6 +24,9 @@ private:
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
+
+	sf::Vector2f m_headTarget;
+	sf::Vector2f m_headPoint;
 
 	float m_speed;
 	bool m_running = false;
@@ -45,16 +47,26 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow&);
 
-	void Smell();
-	void Dash();
+	void Smell(); // Alt Key / Left Bumper
+	void Dash(); // Space Bar / Right bumper?
+	void Bite(); // Right Click / Right Trigger
+	void Slash(); // Left Click / Left Trigger
+
+	// Get / Sets
+	void SetPosition(sf::Vector2f pos) { m_position = pos; }
+	sf::Vector2f GetPosition() { return m_position; }
+	void SetX(float x) { m_position.x = x; }
+	float GetX() { return m_position.x; }
+	void SetY(float y) { m_position.y = y; }
+	float GetY() { return m_position.y; }
+	void SetHealth(float h) { m_health = h; }
+	float GetHealth() { return m_health; }
 
 	~Player()
 	{
 		delete instance;
 		instanceFlag = false;
 	}
-
-	Pvector m_pvecPosition;
 };
 
 #endif

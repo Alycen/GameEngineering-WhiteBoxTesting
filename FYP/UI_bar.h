@@ -2,6 +2,7 @@
 #define _UI_BAR_
 
 #include "stdafx.h"
+#include "Camera.h"
 
 class UI_bar
 {
@@ -20,6 +21,8 @@ private:
 	sf::Sprite m_mid_sprite;
 
 	float m_length;
+	float m_scale;
+	float m_y;
 
 	// Filling
 	sf::Vector2f m_left_filling_pos;
@@ -39,7 +42,7 @@ private:
 	bool isVisible;
 public:
 	UI_bar();
-	UI_bar(float, float, string, float); // float x, float y, int type (health / stamina), float length
+	UI_bar(float, string, float); // float x, float y, int type (health / stamina), float length
 
 	void Update();
 	void Draw(sf::RenderWindow&);

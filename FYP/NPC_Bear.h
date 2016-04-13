@@ -2,13 +2,15 @@
 #define _NPC_BEAR_
 
 #include "stdafx.h"
-#include "Pvector.h"
 
 #define DistanceOfNeck 60.5
 
 class Bear
 {
 private:
+	int timer = 200;
+	int dir = rand() % 10 + 1;
+
 	sf::Texture m_bodyTexture;
 	sf::Texture m_headTexture;
 	sf::Sprite m_bodySprite;
@@ -17,15 +19,30 @@ private:
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
 
+	float m_speed = 2;
 	float m_rotation;
+
+	float m_attackDamage;
+	float m_health;
 public:
 	Bear();
 	Bear(float, float);
 
 	void Update();
+	void Update(sf::Vector2f);
 	void Draw(sf::RenderWindow&);
-	void Move();
 
+	// AI Behaviours
+	void Move(); // Wander
+	void Flee(sf::Vector2f);
+	void Chase(sf::Vector2f);
+	void Attack();
+	void KeepDistance(sf::Vector2f);
+
+	// Helper Methods for AI
+	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
+
+	// Get / Sets
 	void SetPosition(sf::Vector2f pos) { m_position = pos; }
 	sf::Vector2f GetPosition() { return m_position; }
 	void SetX(float x) { m_position.x = x; }
@@ -34,8 +51,6 @@ public:
 	float GetY() { return m_position.y; }
 
 	Bear::~Bear() {};
-
-	Pvector m_pvecPosition;
 };
 
 #endif

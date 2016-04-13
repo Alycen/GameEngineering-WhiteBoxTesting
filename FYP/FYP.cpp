@@ -50,7 +50,7 @@ int main()
 
 	//SplashScene::GetInstance()->Init();
 	//MainMenuScene::GetInstance()->Init();
-	GameScene::GetInstance()->Init();
+	//GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -60,8 +60,8 @@ int main()
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
 
-			if (Event.type == sf::Event::MouseMoved)
-				InputManager::GetInstance()->GetWindow(mouse, window);
+			//if (Event.type == sf::Event::MouseMoved)
+				//InputManager::GetInstance()->GetWindow(mouse, window);
 
 			if (Event.type == sf::Event::Closed)
 				window.close();
@@ -76,7 +76,7 @@ int main()
 		{
 			window.close();
 		}*/
-		GameScene::GetInstance()->Update();
+		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
@@ -84,7 +84,7 @@ int main()
 
 		//SplashScene::GetInstance()->Draw(window);
 		//MainMenuScene::GetInstance()->Draw(window);
-		GameScene::GetInstance()->Draw(window);
+		//GameScene::GetInstance()->Draw(window);
 		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
