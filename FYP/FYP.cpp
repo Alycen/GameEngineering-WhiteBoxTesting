@@ -48,6 +48,8 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
+
+
 	//SplashScene::GetInstance()->Init();
 	//MainMenuScene::GetInstance()->Init();
 	//GameScene::GetInstance()->Init();
