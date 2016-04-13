@@ -25,6 +25,22 @@
 #include "STP\TMXLoader.hpp"
 #include "SplashScene.h"
 
+// TO DO:
+// ------------------------------------------
+// Sound							|	 1 h
+// Scene Manager					|	 2 h
+// Settings							|	 2 h
+// Interaction with NPCs			|	 3 h
+// Particles						|	 2 h
+// Popups							|	 1 h
+// ---NPC AI---						|	 ---
+// -> Attack						|	 2 h
+// Player stay within level bounds	|	 2 h
+// Player Stats						|	 3 h
+// Level switch						|	 2 h
+// Load / Save Level				|	 8 h
+// ------------------------------------------
+
 int main()
 {
 	srand(time(NULL));
@@ -32,37 +48,44 @@ int main()
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
-	MainMenuScene::GetInstance()->Init();
+	//SplashScene::GetInstance()->Init();
+	//MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
-	SplashScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
 		sf::Event Event;
+		sf::Mouse mouse;
 		while (window.pollEvent(Event))
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
+
+			if (Event.type == sf::Event::MouseMoved)
+				InputManager::GetInstance()->GetWindow(mouse, window);
+
 			if (Event.type == sf::Event::Closed)
 				window.close();
 
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
+
 		//SplashScene::GetInstance()->Update();
-		MainMenuScene::GetInstance()->Update();
+		/*MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
-		}
-		//GameScene::GetInstance()->Update();
+		}*/
+		GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
 		window.clear();
+
 		//SplashScene::GetInstance()->Draw(window);
-		MainMenuScene::GetInstance()->Draw(window);
-		//GameScene::GetInstance()->Draw(window);
-		//window.setView(Camera::GetInstance()->getView());
+		//MainMenuScene::GetInstance()->Draw(window);
+		GameScene::GetInstance()->Draw(window);
+		window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 
