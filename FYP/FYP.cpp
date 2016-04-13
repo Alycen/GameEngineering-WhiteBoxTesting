@@ -36,6 +36,7 @@
 // ---NPC AI---						|	 ---
 // -> Attack						|	 2 h
 // Player stay within level bounds	|	 2 h
+// Player Stats
 // Level switch						|	 2 h
 // Load / Save Level				|	 8 h
 // ------------------------------------------
