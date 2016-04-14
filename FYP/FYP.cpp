@@ -25,21 +25,34 @@
 #include "STP\TMXLoader.hpp"
 #include "SplashScene.h"
 
-// TO DO:
-// ------------------------------------------
-// Sound							|	 1 h
-// Scene Manager					|	 2 h
-// Settings							|	 2 h
-// Interaction with NPCs			|	 3 h
-// Particles						|	 2 h
-// Popups							|	 1 h
-// ---NPC AI---						|	 ---
-// -> Attack						|	 2 h
-// Player stay within level bounds	|	 2 h
-// Player Stats
-// Level switch						|	 2 h
-// Load / Save Level				|	 8 h
-// ------------------------------------------
+// -----------------------------------------|
+// TO DO:									|
+// -----------------------------------------|
+// Sound							|	 1 h|
+// Scene Manager					|	 2 h|
+// Settings							|	 2 h|
+// Interaction with NPCs			|	 3 h|
+// Particles						|	 2 h|
+// Popups							|	 1 h|
+// ---NPC AI---						|	 ---|
+// -> Attack						|	 2 h|
+// Player stay within level bounds	|	 2 h|
+// Player Stats						|	 1 h|
+// Level switch						|	 2 h|
+// Load / Save Level				|	 8 h|
+// Targetting						|	 2 h|
+// Select NPC						|    4 h|
+// -----------------------------------------|
+// AI Behaviours 						    |
+// -> Move() - Wander						|
+// -> Stare() - Rotate towards, dont move	|		
+// -> Follow() - Slowly follow				|
+// -> Chase() - Quickly follow				|
+// -> Avoid() - Slowly avoid				|
+// -> Flee() - quickly avoid				|
+// -> Attack() - cause damage				|
+// Dont go outside the level bounds			|
+// -----------------------------------------|
 
 int main()
 {
