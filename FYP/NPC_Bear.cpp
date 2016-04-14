@@ -1,8 +1,5 @@
 #include "NPC_Bear.h"
 
-// look into exactly waht Flee() and other 
-// methods bar move, do with m_direction
-
 Bear::Bear() {}
 
 Bear::Bear(float x, float y) 

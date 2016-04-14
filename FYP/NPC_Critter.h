@@ -24,6 +24,8 @@ protected:
 
 	int timer = 200;
 	int dir = rand() % 7 + 1;
+
+	sf::CircleShape m_boundingCircle;
 public:
 	Critter::Critter() { }
 	Critter::~Critter() { }

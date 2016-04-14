@@ -57,7 +57,9 @@
 int main()
 {
 	srand(time(NULL));
-	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Beasts of Burden", sf::Style::None);
+	//sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
@@ -69,12 +71,10 @@ int main()
 	{
 		sf::Event Event;
 		sf::Mouse mouse;
+		window.setMouseCursorVisible(false);
 		while (window.pollEvent(Event))
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
-
-			if (Event.type == sf::Event::MouseMoved)
-				InputManager::GetInstance()->GetWindow(mouse, window);
 
 			if (Event.type == sf::Event::Closed)
 				window.close();
@@ -82,6 +82,7 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
+		InputManager::GetInstance()->GetWindow(mouse, window);
 
 		//SplashScene::GetInstance()->Update();
 		/*MainMenuScene::GetInstance()->Update();

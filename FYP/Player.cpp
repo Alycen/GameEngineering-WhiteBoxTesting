@@ -48,6 +48,11 @@ void Player::Init(float x, float y)
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 	// m_headSprite.setScale(xScale, yScale);
 	
+	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
+	m_pawTexture.setSmooth(true);
+
+	m_paw.setTexture(m_pawTexture);
+	m_paw.setOrigin(m_paw.getLocalBounds().width / 2, m_paw.getLocalBounds().height / 2);
 
 	// Player Temp Bark Sound
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
@@ -62,6 +67,11 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
+	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
+	m_pawBounds.setRadius(21.5f);
+	m_pawBounds.setOrigin(21.5f, 21.5f);
+	m_pawBounds.setPosition(m_paw.getPosition());
+
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
 	{
@@ -152,10 +162,21 @@ void Player::Update()
 	float dy = InputManager::GetInstance()->GetMousePosWorld().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
 
 	//cout << "Mouse X : " << (m_headSprite.getLocalBounds().width / 2) << ", Mouse Y : " << (m_headSprite.getLocalBounds().height - m_headTexture.getSize().y) << endl;
+	m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
 
-	//m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
-
-	Camera::GetInstance()->setViewPosition(m_position);
+	if (m_selected)
+	{
+		sf::Vector2f targ;
+		targ.x = (m_position.x + m_selectedPosition.x) / 2;
+		targ.y = (m_position.y + m_selectedPosition.y) / 2;
+		Camera::GetInstance()->setViewPosition(targ);
+		// if length is greater than window height / 4
+		//	   m_selected = false;
+	}
+	else if (!m_selected)
+	{
+		Camera::GetInstance()->setViewPosition(m_position);
+	}
 }
 
 void Player::Smell() 
@@ -201,4 +222,5 @@ void Player::Draw(sf::RenderWindow &win)
 			m_smell = false;
 		}
 	}
+	win.draw(m_paw);
 }

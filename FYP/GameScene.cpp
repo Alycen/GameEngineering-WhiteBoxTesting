@@ -50,6 +50,8 @@ void GameScene::Update()
 	bambisMom->Update(Player::GetInstance()->GetPosition());
 	testBunny->Update(Player::GetInstance()->GetPosition());
 
+	Player::GetInstance()->SetSelectedNPC(testBear->GetPosition());
+
 	temp_healtbar->Update();
 	temp_staminabar->Update();
 	// check player doesnt leave bounding area
@@ -68,6 +70,7 @@ void GameScene::Draw(sf::RenderWindow &win)
 
 	// restore the default view
 	win.setView(win.getDefaultView());
+
 	temp_healtbar->Draw(win);
 	temp_staminabar->Draw(win);
 }
