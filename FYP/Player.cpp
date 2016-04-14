@@ -49,7 +49,7 @@ void Player::Init(float x, float y)
 	// m_headSprite.setScale(xScale, yScale);
 
 	// Bounding Circle
-	m_playerBounds.setOrigin(m_bodySprite.getOrigin());
+	m_playerBounds.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 5.5), m_bodySprite.getOrigin().y);
 	m_playerBounds.setRadius(m_bodySprite.getLocalBounds().height / 2);
 	m_playerBounds.setFillColor(sf::Color::Transparent);
 	m_playerBounds.setOutlineColor(sf::Color::Red);
