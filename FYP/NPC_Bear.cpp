@@ -24,7 +24,7 @@ Bear::Bear(float x, float y)
 
 	// Bounding Circle
 	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
-	m_boundingCircle.setOrigin(m_bodySprite.getOrigin());
+	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 6.5), m_bodySprite.getOrigin().y);
 	m_boundingCircle.setFillColor(sf::Color::Transparent);
 	m_boundingCircle.setOutlineColor(sf::Color::Green);
 	m_boundingCircle.setOutlineThickness(3);

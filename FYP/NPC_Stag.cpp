@@ -24,7 +24,7 @@ Stag::Stag(float x, float y)
 
 	// Bounding Circle
 	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
-	m_boundingCircle.setOrigin(m_bodySprite.getOrigin());
+	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 2.5), m_bodySprite.getOrigin().y);
 	m_boundingCircle.setFillColor(sf::Color::Transparent);
 	m_boundingCircle.setOutlineColor(sf::Color::Yellow);
 	m_boundingCircle.setOutlineThickness(3);
@@ -43,7 +43,7 @@ void Stag::Move()
 {
 	if (timer == 0) {
 		timer = 200;
-		dir = rand() % 87 + 1; // may want to tweak the probability here
+		dir = rand() % 7 + 1; // may want to tweak the probability here
 	}
 
 	if (dir == 2 && m_position.x < 790) { // Border limits need modifying
