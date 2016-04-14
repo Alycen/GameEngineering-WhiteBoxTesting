@@ -2,25 +2,14 @@
 #define _NPC_BEAR_
 
 #include "stdafx.h"
+#include "NPC_Critter.h"
 
 #define DistanceOfNeck 60.5
 
-class Bear
+class Bear : public Critter
 {
 private:
-	int timer = 200;
-	int dir = rand() % 8 + 1;
-
-	sf::Texture m_bodyTexture;
-	sf::Texture m_headTexture;
-	sf::Sprite m_bodySprite;
-	sf::Sprite m_headSprite;
-
-	sf::Vector2f m_position;
-	sf::Vector2f m_direction;
-
 	float m_speed = 3;
-	float m_rotation;
 
 	float m_attackDamage;
 	float m_health;

@@ -3,25 +3,13 @@
 
 #include "SFML/Graphics.hpp" 
 #include "SFML/OpenGL.hpp" 
+#include "NPC_Critter.h"
 
 #define DistanceOfNeck 35.5
 
-class Kanine
+class Kanine : public Critter
 {
 private:
-	sf::Texture m_bodyTexture;
-	sf::Texture m_headTexture;
-	sf::Sprite m_bodySprite;
-	sf::Sprite m_headSprite;
-
-	sf::Vector2f m_position;
-	sf::Vector2f m_direction;
-
-	float m_rotation;
-
-	int timer = 200;
-	int dir = rand() % 7 + 1;
-
 	float m_speed = 3;
 public:
 	Kanine();
@@ -29,8 +17,11 @@ public:
 
 	void Update();
 	void Draw(sf::RenderWindow&);
+	
+	// AI Behaviours
 	void Move();
 
+	// Get / Sets
 	void SetPosition(sf::Vector2f pos) { m_position = pos; }
 	sf::Vector2f GetPosition() { return m_position; }
 	void SetX(float x) { m_position.x = x; }
