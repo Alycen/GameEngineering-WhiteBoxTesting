@@ -191,17 +191,22 @@ void Player::Smell()
 
 void Player::Dash()
 {
-	
+	// No Damage
+}
+
+void Player::Bash()
+{
+	// Damage = 5; (Have it be a multiplier)
 }
 
 void Player::Bite()
 {
-
+	// Damage = 15
 }
 
 void Player::Slash()
 {
-
+	// Damage = 20
 }
 
 void Player::Draw(sf::RenderWindow &win)

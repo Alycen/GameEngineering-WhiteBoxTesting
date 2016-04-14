@@ -60,6 +60,7 @@ public:
 
 	void Smell(); // Alt Key / Left Bumper
 	void Dash(); // Space Bar / Right bumper?
+	void Bash();
 	void Bite(); // Right Click / Right Trigger
 	void Slash(); // Left Click / Left Trigger
 
