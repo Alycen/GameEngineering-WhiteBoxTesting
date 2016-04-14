@@ -21,11 +21,19 @@ Doe::Doe(float x, float y)
 	m_headSprite.setTexture(m_headTexture);
 	m_headSprite.setOrigin(25.0f, 34.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
+
+	// Bounding Circle
+	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	m_boundingCircle.setOrigin(m_bodySprite.getOrigin());
+	m_boundingCircle.setFillColor(sf::Color::Transparent);
+	m_boundingCircle.setOutlineColor(sf::Color::Blue);
+	m_boundingCircle.setOutlineThickness(3);
 }
 
 void Doe::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
+	m_boundingCircle.setPosition(m_position);
 	Flee(target);
 }
 

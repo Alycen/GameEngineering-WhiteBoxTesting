@@ -21,11 +21,19 @@ Kanine::Kanine(float x, float y)
 	m_headSprite.setTexture(m_headTexture);
 	m_headSprite.setOrigin(20.0f, 40.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
+
+	// Bounding Circle
+	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	m_boundingCircle.setOrigin(m_bodySprite.getOrigin());
+	m_boundingCircle.setFillColor(sf::Color::Transparent);
+	m_boundingCircle.setOutlineColor(sf::Color::Cyan);
+	m_boundingCircle.setOutlineThickness(3);
 }
 
 void Kanine::Update()
 {
 	m_bodySprite.setPosition(m_position.x, m_position.y);
+	m_boundingCircle.setPosition(m_position);
 	Move();
 }
 
@@ -33,6 +41,7 @@ void Kanine::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
+	win.draw(m_boundingCircle);
 }
 
 void Kanine::Move()

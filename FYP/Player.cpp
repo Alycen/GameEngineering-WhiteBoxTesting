@@ -47,12 +47,24 @@ void Player::Init(float x, float y)
 	m_headSprite.setOrigin(20.0f, 40.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 	// m_headSprite.setScale(xScale, yScale);
+
+	// Bounding Circle
+	m_playerBounds.setOrigin(m_bodySprite.getOrigin());
+	m_playerBounds.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	m_playerBounds.setFillColor(sf::Color::Transparent);
+	m_playerBounds.setOutlineColor(sf::Color::Red);
+	m_playerBounds.setOutlineThickness(3);
 	
+	// Mouse / Paw
 	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
 	m_pawTexture.setSmooth(true);
-
 	m_paw.setTexture(m_pawTexture);
 	m_paw.setOrigin(m_paw.getLocalBounds().width / 2, m_paw.getLocalBounds().height / 2);
+	m_pawBounds.setOrigin(21.5f, 21.5f);
+	m_pawBounds.setRadius(21.5f);
+	m_pawBounds.setFillColor(sf::Color::Transparent);
+	m_pawBounds.setOutlineColor(sf::Color::Black);
+	m_pawBounds.setOutlineThickness(3);
 
 	// Player Temp Bark Sound
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
@@ -68,9 +80,9 @@ void Player::Init(float x, float y)
 void Player::Update()
 {
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
-	m_pawBounds.setRadius(21.5f);
-	m_pawBounds.setOrigin(21.5f, 21.5f);
+
 	m_pawBounds.setPosition(m_paw.getPosition());
+	m_playerBounds.setPosition(m_position);
 
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
@@ -135,6 +147,7 @@ void Player::Update()
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) 
 	{
 		Smell();
+		//m_selected = true;     // for debugging purposes
 	}
 	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) 
 	{
@@ -169,9 +182,18 @@ void Player::Update()
 		sf::Vector2f targ;
 		targ.x = (m_position.x + m_selectedPosition.x) / 2;
 		targ.y = (m_position.y + m_selectedPosition.y) / 2;
+
 		Camera::GetInstance()->setViewPosition(targ);
-		// if length is greater than window height / 4
-		//	   m_selected = false;
+		sf::Vector2f target = Closest(m_position, targ);
+		sf::Vector2f diff = m_position - target;
+		if (diff.x*diff.x + diff.y*diff.y > 150000)
+		{
+			m_selected = false;
+		}
+		else
+		{
+			m_selected = true;
+		}
 	}
 	else if (!m_selected)
 	{
@@ -228,4 +250,20 @@ void Player::Draw(sf::RenderWindow &win)
 		}
 	}
 	win.draw(m_paw);
+	win.draw(m_pawBounds);
+	win.draw(m_playerBounds);
+}
+
+sf::Vector2f Player::Closest(sf::Vector2f pos, sf::Vector2f target)
+{
+	float dx = pos.x - target.x, dy = pos.y - target.y, x = target.x, y = target.y;
+	if (abs(dx) > 1200 && dx != 0)
+	{
+		x = target.x + 2400 * (dx / abs(dx));
+	}
+	if (abs(dy) > 900 && dy != 0)
+	{
+		y = target.y + 1800 * (dy / abs(dy));
+	}
+	return sf::Vector2f(x, y);
 }

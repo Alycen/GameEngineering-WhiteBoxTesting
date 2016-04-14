@@ -64,6 +64,8 @@ public:
 	void Bite(); // Right Click / Right Trigger
 	void Slash(); // Left Click / Left Trigger
 
+	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
+
 	void CheckTargetDistance();
 
 	// Get / Sets
@@ -77,6 +79,7 @@ public:
 	float GetHealth() { return m_health; }
 	void SetSelectedNPC(sf::Vector2f target) { m_selectedPosition = target; }
 	void SetSelected(bool selected) { m_selected = select; }
+	sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
 
 	sf::Vector2f GetSelectedNPC() { return m_selectedPosition; }
 	bool GetSelected() { return m_selected; }

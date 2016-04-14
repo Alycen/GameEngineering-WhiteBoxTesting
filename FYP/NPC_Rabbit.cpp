@@ -21,11 +21,19 @@ Rabbit::Rabbit(float x, float y)
 	m_headSprite.setTexture(m_headTexture);
 	m_headSprite.setOrigin(11.0f, 18.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
+
+	// Bounding Circle
+	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	m_boundingCircle.setOrigin(m_bodySprite.getOrigin());
+	m_boundingCircle.setFillColor(sf::Color::Transparent);
+	m_boundingCircle.setOutlineColor(sf::Color::Magenta);
+	m_boundingCircle.setOutlineThickness(3);
 }
 
 void Rabbit::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
+	m_boundingCircle.setPosition(m_position);
 	Flee(target);
 }
 
