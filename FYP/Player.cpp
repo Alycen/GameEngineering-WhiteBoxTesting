@@ -75,7 +75,11 @@ void Player::Init(float x, float y)
 
 	// Stats
 	m_health = 100;
+	// Attack Damage 
 }
+
+// Load stats from txt file()
+// Write stats to txt file()
 
 void Player::Update()
 {

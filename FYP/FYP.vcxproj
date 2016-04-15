@@ -171,6 +171,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Popup.h" />
     <ClInclude Include="Pvector.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SplashScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -194,6 +195,12 @@
     <ClCompile Include="SplashScene.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="UI_bar.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FYP.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
