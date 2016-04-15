@@ -239,7 +239,7 @@ void Player::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
-	
+
 	if (m_smell)  
 	{
 		win.draw(m_smellCircle);
