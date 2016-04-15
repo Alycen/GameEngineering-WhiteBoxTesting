@@ -13,7 +13,7 @@ private:
 
 	SceneManager() {};
 
-	int m_spashSceneTimer = 100;
+	int m_spashSceneTimer = 300;
 public:
 	static SceneManager* GetInstance();
 	void Init();
