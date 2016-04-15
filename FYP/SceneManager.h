@@ -13,7 +13,6 @@ private:
 
 	SceneManager() {};
 
-	int m_currentScene;
 	int m_spashSceneTimer = 100;
 public:
 	static SceneManager* GetInstance();
@@ -21,8 +20,11 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow&);
 
+	int m_currentScene;
+
 	void SceneManager::SetScene(int scene) { m_currentScene = scene; }
 	int SceneManager::GetScene() { return m_currentScene; }
+
 };
 
 #endif

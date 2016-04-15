@@ -23,14 +23,18 @@ void SceneManager::Init()
 {
 	m_currentScene = SPLASH;
 	SplashScene::GetInstance()->Init();
+	MainMenuScene::GetInstance()->Init();
+	GameScene::GetInstance()->Init();
 }
 
 void SceneManager::Update()
 {
-	if (m_spashSceneTimer <= 0)
+	if (MainMenuScene::GetInstance()->gameSelected)
+		m_currentScene = GAME;
+
+	else if (m_spashSceneTimer <= 0)
 	{
 		m_currentScene = MAIN;
-		MainMenuScene::GetInstance()->Init();
 		//SplashScene::GetInstance()->~SplashScene();
 	}
 	else
@@ -41,16 +45,13 @@ void SceneManager::Update()
 	switch (GetScene())
 	{
 	case 0:
-		//cout << "Current Scene : SPLASH" << endl;
 		SplashScene::GetInstance()->Update();
 		break;
 	case 1:
-		//cout << "Current Scene : MAIN MENU" << endl;
 		MainMenuScene::GetInstance()->Update();
 		break;
 	case 2:
-		//cout << "Current Scene : GAME" << endl;
-
+		GameScene::GetInstance()->Update();
 		break;
 	}
 }
@@ -59,18 +60,15 @@ void SceneManager::Draw(sf::RenderWindow &win)
 {
 	if (m_currentScene == 0)
 	{
-		// restore the default view
-		win.setView(win.getDefaultView());
 		SplashScene::GetInstance()->Draw(win);
 	}
 	else if (m_currentScene == 1)
 	{
-		// restore the default view
-		win.setView(win.getDefaultView());
 		MainMenuScene::GetInstance()->Draw(win);
 	}
 	else if (m_currentScene == 2)
 	{
-		//GameScene::GetInstance()->Draw(win);
+		GameScene::GetInstance()->Draw(win);
+		win.setView(Camera::GetInstance()->getView());
 	}
 }

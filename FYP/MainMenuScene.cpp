@@ -1,4 +1,5 @@
 #include "MainMenuScene.h"
+#include "SceneManager.h"
 
 bool MainMenuScene::instanceFlag = false;
 MainMenuScene* MainMenuScene::instance = NULL;
@@ -42,6 +43,7 @@ void MainMenuScene::Init()
 	m_menu[1].setStyle(sf::Text::Bold);
 	m_menu[1].setColor(sf::Color::White);
 	m_menu[1].setString("Settings");
+	//m_menu[1].setPosition(sf::Vector2f(desktop.width / 6, (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 2.5));
 	m_menu[1].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 2.5));
 
 	m_menu[2].setFont(m_font);
@@ -49,6 +51,7 @@ void MainMenuScene::Init()
 	m_menu[2].setStyle(sf::Text::Bold);
 	m_menu[2].setColor(sf::Color::White);
 	m_menu[2].setString("Exit");
+	//m_menu[2].setPosition(sf::Vector2f(desktop.width / 6, (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 4));
 	m_menu[2].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 4));
 
 	m_menu[3].setFont(m_font);
@@ -83,7 +86,6 @@ void MainMenuScene::Init()
 
 void MainMenuScene::Update()
 {
-	cout << std::to_string(m_menu[0].getPosition().x) << " : " << std::to_string(m_menu[0].getPosition().y) << endl;
 	if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::W) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::Up))
 	{
 		MoveUp();
@@ -98,23 +100,22 @@ void MainMenuScene::Update()
 		switch (GetPressedItem())
 		{
 		case 0:
-			cout << "PLAY PRESSED" << endl;
 			m_selectedItemIndex = 3;
 			first_scene = false;
-			//gameSelected = true;
 			//settingsSelected = false;
 			break;
 		case 1:
-			cout << "SETTINGS PRESSED" << endl;
 			//settingsSelected = true;
 			//gameSelected = false;
 			break;
 		case 2:
 			cout << "EXIT PRESSED" << endl;
-			//exitSelected = true;
+			exitSelected = true;
 			break;
 		case 3:
 			cout << "NEW GAME PRESSED" << endl;
+			gameSelected = true;
+			//SceneManager::GetInstance()->m_currentScene = 2;
 			break;
 		case 4:
 			cout << "LOAD GAME PRESSED" << endl;
@@ -131,7 +132,7 @@ void MainMenuScene::Update()
 void MainMenuScene::Draw(sf::RenderWindow &win)
 {
 	// restore the default view
-	win.setView(win.getDefaultView());
+	//win.setView(win.getDefaultView());
 	if (first_scene)
 	{
 		for (int i = 0; i < 3; i++) 

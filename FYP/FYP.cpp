@@ -50,9 +50,6 @@ int main()
 	window.setVerticalSyncEnabled(true);
 
 	SceneManager::GetInstance()->Init();
-
-	//SplashScene::GetInstance()->Init();
-	//MainMenuScene::GetInstance()->Init();
 	//GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
@@ -72,25 +69,21 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
-
+		// *** UPDATES *** //
 		SceneManager::GetInstance()->Update();
 
-		//SplashScene::GetInstance()->Update();
-		/*MainMenuScene::GetInstance()->Update();
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
-		}*/
+		}
 		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
+		// *** DRAW *** //
 		window.clear();
 
 		SceneManager::GetInstance()->Draw(window);
-
-		//SplashScene::GetInstance()->Draw(window);
-		//MainMenuScene::GetInstance()->Draw(window);
 		//GameScene::GetInstance()->Draw(window);
 		//window.setView(Camera::GetInstance()->getView());
 		window.display();
