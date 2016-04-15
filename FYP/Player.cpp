@@ -47,7 +47,24 @@ void Player::Init(float x, float y)
 	m_headSprite.setOrigin(20.0f, 40.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 	// m_headSprite.setScale(xScale, yScale);
+
+	// Bounding Circle
+	m_playerBounds.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 5.5), m_bodySprite.getOrigin().y);
+	m_playerBounds.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	m_playerBounds.setFillColor(sf::Color::Transparent);
+	m_playerBounds.setOutlineColor(sf::Color::Red);
+	m_playerBounds.setOutlineThickness(3);
 	
+	// Mouse / Paw
+	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
+	m_pawTexture.setSmooth(true);
+	m_paw.setTexture(m_pawTexture);
+	m_paw.setOrigin(m_paw.getLocalBounds().width / 2, m_paw.getLocalBounds().height / 2);
+	m_pawBounds.setOrigin(21.5f, 21.5f);
+	m_pawBounds.setRadius(21.5f);
+	m_pawBounds.setFillColor(sf::Color::Transparent);
+	m_pawBounds.setOutlineColor(sf::Color::Black);
+	m_pawBounds.setOutlineThickness(3);
 
 	// Player Temp Bark Sound
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
@@ -58,10 +75,19 @@ void Player::Init(float x, float y)
 
 	// Stats
 	m_health = 100;
+	// Attack Damage 
 }
+
+// Load stats from txt file()
+// Write stats to txt file()
 
 void Player::Update()
 {
+	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
+
+	m_pawBounds.setPosition(m_paw.getPosition());
+	m_playerBounds.setPosition(m_position);
+
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
 	{
@@ -125,6 +151,7 @@ void Player::Update()
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) 
 	{
 		Smell();
+		//m_selected = true;     // for debugging purposes
 	}
 	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) 
 	{
@@ -152,10 +179,30 @@ void Player::Update()
 	float dy = InputManager::GetInstance()->GetMousePosWorld().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
 
 	//cout << "Mouse X : " << (m_headSprite.getLocalBounds().width / 2) << ", Mouse Y : " << (m_headSprite.getLocalBounds().height - m_headTexture.getSize().y) << endl;
+	m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
 
-	//m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));
+	if (m_selected)
+	{
+		sf::Vector2f targ;
+		targ.x = (m_position.x + m_selectedPosition.x) / 2;
+		targ.y = (m_position.y + m_selectedPosition.y) / 2;
 
-	Camera::GetInstance()->setViewPosition(m_position);
+		Camera::GetInstance()->setViewPosition(targ);
+		sf::Vector2f target = Closest(m_position, targ);
+		sf::Vector2f diff = m_position - target;
+		if (diff.x*diff.x + diff.y*diff.y > 150000)
+		{
+			m_selected = false;
+		}
+		else
+		{
+			m_selected = true;
+		}
+	}
+	else if (!m_selected)
+	{
+		Camera::GetInstance()->setViewPosition(m_position);
+	}
 }
 
 void Player::Smell() 
@@ -170,17 +217,22 @@ void Player::Smell()
 
 void Player::Dash()
 {
-	
+	// No Damage
+}
+
+void Player::Bash()
+{
+	// Damage = 5; (Have it be a multiplier)
 }
 
 void Player::Bite()
 {
-
+	// Damage = 15
 }
 
 void Player::Slash()
 {
-
+	// Damage = 20
 }
 
 void Player::Draw(sf::RenderWindow &win)
@@ -201,4 +253,21 @@ void Player::Draw(sf::RenderWindow &win)
 			m_smell = false;
 		}
 	}
+	win.draw(m_paw);
+	win.draw(m_pawBounds);
+	win.draw(m_playerBounds);
+}
+
+sf::Vector2f Player::Closest(sf::Vector2f pos, sf::Vector2f target)
+{
+	float dx = pos.x - target.x, dy = pos.y - target.y, x = target.x, y = target.y;
+	if (abs(dx) > 1200 && dx != 0)
+	{
+		x = target.x + 2400 * (dx / abs(dx));
+	}
+	if (abs(dy) > 900 && dy != 0)
+	{
+		y = target.y + 1800 * (dy / abs(dy));
+	}
+	return sf::Vector2f(x, y);
 }

@@ -9,10 +9,13 @@
 class Rabbit : public Critter
 {
 private:
-
+	float m_speed = 25.0f;
 public:
 	Rabbit();
 	Rabbit(float, float);
+	void Update(sf::Vector2f);
+	void Flee(sf::Vector2f);
+	void Move();
 };
 
 #endif 

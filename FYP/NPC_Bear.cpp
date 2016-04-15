@@ -1,8 +1,5 @@
 #include "NPC_Bear.h"
 
-// look into exactly waht Flee() and other 
-// methods bar move, do with m_direction
-
 Bear::Bear() {}
 
 Bear::Bear(float x, float y) 
@@ -24,6 +21,13 @@ Bear::Bear(float x, float y)
 	m_headSprite.setTexture(m_headTexture);
 	m_headSprite.setOrigin(27.0f, 56.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
+
+	// Bounding Circle
+	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 6.5), m_bodySprite.getOrigin().y);
+	m_boundingCircle.setFillColor(sf::Color::Transparent);
+	m_boundingCircle.setOutlineColor(sf::Color::Green);
+	m_boundingCircle.setOutlineThickness(3);
 }
 
 void Bear::Update()
@@ -35,21 +39,25 @@ void Bear::Update()
 void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
+	m_boundingCircle.setPosition(m_position);
+	
 	//Move();
-	Flee(target);
+	//Flee(target);
+	Chase(target);
 }
 
 void Bear::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
+	win.draw(m_boundingCircle);
 }
 
-void Bear::Move() // Wander
+void Bear::Move() // Wander - Needs modifying - find out how m_direction is used in flee and modify for this
 {
 	if (timer == 0) {
 		timer = 200;
-		dir = rand() % 10 + 1; // may want to tweak the probability here
+		dir = rand() % 8 + 1; // may want to tweak the probability here
 	}
 
 	if (dir == 2 && m_position.x < 790) { // Border limits need modifying
@@ -91,17 +99,35 @@ void Bear::Flee(sf::Vector2f target)	// Run from target
 		m_speed = 0;
 	else
 	{
+		m_speed = 3;
 		m_rotation = atan2(diff.y, diff.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
-		m_speed = 2;
+		m_position += m_direction * m_speed;
+		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+		//Set position of Head and rotation 
 	}
 }
 
 void Bear::Chase(sf::Vector2f target)	// Chase target
 {
 	target = Closest(m_position, target);
-	m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
-	m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
+	sf::Vector2f diff = m_position - target;
+	if (diff.x*diff.x + diff.y*diff.y < 15000)
+	{
+		m_speed = 0;
+	}
+	else if (diff.x*diff.x + diff.y*diff.y >= 150000)
+	{
+		Move();
+	}
+	else if (diff.x*diff.x + diff.y*diff.y >= 15000 && diff.x*diff.x + diff.y*diff.y < 150000)
+	{
+		m_speed = 3;
+		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
+		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
+		m_position += m_direction * m_speed;
+		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+	}
 }
 
 void Bear::Attack()	//

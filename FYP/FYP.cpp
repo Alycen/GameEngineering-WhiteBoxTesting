@@ -19,32 +19,45 @@
 #include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
 #include "Player.h"
-//#include "MainMenuScene.h"
-//#include "GameScene.h"
 #include "Camera.h"
 #include "STP\TMXLoader.hpp"
-//#include "SplashScene.h"
 #include "SceneManager.h"
 
-// TO DO:
-// ------------------------------------------
-// Sound							|	 1 h
-// Scene Manager					|	 2 h
-// Settings							|	 2 h
-// Interaction with NPCs			|	 3 h
-// Particles						|	 2 h
-// Popups							|	 1 h
-// ---NPC AI---						|	 ---
-// -> Attack						|	 2 h
-// Player stay within level bounds	|	 2 h
-// Player Stats						|	 3 h
-// Level switch						|	 2 h
-// Load / Save Level				|	 8 h
-// ------------------------------------------
+// -----------------------------------------|
+// TO DO:									|
+// -----------------------------------------|
+// Sound							|	 1 h|
+// Scene Manager					|	 2 h|
+// Settings							|	 2 h|
+// Interaction with NPCs			|	 3 h|
+// Particles						|	 2 h|
+// Popups							|	 1 h|
+// ---NPC AI---						|	 ---|
+// -> Attack						|	 2 h|
+// Player stay within level bounds	|	 2 h|
+// Player Stats						|	 1 h|
+// Level switch						|	 2 h|
+// Load / Save Level				|	 8 h|
+// Targetting						|	 2 h|
+// Select NPC						|    4 h|
+// LOAD SCENE!!!!!!!!				|	 1 h|
+// -----------------------------------------|
+// AI Behaviours 						    |
+// -> Move() - Wander						|
+// -> Stare() - Rotate towards, dont move	|		
+// -> Follow() - Slowly follow				|
+// -> Chase() - Quickly follow				|
+// -> Avoid() - Slowly avoid				|
+// -> Flee() - quickly avoid				|
+// -> Attack() - cause damage				|
+// Dont go outside the level bounds			|
+// -----------------------------------------|
 
 int main()
 {
 	srand(time(NULL));
+	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	//sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Beasts of Burden", sf::Style::None);
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
@@ -56,12 +69,10 @@ int main()
 	{
 		sf::Event Event;
 		sf::Mouse mouse;
+		window.setMouseCursorVisible(false);
 		while (window.pollEvent(Event))
 		{
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
-
-			if (Event.type == sf::Event::MouseMoved)
-				InputManager::GetInstance()->GetWindow(mouse, window);
 
 			if (Event.type == sf::Event::Closed)
 				window.close();
@@ -72,11 +83,12 @@ int main()
 		// *** UPDATES *** //
 		SceneManager::GetInstance()->Update();
 
+		InputManager::GetInstance()->GetWindow(mouse, window);
+
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
 		}
-		//GameScene::GetInstance()->Update();
 
 		InputManager::GetInstance()->UpdateState();
 		
@@ -84,8 +96,6 @@ int main()
 		window.clear();
 
 		SceneManager::GetInstance()->Draw(window);
-		//GameScene::GetInstance()->Draw(window);
-		//window.setView(Camera::GetInstance()->getView());
 		window.display();
 	}
 

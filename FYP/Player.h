@@ -6,6 +6,7 @@
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
 #include "Camera.h"
+#include "NPC_Critter.h"
 
 #define DistanceOfNeck 35.5
 #define DistanceOfTail 100
@@ -20,6 +21,10 @@ private:
 
 	sf::Texture m_bodyTexture, m_headTexture;
 	sf::Sprite m_bodySprite, m_headSprite;
+
+	sf::Texture m_pawTexture;
+	sf::Sprite m_paw;
+
 	float m_roatation;
 
 	sf::Vector2f m_position;
@@ -32,6 +37,9 @@ private:
 	bool m_running = false;
 	bool m_smell = false;
 
+	sf::CircleShape m_pawBounds;
+	sf::CircleShape m_playerBounds;
+
 	sf::CircleShape m_smellCircle;
 	float m_radius;
 
@@ -40,6 +48,9 @@ private:
 	
 	int m_health;
 	int m_stamina;
+
+	bool m_selected = true;
+	sf::Vector2f m_selectedPosition;
 public:
 	static Player* GetInstance();
 	void Init(float, float);
@@ -49,8 +60,13 @@ public:
 
 	void Smell(); // Alt Key / Left Bumper
 	void Dash(); // Space Bar / Right bumper?
+	void Bash();
 	void Bite(); // Right Click / Right Trigger
 	void Slash(); // Left Click / Left Trigger
+
+	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
+
+	void CheckTargetDistance();
 
 	// Get / Sets
 	void SetPosition(sf::Vector2f pos) { m_position = pos; }
@@ -61,7 +77,13 @@ public:
 	float GetY() { return m_position.y; }
 	void SetHealth(float h) { m_health = h; }
 	float GetHealth() { return m_health; }
+	void SetSelectedNPC(sf::Vector2f target) { m_selectedPosition = target; }
+	void SetSelected(bool selected) { m_selected = select; }
+	sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
 
+	sf::Vector2f GetSelectedNPC() { return m_selectedPosition; }
+	bool GetSelected() { return m_selected; }
+	
 	~Player()
 	{
 		delete instance;

@@ -26,8 +26,8 @@ void GameScene::Init()
 	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
 
 	m_backgroundMusic.setVolume(10);
-	//m_backgroundMusic.play();
-	//m_backgroundMusic.setLoop(true);
+	m_backgroundMusic.play();
+	m_backgroundMusic.setLoop(true);
 
 	Player::GetInstance()->Init(3000,2500);
 	Camera::GetInstance()->Init(1400,900);
@@ -50,6 +50,8 @@ void GameScene::Update()
 	bambisMom->Update(Player::GetInstance()->GetPosition());
 	testBunny->Update(Player::GetInstance()->GetPosition());
 
+	Player::GetInstance()->SetSelectedNPC(testBear->GetPosition());
+
 	temp_healtbar->Update();
 	temp_staminabar->Update();
 	// check player doesnt leave bounding area
@@ -68,6 +70,7 @@ void GameScene::Draw(sf::RenderWindow &win)
 
 	// restore the default view
 	win.setView(win.getDefaultView());
+
 	temp_healtbar->Draw(win);
 	temp_staminabar->Draw(win);
 }
