@@ -97,6 +97,7 @@ public:
 	//sf::CircleShape GetBoundingPaw() { return m_pawBounds; }
 
 	sf::Sprite GetSprite() { return m_bodySprite; }
+	sf::Sprite GetHeadSprite() { return m_headSprite; }
 	sf::Sprite GetPawSprite() { return m_paw; }
 	
 	~Player()

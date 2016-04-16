@@ -192,13 +192,17 @@ void Player::Update()
 		Camera::GetInstance()->setViewPosition(targ);
 		sf::Vector2f target = Closest(m_position, targ);
 		sf::Vector2f diff = m_position - target;
-		if (diff.x*diff.x + diff.y*diff.y > 150000)
+		if (diff.x*diff.x + diff.y*diff.y > 180000)
 		{
 			m_selected = false;
 		}
 		else
 		{
 			m_selected = true;
+		}
+		if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::Escape))
+		{
+			m_selected = false;
 		}
 	}
 	else if (!m_selected)

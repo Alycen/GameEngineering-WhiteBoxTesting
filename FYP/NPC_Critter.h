@@ -154,6 +154,7 @@ public:
 	//sf::CircleShape GetBoundingCircle() { return m_boundingCircle; }
 
 	sf::Sprite GetSprite() { return m_bodySprite; }
+	sf::Sprite GetHeadSprite() { return m_headSprite; }
 };
 
 #endif

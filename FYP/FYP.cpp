@@ -27,20 +27,14 @@
 // TO DO:									|
 // -----------------------------------------|
 // Sound							|	 1 h|
-// ---Scene Manager	---				|	 ---|
 // Settings							|	 2 h|
-// Interaction with NPCs			|	 3 h|
 // Particles						|	 2 h|
 // Popups							|	 1 h|
-// ---NPC AI---						|	 ---|
-// -> Attack						|	 2 h|
+// Attack							|	 2 h|
 // Player stay within level bounds	|	 2 h|
-// ---Player Stats---				|	 ---|
 // Level switch						|	 2 h|
 // Load / Save Level				|	 8 h|
-// ---Targetting---					|	 ---|
-// Select NPC						|    4 h|
-// LOAD SCENE!!!!!!!!				|	 1 h|
+// LOADING SCENE!!!!!!!!			|	 1 h|
 // -----------------------------------------|
 //											|
 // AI Behaviours 						    |
@@ -59,7 +53,7 @@ int main()
 	srand(time(NULL));
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	//sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Beasts of Burden", sf::Style::None);
-	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");
+	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");//, sf::Style::None);
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 
@@ -77,10 +71,10 @@ int main()
 			if (Event.type == sf::Event::Closed)
 				window.close();
 
-			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
-				window.close();
+			//if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
+			//	window.close();
 
-			if (Event.type == sf::Event::MouseButtonPressed)
+			if (Event.type == sf::Event::MouseButtonPressed && mouse.isButtonPressed(sf::Mouse::Left))
 			{
 				GameScene::GetInstance()->CheckMouseCollision();
 			}
