@@ -11,6 +11,8 @@ private:
 	static bool instanceFlag;
 	static SceneManager* instance;
 
+	sf::Music m_backgroundMusic;
+
 	SceneManager() {};
 
 	int m_spashSceneTimer = 300;

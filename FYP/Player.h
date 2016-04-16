@@ -46,8 +46,8 @@ private:
 	sf::SoundBuffer m_barkBuffer;
 	sf::Sound m_barkSound;
 	
-	int m_health;
-	int m_stamina;
+	int m_maxHealth, m_health;
+	int m_maxStamina, m_stamina;
 
 	bool m_selected = true;
 	sf::Vector2f m_selectedPosition;

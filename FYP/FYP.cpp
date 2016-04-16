@@ -27,7 +27,7 @@
 // TO DO:									|
 // -----------------------------------------|
 // Sound							|	 1 h|
-// Scene Manager					|	 2 h|
+// ---Scene Manager	---				|	 ---|
 // Settings							|	 2 h|
 // Interaction with NPCs			|	 3 h|
 // Particles						|	 2 h|
@@ -38,7 +38,7 @@
 // Player Stats						|	 1 h|
 // Level switch						|	 2 h|
 // Load / Save Level				|	 8 h|
-// Targetting						|	 2 h|
+// ---Targetting---					|	 ---|
 // Select NPC						|    4 h|
 // LOAD SCENE!!!!!!!!				|	 1 h|
 // -----------------------------------------|
@@ -63,7 +63,6 @@ int main()
 	window.setVerticalSyncEnabled(true);
 
 	SceneManager::GetInstance()->Init();
-	//GameScene::GetInstance()->Init();
 
 	while (window.isOpen())
 	{
@@ -80,25 +79,21 @@ int main()
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
 		}
+
 		// *** UPDATES *** //
 		SceneManager::GetInstance()->Update();
-
-		InputManager::GetInstance()->GetWindow(mouse, window);
-
 		if (MainMenuScene::GetInstance()->exitSelected)
 		{
 			window.close();
 		}
-
+		InputManager::GetInstance()->GetWindow(mouse, window);
 		InputManager::GetInstance()->UpdateState();
 		
 		// *** DRAW *** //
 		window.clear();
-
 		SceneManager::GetInstance()->Draw(window);
 		window.display();
 	}
 
 	return EXIT_SUCCESS;
 }
-

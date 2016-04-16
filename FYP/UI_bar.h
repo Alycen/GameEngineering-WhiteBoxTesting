@@ -60,6 +60,9 @@ public:
 	// get / set isVisible
 	void SetVisible(bool);
 	bool GetVisible();
+
+	// UI bar.length == max Health / Stamina
+	// UI filling.length == health / stamina
 };
 
 #endif

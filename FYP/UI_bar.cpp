@@ -10,7 +10,7 @@ UI_bar::UI_bar(float y, string type, float legnth)
 	//m_left_pos.y = y;
 	//m_mid_pos.y = y;
 	//m_right_pos.y = y;
-	m_length = 150;
+	m_length = 100;
 	m_scale = .12f;
 	m_y = y;
 
@@ -58,14 +58,13 @@ void UI_bar::Draw(sf::RenderWindow &win)
 	//Leave border positions as is
 	m_left_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 20), windowCentre.y - ((windowSize.y / 2) - m_y));
 	m_mid_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
-	m_right_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.415))), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_right_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
 
 	// Need modifiable Length variable for here
 	m_left_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 22), windowCentre.y - ((windowSize.y / 2) - m_y));
-
 	//Below needs modifying
 	m_mid_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
-	m_right_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4135))), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_right_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - (m_length / (.4))), windowCentre.y - ((windowSize.y / 2) - m_y));
 
 	if (isVisible)
 	{
@@ -113,4 +112,4 @@ float UI_bar::GetX()
 float UI_bar::GetY()
 {
 	return m_left_pos.y;
-}
+}                                                                                                                                                
