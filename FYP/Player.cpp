@@ -49,22 +49,22 @@ void Player::Init(float x, float y)
 	// m_headSprite.setScale(xScale, yScale);
 
 	// Bounding Circle
-	m_playerBounds.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 5.5), m_bodySprite.getOrigin().y);
+	/*m_playerBounds.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 5.5), m_bodySprite.getOrigin().y);
 	m_playerBounds.setRadius(m_bodySprite.getLocalBounds().height / 2);
 	m_playerBounds.setFillColor(sf::Color::Transparent);
 	m_playerBounds.setOutlineColor(sf::Color::Red);
-	m_playerBounds.setOutlineThickness(3);
+	m_playerBounds.setOutlineThickness(3);*/
 	
 	// Mouse / Paw
 	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
 	m_pawTexture.setSmooth(true);
 	m_paw.setTexture(m_pawTexture);
 	m_paw.setOrigin(m_paw.getLocalBounds().width / 2, m_paw.getLocalBounds().height / 2);
-	m_pawBounds.setOrigin(21.5f, 21.5f);
+	/*m_pawBounds.setOrigin(21.5f, 21.5f);
 	m_pawBounds.setRadius(21.5f);
 	m_pawBounds.setFillColor(sf::Color::Transparent);
 	m_pawBounds.setOutlineColor(sf::Color::Black);
-	m_pawBounds.setOutlineThickness(3);
+	m_pawBounds.setOutlineThickness(3);*/
 
 	// Player Temp Bark Sound
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
@@ -89,9 +89,6 @@ void Player::Init(float x, float y)
 void Player::Update()
 {
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
-
-	m_pawBounds.setPosition(m_paw.getPosition());
-	m_playerBounds.setPosition(m_position);
 
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
@@ -259,8 +256,6 @@ void Player::Draw(sf::RenderWindow &win)
 		}
 	}
 	win.draw(m_paw);
-	win.draw(m_pawBounds);
-	win.draw(m_playerBounds);
 }
 
 sf::Vector2f Player::Closest(sf::Vector2f pos, sf::Vector2f target)

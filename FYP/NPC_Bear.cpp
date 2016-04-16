@@ -23,11 +23,11 @@ Bear::Bear(float x, float y)
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 
 	// Bounding Circle
-	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+/*	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
 	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 6.5), m_bodySprite.getOrigin().y);
 	m_boundingCircle.setFillColor(sf::Color::Transparent);
 	m_boundingCircle.setOutlineColor(sf::Color::Green);
-	m_boundingCircle.setOutlineThickness(3);
+	m_boundingCircle.setOutlineThickness(3);*/
 }
 
 void Bear::Update()
@@ -39,7 +39,7 @@ void Bear::Update()
 void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	m_boundingCircle.setPosition(m_position);
+	//m_boundingCircle.setPosition(m_position);
 	
 	//Move();
 	//Flee(target);
@@ -50,13 +50,13 @@ void Bear::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
-	win.draw(m_boundingCircle);
+	//win.draw(m_boundingCircle);
 }
 
 void Bear::Move() // Wander - Needs modifying - find out how m_direction is used in flee and modify for this
 {
 	if (timer == 0) {
-		timer = 200;
+		timer = rand() % 300 + 100;
 		dir = rand() % 8 + 1; // may want to tweak the probability here
 	}
 

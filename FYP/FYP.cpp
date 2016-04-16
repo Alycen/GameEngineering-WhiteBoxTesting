@@ -35,13 +35,14 @@
 // ---NPC AI---						|	 ---|
 // -> Attack						|	 2 h|
 // Player stay within level bounds	|	 2 h|
-// Player Stats						|	 1 h|
+// ---Player Stats---				|	 ---|
 // Level switch						|	 2 h|
 // Load / Save Level				|	 8 h|
 // ---Targetting---					|	 ---|
 // Select NPC						|    4 h|
 // LOAD SCENE!!!!!!!!				|	 1 h|
 // -----------------------------------------|
+//											|
 // AI Behaviours 						    |
 // -> Move() - Wander						|
 // -> Stare() - Rotate towards, dont move	|		
@@ -78,6 +79,11 @@ int main()
 
 			if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
 				window.close();
+
+			if (Event.type == sf::Event::MouseButtonPressed)
+			{
+				GameScene::GetInstance()->CheckMouseCollision();
+			}
 		}
 
 		// *** UPDATES *** //

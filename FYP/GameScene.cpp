@@ -19,6 +19,8 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Init()
 {
+	bearNum = 2;
+
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{
 		// handle error
@@ -31,12 +33,35 @@ void GameScene::Init()
 
 	Player::GetInstance()->Init(3000,2500);
 	Camera::GetInstance()->Init(1400,900);
+
+	for (int i = 0; i < wolfNum; i++)
+	{
+		npcs.push_back(new Kanine(1000, 1000));
+	}
+	for (int i = 0; i < bearNum; i++)
+	{
+		npcs.push_back(new Bear(2000, 2000));
+	}
+	for (int i = 0; i < stagNum; i++)
+	{
+		npcs.push_back(new Stag(3000, 3000));
+	}
+	for (int i = 0; i < doeNum; i++)
+	{
+		npcs.push_back(new Doe(3000, 3000));
+	}
+	for (int i = 0; i < rabbitNum; i++)
+	{
+		npcs.push_back(new Rabbit(4000, 4000));
+	}
+
+	/*
 	testKanine = new Kanine(2700, 2700);
 	testBear = new Bear(2900, 2700);
 	testStag = new Stag(2800, 2700);
 	bambisMom = new Doe(2600, 2700);
 	testBunny = new Rabbit(2500, 2700);
-
+	*/
 	m_healthbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
 	m_staminabar = new UI_bar(50, "Stamina", Player::GetInstance()->GetStamina());
 }
@@ -44,13 +69,18 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	Player::GetInstance()->Update();
+	for each (Critter* c in npcs)
+	{
+		c->Update(Player::GetInstance()->GetPosition());
+	}
+	/*
 	testKanine->Update();
 	testBear->Update(Player::GetInstance()->GetPosition());
 	testStag->Update(Player::GetInstance()->GetPosition());
 	bambisMom->Update(Player::GetInstance()->GetPosition());
 	testBunny->Update(Player::GetInstance()->GetPosition());
-
-	Player::GetInstance()->SetSelectedNPC(testBear->GetPosition());
+	*/
+	//Player::GetInstance()->SetSelectedNPC(testBear->GetPosition());
 
 	UpdateHealth();
 	UpdateStamina();
@@ -59,17 +89,29 @@ void GameScene::Update()
 	m_staminabar->Update();
 
 	// check player doesnt leave bounding area
+	for each(Critter* c in npcs)
+	{
+		if (Collision::PixelPerfectTest(Player::GetInstance()->GetSprite(), c->GetSprite()))
+		{
+			cout << "Player colliding" << endl;
+		}
+	}
 }
 
 void GameScene::Draw(sf::RenderWindow &win)
 {
 	win.draw(*m_map);
+	for each (Critter* c in npcs)
+	{
+		c->Draw(win);
+	}
+	/*
 	testKanine->Draw(win);
 	testBear->Draw(win);
 	testStag->Draw(win);
 	bambisMom->Draw(win);
 	testBunny->Draw(win);
-
+	*/
 	Player::GetInstance()->Draw(win);
 
 	// restore the default view
@@ -107,4 +149,17 @@ void GameScene::UpdateStamina()
 	float staminaBarFull = m_staminabar->GetMaxVal();
 	float value = (staminaBarFull / 100) * percent;
 	m_staminabar->SetValue(value);
+}
+
+// Collision Checks
+void GameScene::CheckMouseCollision()
+{
+	for each(Critter* c in npcs)
+	{
+		if (Collision::PixelPerfectTest(Player::GetInstance()->GetPawSprite(), c->GetSprite()))
+		{
+			Player::GetInstance()->SetSelectedNPC(c->GetPosition());
+			Player::GetInstance()->m_selected = true;
+		}
+	}
 }

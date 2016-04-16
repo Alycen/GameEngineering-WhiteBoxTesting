@@ -16,7 +16,7 @@ protected:
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
 
-	sf::CircleShape m_boundingCircle;
+	// sf::CircleShape m_boundingCircle;
 
 	float m_speed;
 	float m_rotation;
@@ -24,7 +24,7 @@ protected:
 	float m_attackDamage;
 	float m_health;
 
-	int timer = 200;
+	int timer = rand() % 300 + 100;
 	int dir = rand() % 7 + 1;
 public:
 	Critter::Critter() { }
@@ -42,7 +42,7 @@ public:
 	{
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
-		win.draw(m_boundingCircle);
+		//win.draw(m_boundingCircle);
 	}
 
 	// AI Behaviour
@@ -151,7 +151,9 @@ public:
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
 
-	sf::CircleShape GetBoundingCircle() { return m_boundingCircle; }
+	//sf::CircleShape GetBoundingCircle() { return m_boundingCircle; }
+
+	sf::Sprite GetSprite() { return m_bodySprite; }
 };
 
 #endif

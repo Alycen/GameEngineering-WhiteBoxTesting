@@ -23,17 +23,17 @@ Kanine::Kanine(float x, float y)
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 
 	// Bounding Circle
-	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+	/*m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
 	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 5.5), m_bodySprite.getOrigin().y);
 	m_boundingCircle.setFillColor(sf::Color::Transparent);
 	m_boundingCircle.setOutlineColor(sf::Color::Cyan);
-	m_boundingCircle.setOutlineThickness(3);
+	m_boundingCircle.setOutlineThickness(3);*/
 }
 
 void Kanine::Update()
 {
 	m_bodySprite.setPosition(m_position.x, m_position.y);
-	m_boundingCircle.setPosition(m_position);
+	//m_boundingCircle.setPosition(m_position);
 	Move();
 }
 
@@ -41,13 +41,13 @@ void Kanine::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
-	win.draw(m_boundingCircle);
+	//win.draw(m_boundingCircle);
 }
 
 void Kanine::Move()
 {
 	if (timer == 0) {
-		timer = 200;
+		timer = rand() % 300 + 100;
 		dir = rand() % 10 + 1; // may want to tweak the probability here
 	}
 

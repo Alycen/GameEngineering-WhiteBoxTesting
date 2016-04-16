@@ -14,6 +14,7 @@
 #include <list>
 #include "STP\TMXLoader.hpp"
 #include "UI_bar.h"
+#include "Collision.h"
 
 class GameScene
 {
@@ -23,12 +24,17 @@ private:
 	GameScene() { }
 
 	sf::Music m_backgroundMusic;
+
+	list<Critter*> npcs;
+
+	int wolfNum, bearNum, stagNum, doeNum, rabbitNum;
+	/*
 	Kanine* testKanine;
 	Bear* testBear;
 	Stag* testStag;
 	Doe* bambisMom;
-	Rabbit* testBunny;
-
+	Critter* testBunny;
+	*/
 	UI_bar* m_healthbar;
 	UI_bar* m_staminabar;
 
@@ -43,6 +49,11 @@ public:
 	// UI Bars
 	void UpdateHealth();
 	void UpdateStamina();
+
+	// Checks
+	void CheckMouseCollision();
+	void CheckPlayerCollision();
+	void CheckNPCsCollisions();
 
 	GameScene::~GameScene()
 	{

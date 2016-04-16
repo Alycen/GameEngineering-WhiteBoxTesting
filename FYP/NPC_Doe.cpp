@@ -23,17 +23,17 @@ Doe::Doe(float x, float y)
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 
 	// Bounding Circle
-	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
+/*	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
 	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 2), m_bodySprite.getOrigin().y);
 	m_boundingCircle.setFillColor(sf::Color::Transparent);
 	m_boundingCircle.setOutlineColor(sf::Color::Blue);
-	m_boundingCircle.setOutlineThickness(3);
+	m_boundingCircle.setOutlineThickness(3);*/
 }
 
 void Doe::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	m_boundingCircle.setPosition(m_position);
+	//m_boundingCircle.setPosition(m_position);
 	Flee(target);
 }
 
@@ -61,7 +61,7 @@ void Doe::Flee(sf::Vector2f target)
 void Doe::Move()
 {
 	if (timer == 0) {
-		timer = 200;
+		timer = rand() % 300 + 100;
 		dir = rand() % 8 + 1; // may want to tweak the probability here
 	}
 

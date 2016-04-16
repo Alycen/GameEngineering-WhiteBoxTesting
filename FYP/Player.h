@@ -37,8 +37,8 @@ private:
 	bool m_running = false;
 	bool m_smell = false;
 
-	sf::CircleShape m_pawBounds;
-	sf::CircleShape m_playerBounds;
+	//sf::CircleShape m_pawBounds;
+	//sf::CircleShape m_playerBounds;
 
 	sf::CircleShape m_smellCircle;
 	float m_radius;
@@ -49,7 +49,6 @@ private:
 	float m_maxHealth, m_health;
 	float m_maxStamina, m_stamina;
 
-	bool m_selected = true;
 	sf::Vector2f m_selectedPosition;
 public:
 	static Player* GetInstance();
@@ -63,6 +62,8 @@ public:
 	void Bash();
 	void Bite(); // Right Click / Right Trigger
 	void Slash(); // Left Click / Left Trigger
+
+	bool m_selected = false;
 
 	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
 
@@ -92,7 +93,11 @@ public:
 	sf::Vector2f GetSelectedNPC() { return m_selectedPosition; }
 	bool GetSelected() { return m_selected; }
 
-	sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
+	//sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
+	//sf::CircleShape GetBoundingPaw() { return m_pawBounds; }
+
+	sf::Sprite GetSprite() { return m_bodySprite; }
+	sf::Sprite GetPawSprite() { return m_paw; }
 	
 	~Player()
 	{
