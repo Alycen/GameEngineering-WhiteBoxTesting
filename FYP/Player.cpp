@@ -79,6 +79,7 @@ void Player::Init(float x, float y)
 
 	m_maxStamina = 120;
 	m_stamina = m_maxStamina;
+
 	// Attack Damage 
 }
 
