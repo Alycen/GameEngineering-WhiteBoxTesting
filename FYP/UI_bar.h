@@ -23,6 +23,7 @@ private:
 	float m_length;
 	float m_scale;
 	float m_y;
+	float m_fillingScale;
 
 	// Filling
 	sf::Vector2f m_left_filling_pos;
@@ -36,8 +37,6 @@ private:
 	sf::Sprite m_left_filling_sprite;
 	sf::Sprite m_right_filling_sprite;
 	sf::Sprite m_mid_filling_sprite;
-
-	float m_filling_length;
 	
 	bool isVisible;
 public:
@@ -48,21 +47,19 @@ public:
 	void Draw(sf::RenderWindow&);
 
 	// set / get length of bar
-	void SetLength(float);
-	float GetLength();
+	void SetLength(float l) { m_length = l; };
+	float GetLength() { return m_length; };
 
-	// set / get position of left most bar componant
-	void SetPosition(float, float);
-	sf::Vector2f GetPosition();
-	float GetX();
-	float GetY();
+	void Decrease(float);
+	void Increase(float);
+	float GetValue();
+	void SetValue(float);
+	float GetMaxVal() { return 20.0f; }
 
 	// get / set isVisible
-	void SetVisible(bool);
-	bool GetVisible();
+	void SetVisible(bool v) { isVisible = v; }
+	bool GetVisible() {return isVisible; }
 
-	// UI bar.length == max Health / Stamina
-	// UI filling.length == health / stamina
 };
 
 #endif

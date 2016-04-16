@@ -29,8 +29,8 @@ private:
 	Doe* bambisMom;
 	Rabbit* testBunny;
 
-	UI_bar* temp_healtbar;
-	UI_bar* temp_staminabar;
+	UI_bar* m_healthbar;
+	UI_bar* m_staminabar;
 
 	tmx::TileMap* m_map;
 public:
@@ -39,6 +39,10 @@ public:
 	void Init();
 	void Update();
 	void Draw(sf::RenderWindow&);
+
+	// UI Bars
+	void UpdateHealth();
+	void UpdateStamina();
 
 	GameScene::~GameScene()
 	{

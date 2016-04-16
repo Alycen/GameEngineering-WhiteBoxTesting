@@ -37,8 +37,11 @@ void GameScene::Init()
 	bambisMom = new Doe(2600, 2700);
 	testBunny = new Rabbit(2500, 2700);
 
-	temp_healtbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
-	temp_staminabar = new UI_bar(50, "Stamina", Player::GetInstance()->GetHealth());
+	m_healthbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
+	m_staminabar = new UI_bar(50, "Stamina", Player::GetInstance()->GetStamina());
+
+	m_healthbar->SetValue(20.0f);
+	m_staminabar->SetValue(20.0f);
 }
 
 void GameScene::Update()
@@ -52,8 +55,12 @@ void GameScene::Update()
 
 	Player::GetInstance()->SetSelectedNPC(testBear->GetPosition());
 
-	temp_healtbar->Update();
-	temp_staminabar->Update();
+	UpdateHealth();
+	UpdateStamina();
+
+	m_healthbar->Update();
+	m_staminabar->Update();
+
 	// check player doesnt leave bounding area
 }
 
@@ -71,6 +78,36 @@ void GameScene::Draw(sf::RenderWindow &win)
 	// restore the default view
 	win.setView(win.getDefaultView());
 
-	temp_healtbar->Draw(win);
-	temp_staminabar->Draw(win);
+	m_healthbar->Draw(win);
+	m_staminabar->Draw(win);
+}
+
+// UI bars
+void GameScene::UpdateHealth()
+{
+	float playerCurrHealth = Player::GetInstance()->GetHealth();
+	float playerHealthFull = Player::GetInstance()->GetMaxHealth();
+
+	//get the current percent of the players health
+	float percent = (playerCurrHealth / playerHealthFull) * 100;
+
+	// find what value that percent is of the health bar
+	float healthBarFull = m_healthbar->GetMaxVal();
+	float value = (healthBarFull / 100) * percent;
+	cout << value << endl;
+	m_healthbar->SetValue(value);
+}
+
+void GameScene::UpdateStamina()
+{
+	float playerCurrStamina = Player::GetInstance()->GetStamina();
+	float playerStaminaFull = Player::GetInstance()->GetMaxStamina();
+
+	//get the current percent of the players stamina
+	float percent = (playerStaminaFull / playerCurrStamina) * 100;
+
+	// find what value that percent is of the stamina bar
+	float staminaBarFull = m_staminabar->GetMaxVal();
+	float value = (staminaBarFull / 100) * percent;
+	m_healthbar->SetValue(value);
 }

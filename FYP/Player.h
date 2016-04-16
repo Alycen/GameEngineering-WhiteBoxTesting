@@ -46,8 +46,8 @@ private:
 	sf::SoundBuffer m_barkBuffer;
 	sf::Sound m_barkSound;
 	
-	int m_maxHealth, m_health;
-	int m_maxStamina, m_stamina;
+	float m_maxHealth, m_health;
+	float m_maxStamina, m_stamina;
 
 	bool m_selected = true;
 	sf::Vector2f m_selectedPosition;
@@ -75,14 +75,24 @@ public:
 	float GetX() { return m_position.x; }
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
+	// Health
 	void SetHealth(float h) { m_health = h; }
 	float GetHealth() { return m_health; }
+	void SetMaxHealth(float h) { m_maxHealth = h; }
+	float GetMaxHealth() { return m_maxHealth; }
+	// Stamina
+	void SetStamina(float s) { m_stamina = s; }
+	float GetStamina() { return m_stamina; }
+	void SetMaxStamina(float s) { m_maxStamina = s; }
+	float GetMaxStamina() { return m_maxStamina; }
+
+	//NPC target
 	void SetSelectedNPC(sf::Vector2f target) { m_selectedPosition = target; }
 	void SetSelected(bool selected) { m_selected = select; }
-	sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
-
 	sf::Vector2f GetSelectedNPC() { return m_selectedPosition; }
 	bool GetSelected() { return m_selected; }
+
+	sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
 	
 	~Player()
 	{

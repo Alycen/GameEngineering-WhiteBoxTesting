@@ -84,6 +84,7 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
+
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
 
 	m_pawBounds.setPosition(m_paw.getPosition());
