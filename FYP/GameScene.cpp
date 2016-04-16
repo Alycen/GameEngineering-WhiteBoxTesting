@@ -39,9 +39,6 @@ void GameScene::Init()
 
 	m_healthbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
 	m_staminabar = new UI_bar(50, "Stamina", Player::GetInstance()->GetStamina());
-
-	m_healthbar->SetValue(20.0f);
-	m_staminabar->SetValue(20.0f);
 }
 
 void GameScene::Update()
@@ -94,7 +91,7 @@ void GameScene::UpdateHealth()
 	// find what value that percent is of the health bar
 	float healthBarFull = m_healthbar->GetMaxVal();
 	float value = (healthBarFull / 100) * percent;
-	cout << value << endl;
+
 	m_healthbar->SetValue(value);
 }
 
@@ -104,10 +101,10 @@ void GameScene::UpdateStamina()
 	float playerStaminaFull = Player::GetInstance()->GetMaxStamina();
 
 	//get the current percent of the players stamina
-	float percent = (playerStaminaFull / playerCurrStamina) * 100;
+	float percent = (playerCurrStamina / playerStaminaFull) * 100;
 
 	// find what value that percent is of the stamina bar
 	float staminaBarFull = m_staminabar->GetMaxVal();
 	float value = (staminaBarFull / 100) * percent;
-	m_healthbar->SetValue(value);
+	m_staminabar->SetValue(value);
 }

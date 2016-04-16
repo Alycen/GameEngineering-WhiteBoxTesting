@@ -20,6 +20,7 @@ private:
 	sf::Sprite m_right_sprite;
 	sf::Sprite m_mid_sprite;
 
+	string m_type;
 	float m_length;
 	float m_scale;
 	float m_y;

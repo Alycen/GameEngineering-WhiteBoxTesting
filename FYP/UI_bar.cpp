@@ -7,7 +7,8 @@ UI_bar::UI_bar(float y, string type, float legnth)
 	m_length = 100;
 	m_scale = .12f;
 	m_y = y;
-	//m_fillingScale = 20.0f;
+	m_fillingScale = 20.0f;
+	m_type = type;
 
 	m_left_tex.loadFromFile("Assets/UI/bar_left.png");
 	m_mid_tex.loadFromFile("Assets/UI/bar_mid.png");
@@ -36,9 +37,10 @@ UI_bar::UI_bar(float y, string type, float legnth)
 
 void UI_bar::Update()
 {
-	//if (m_fillingScale >=0 )
-	//{
-	//}
+	if (m_fillingScale >= 0)
+	{
+		m_mid_filling_sprite.setScale(m_fillingScale, m_scale);
+	}
 
 	m_left_sprite.setPosition(m_left_pos);
 	m_mid_sprite.setPosition(m_mid_pos);
@@ -47,8 +49,6 @@ void UI_bar::Update()
 	m_left_filling_sprite.setPosition(m_left_filling_pos);
 	m_mid_filling_sprite.setPosition(m_mid_filling_pos);
 	m_right_filling_sprite.setPosition(m_right_filling_pos);
-
-	m_mid_filling_sprite.setScale(m_fillingScale, m_scale);
 }
 
 void UI_bar::Draw(sf::RenderWindow &win)

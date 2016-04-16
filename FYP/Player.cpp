@@ -76,6 +76,9 @@ void Player::Init(float x, float y)
 	// Stats
 	m_maxHealth = 100;
 	m_health = m_maxHealth;
+
+	m_maxStamina = 120;
+	m_stamina = m_maxStamina;
 	// Attack Damage 
 }
 
@@ -84,7 +87,6 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
-
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
 
 	m_pawBounds.setPosition(m_paw.getPosition());
