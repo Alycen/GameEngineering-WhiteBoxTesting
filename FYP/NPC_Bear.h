@@ -5,6 +5,7 @@
 #include "NPC_Critter.h"
 
 #define DistanceOfNeck 60.5
+#define DistanceOfTail -65
 
 class Bear : public Critter
 {

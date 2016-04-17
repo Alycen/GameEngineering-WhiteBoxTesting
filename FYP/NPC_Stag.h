@@ -4,6 +4,7 @@
 #include "NPC_Critter.h"
 
 #define DistanceOfNeck 58
+#define DistanceOfTail -55
 
 class Stag : public Critter
 {

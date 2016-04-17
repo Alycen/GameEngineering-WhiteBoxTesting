@@ -7,9 +7,11 @@
 #include "InputManager.h"
 #include "Camera.h"
 #include "NPC_Critter.h"
+#include "AnimateSprite.h"
 
 #define DistanceOfNeck 35.5
-#define DistanceOfTail 100
+#define DistanceOfTail -35
+#define DistanceOfAttack 105
 
 class Player
 {
@@ -18,35 +20,46 @@ private:
 	static Player* instance;
 
 	Player() { }
-
-	sf::Texture m_bodyTexture, m_headTexture;
-	sf::Sprite m_bodySprite, m_headSprite;
+	// Sprite variables
+	sf::Texture m_bodyTexture, m_headTexture, m_tailTexture;
+	sf::Sprite m_bodySprite, m_headSprite, m_tailSprite;
 
 	sf::Texture m_pawTexture;
 	sf::Sprite m_paw;
 
+	// Position & position manipulators
 	float m_roatation;
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
-
-	sf::Vector2f m_headTarget;
-	sf::Vector2f m_headPoint;
-
-	float m_speed;
+	//sf::Vector2f m_headTarget;
+	//sf::Vector2f m_headPoint;
+	// Player bools
 	bool m_running = false;
 	bool m_smell = false;
+	bool m_attacking = false;
 
 	sf::CircleShape m_smellCircle;
 	float m_radius;
-
+	// Player Sounds
 	sf::SoundBuffer m_barkBuffer;
 	sf::Sound m_barkSound;
-	
+	// Stats
 	float m_maxHealth, m_health;
 	float m_maxStamina, m_stamina;
-
+	float m_speed;
+	// Target variables
 	sf::Vector2f m_selectedPosition;
+
+	// Animations / Attacks
+	sf::Texture m_slashTexture;
+	Animation m_slashAnimation;
+	Animation* m_currentAnimation;
+	// Animated Sprite
+	AnimatedSprite m_animatedSprite;
+
+	// Clock
+	sf::Clock frameClock;
 public:
 	static Player* GetInstance();
 	void Init(float, float);
@@ -63,8 +76,6 @@ public:
 	bool m_selected = false;
 
 	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
-
-	void CheckTargetDistance();
 
 	// Get / Sets
 	void SetPosition(sf::Vector2f pos) { m_position = pos; }

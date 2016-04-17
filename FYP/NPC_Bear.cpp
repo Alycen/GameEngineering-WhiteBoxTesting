@@ -22,12 +22,12 @@ Bear::Bear(float x, float y)
 	m_headSprite.setOrigin(27.0f, 56.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 
-	// Bounding Circle
-/*	m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
-	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 6.5), m_bodySprite.getOrigin().y);
-	m_boundingCircle.setFillColor(sf::Color::Transparent);
-	m_boundingCircle.setOutlineColor(sf::Color::Green);
-	m_boundingCircle.setOutlineThickness(3);*/
+	m_tailTexture.loadFromFile("Assets/Graphics/NPC/tailBearNPC.png");
+	m_tailTexture.setSmooth(true);
+
+	m_tailSprite.setTexture(m_tailTexture);
+	m_tailSprite.setOrigin(10.0f, 2.0f);
+	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
 }
 
 void Bear::Update()
@@ -50,7 +50,7 @@ void Bear::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
-	//win.draw(m_boundingCircle);
+	win.draw(m_tailSprite);
 }
 
 void Bear::Move() // Wander - Needs modifying - find out how m_direction is used in flee and modify for this
@@ -87,6 +87,9 @@ void Bear::Move() // Wander - Needs modifying - find out how m_direction is used
 		m_bodySprite.setPosition(m_position);
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	timer--;
 }
@@ -112,15 +115,15 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 {
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
-	if (diff.x*diff.x + diff.y*diff.y < 15000)
+	if (diff.x*diff.x + diff.y*diff.y < 30000)
 	{
 		m_speed = 0;
 	}
-	else if (diff.x*diff.x + diff.y*diff.y >= 150000)
+	else if (diff.x*diff.x + diff.y*diff.y >= 170000)
 	{
 		Move();
 	}
-	else if (diff.x*diff.x + diff.y*diff.y >= 15000 && diff.x*diff.x + diff.y*diff.y < 150000)
+	else if (diff.x*diff.x + diff.y*diff.y >= 30000 && diff.x*diff.x + diff.y*diff.y < 170000)
 	{
 		m_speed = 3;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);

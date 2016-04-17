@@ -22,6 +22,13 @@ Stag::Stag(float x, float y)
 	m_headSprite.setOrigin(60.0f, 45.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 
+	m_tailTexture.loadFromFile("Assets/Graphics/NPC/tailStagNPC.png");
+	m_tailTexture.setSmooth(true);
+
+	m_tailSprite.setTexture(m_tailTexture);
+	m_tailSprite.setOrigin(9.0f, 3.0f);
+	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
+
 	m_speed = 2.5;
 }
 
@@ -65,6 +72,9 @@ void Stag::Move()
 		m_bodySprite.setPosition(m_position);
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	timer--;
 }

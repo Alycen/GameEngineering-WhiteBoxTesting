@@ -48,6 +48,16 @@ void Player::Init(float x, float y)
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 	// m_headSprite.setScale(xScale, yScale);
 	
+	// Player Tail Sprite
+	// Tail Texture
+	m_tailTexture.loadFromFile("Assets/Graphics/Player/tail.png");
+	m_tailTexture.setSmooth(true);
+
+	// Tail Sprite
+	m_tailSprite.setTexture(m_tailTexture);
+	m_tailSprite.setOrigin(12.0f, 4.0f);
+	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
+
 	// Mouse / Paw
 	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
 	m_pawTexture.setSmooth(true);
@@ -69,6 +79,24 @@ void Player::Init(float x, float y)
 	m_stamina = m_maxStamina;
 
 	// Attack Damage 
+
+	// Attack animations
+	// texture
+	m_slashTexture.loadFromFile("Assets/Graphics/Actions/Slash.png");
+	// animation
+	m_slashAnimation.setSpriteSheet(m_slashTexture);
+	m_slashAnimation.addFrame(sf::IntRect(0, 144, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 108, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 72, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 36, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+
+	m_currentAnimation = &m_slashAnimation;
+
+	m_animatedSprite = AnimatedSprite(sf::seconds(0.065), true, false);
+	m_animatedSprite.setOrigin(32, 14);
+	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
 }
 
 // Load stats from txt file()
@@ -77,6 +105,7 @@ void Player::Init(float x, float y)
 void Player::Update()
 {
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
+	sf::Time frameTime = frameClock.restart();
 
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
@@ -152,6 +181,20 @@ void Player::Update()
 		m_smell = false;
 	}
 
+	// Attack Inputs
+	// Slash
+	if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::E))
+	{
+		m_attacking = true;
+		m_animatedSprite.play(*m_currentAnimation);
+		m_animatedSprite.move(m_direction * frameTime.asSeconds());
+	}
+	m_animatedSprite.update(frameTime);
+	if (!m_animatedSprite.isPlaying())
+	{
+		m_attacking = false;
+	}
+
 	//Normalise direction
 	float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 
@@ -165,6 +208,12 @@ void Player::Update()
 
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+		m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	/*float dx = InputManager::GetInstance()->GetMousePosWorld().x - (m_headSprite.getGlobalBounds().width / 2); // Wrong points for head
 	float dy = InputManager::GetInstance()->GetMousePosWorld().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
@@ -234,6 +283,10 @@ void Player::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
+	win.draw(m_tailSprite);
+
+	if (m_attacking)
+		win.draw(m_animatedSprite);
 
 	if (m_smell)  
 	{

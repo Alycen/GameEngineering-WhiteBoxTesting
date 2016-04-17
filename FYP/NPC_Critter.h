@@ -4,14 +4,17 @@
 #include "SFML\Graphics.hpp"
 
 #define DistanceOfNeck 0
+#define DistanceOfTail 0
 
 class Critter
 {
 protected:
 	sf::Texture m_bodyTexture;
 	sf::Texture m_headTexture;
+	sf::Texture m_tailTexture;
 	sf::Sprite m_bodySprite;
 	sf::Sprite m_headSprite;
+	sf::Sprite m_tailSprite;
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
@@ -40,6 +43,7 @@ public:
 	{
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
+		win.draw(m_tailSprite);
 	}
 
 	// AI Behaviour
@@ -77,6 +81,9 @@ public:
 			m_bodySprite.setPosition(m_position);
 			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 		}
 		timer--;
 	}

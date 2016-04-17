@@ -5,6 +5,7 @@
 #include "NPC_Critter.h"
 
 #define DistanceOfNeck 22
+#define DistanceOfTail -20
 
 class Rabbit : public Critter
 {

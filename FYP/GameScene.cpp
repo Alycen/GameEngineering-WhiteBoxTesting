@@ -19,7 +19,7 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Init()
 {
-	bearNum = 2;
+	stagNum = 2;
 
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{
@@ -55,13 +55,6 @@ void GameScene::Init()
 		npcs.push_back(new Rabbit(4000, 4000));
 	}
 
-	/*
-	testKanine = new Kanine(2700, 2700);
-	testBear = new Bear(2900, 2700);
-	testStag = new Stag(2800, 2700);
-	bambisMom = new Doe(2600, 2700);
-	testBunny = new Rabbit(2500, 2700);
-	*/
 	m_healthbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
 	m_staminabar = new UI_bar(50, "Stamina", Player::GetInstance()->GetStamina());
 }
@@ -73,14 +66,6 @@ void GameScene::Update()
 	{
 		c->Update(Player::GetInstance()->GetPosition());
 	}
-	/*
-	testKanine->Update();
-	testBear->Update(Player::GetInstance()->GetPosition());
-	testStag->Update(Player::GetInstance()->GetPosition());
-	bambisMom->Update(Player::GetInstance()->GetPosition());
-	testBunny->Update(Player::GetInstance()->GetPosition());
-	*/
-	//Player::GetInstance()->SetSelectedNPC(testBear->GetPosition());
 
 	UpdateHealth();
 	UpdateStamina();
@@ -105,13 +90,7 @@ void GameScene::Draw(sf::RenderWindow &win)
 	{
 		c->Draw(win);
 	}
-	/*
-	testKanine->Draw(win);
-	testBear->Draw(win);
-	testStag->Draw(win);
-	bambisMom->Draw(win);
-	testBunny->Draw(win);
-	*/
+
 	Player::GetInstance()->Draw(win);
 
 	// restore the default view

@@ -21,6 +21,13 @@ Kanine::Kanine(float x, float y)
 	m_headSprite.setTexture(m_headTexture);
 	m_headSprite.setOrigin(20.0f, 40.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
+
+	m_tailTexture.loadFromFile("Assets/Graphics/NPC/tailKanineNPC.png");
+	m_tailTexture.setSmooth(true);
+
+	m_tailSprite.setTexture(m_tailTexture);
+	m_tailSprite.setOrigin(12.0f, 4.0f);
+	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
 }
 
 void Kanine::Update()
@@ -33,6 +40,7 @@ void Kanine::Draw(sf::RenderWindow &win)
 {
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
+	win.draw(m_tailSprite);
 }
 
 void Kanine::Move()
@@ -69,6 +77,9 @@ void Kanine::Move()
 		m_bodySprite.setPosition(m_position);
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	timer--;
 }

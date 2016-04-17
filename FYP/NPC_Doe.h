@@ -4,6 +4,7 @@
 #include "NPC_Critter.h"
 
 #define DistanceOfNeck 40
+#define DistanceOfTail -40
 
 class Doe : public Critter
 {

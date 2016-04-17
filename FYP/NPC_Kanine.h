@@ -6,6 +6,7 @@
 #include "NPC_Critter.h"
 
 #define DistanceOfNeck 35.5
+#define DistanceOfTail -35
 
 class Kanine : public Critter
 {
