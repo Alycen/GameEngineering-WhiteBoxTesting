@@ -161,3 +161,15 @@ void GameScene::CheckPlayerSmell()
 		}
 	}
 }
+
+void GameScene::CheckLevelChange()
+{
+	/*Check if player collides with level switch 
+	{
+		level switch.getID()
+		m_map = new tmx::TileMap("Assets/Tiled/"+std::to_string(levelswitch.getID()+".tmx");
+		if (Player::GetInstance()->GetPosition() != levelSwitch.getSpawn(levelSwitch.GetID()
+			Player::GetInstance()->SetPosition(levelSwitch.getSpawn(levelSwitch.GetID());
+	}*/
+	
+}

@@ -49,6 +49,8 @@ public:
 	void CheckPlayerCollision();
 	void CheckNPCsCollisions();
 
+	void CheckLevelChange();
+
 	void CheckPlayerSmell();
 
 	GameScene::~GameScene()
