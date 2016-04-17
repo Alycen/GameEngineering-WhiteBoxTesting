@@ -75,9 +75,6 @@ void Player::Init(float x, float y)
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
 	//m_barkSound.setBuffer(m_barkBuffer);
 
-	// Smell Area Radius
-	//m_radius = 950.0f;
-
 	// Stats
 	m_maxHealth = 100;
 	m_health = m_maxHealth;
@@ -186,7 +183,6 @@ void Player::Update()
 	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || smellScale <= 1)
 	{
 		m_smell = false;
-		//smellScale = 0.01f;
 	}
 
 	// Attack Inputs
@@ -223,10 +219,6 @@ void Player::Update()
 		m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
 		m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
-	/*float dx = InputManager::GetInstance()->GetMousePosWorld().x - (m_headSprite.getGlobalBounds().width / 2); // Wrong points for head
-	float dy = InputManager::GetInstance()->GetMousePosWorld().y - (m_headSprite.getGlobalBounds().height - m_headTexture.getSize().y);
-
-	m_headSprite.setRotation(atan2(dy, dx) * 180 / (22.0f / 7.0f));*/
 
 	if (m_selected)
 	{
@@ -259,12 +251,7 @@ void Player::Update()
 
 void Player::Smell() 
 {
-	/*//smellCircle.setOrigin(position);
-	m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
-	m_smellCircle.setRadius(0.0f);
-	m_smellCircle.setFillColor(sf::Color::Transparent);
-	m_smellCircle.setOutlineColor(sf::Color::White);
-	m_smellCircle.setOutlineThickness(3);*/
+	// Reset all smell variables
 	smellScale = 0.001f;
 }
 
@@ -300,18 +287,12 @@ void Player::Draw(sf::RenderWindow &win)
 	if (m_smell)  
 	{
 		win.draw(m_smellSprite);
-		//win.draw(m_smellCircle);
-		//if (m_smellCircle.getRadius() < m_radius) 
-		//{
 		if (smellScale <= 1)
 		{
 			smellScale += 0.005f;
 			m_smellSprite.setScale(smellScale, smellScale);
 		}
-			//m_smellCircle.setRadius(m_smellCircle.getRadius() + 4.5f);
-			//.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
-		//}
-		else if (/*m_smellCircle.getRadius() >= m_radius || */smellScale >= 1) 
+		else if (smellScale >= 1) 
 		{
 			m_smell = false;
 		}

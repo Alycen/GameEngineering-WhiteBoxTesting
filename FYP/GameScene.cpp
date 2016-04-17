@@ -72,6 +72,14 @@ void GameScene::Update()
 
 	m_healthbar->Update();
 	m_staminabar->Update();
+	
+	if (Player::GetInstance()->isAttacking())
+	{
+		for each (Critter* c in npcs)
+		{
+			// 
+		}
+	}
 
 	// check player doesnt leave bounding area
 	for each(Critter* c in npcs)

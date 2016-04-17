@@ -77,6 +77,7 @@ public:
 	void Slash(); // Left Click / Left Trigger
 
 	bool m_selected = false;
+	bool isAttacking() { return m_attacking; }
 
 	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
 
@@ -88,8 +89,8 @@ public:
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
 
-	//sf::CircleShape GetSmellCircle() { return m_smellCircle; }
 	sf::Sprite GetSmellSprite() { return m_smellSprite; }
+	//sf::Sprite GetAttackingSprite() { return  }
 
 	// Health
 	void SetHealth(float h) { m_health = h; }
