@@ -162,10 +162,10 @@ void Player::Update()
 	{
 		m_speed = 10.0f;
 	}
-	else if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Space)))
-	{
-		m_speed = 22.0f;
-	}
+	//else if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Space)))
+	//{
+	//	m_speed = 22.0f;
+	//}
 	else
 	{
 		m_speed = 4.5f;

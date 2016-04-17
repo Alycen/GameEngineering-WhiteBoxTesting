@@ -161,6 +161,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collision.h" />
+    <ClInclude Include="Emitter.h" />
     <ClInclude Include="Gamepad.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="InputManager.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="NPC_Kanine.h" />
     <ClInclude Include="NPC_Rabbit.h" />
     <ClInclude Include="NPC_Stag.h" />
+    <ClInclude Include="Particle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Popup.h" />
     <ClInclude Include="SceneManager.h" />
@@ -185,6 +187,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
+    <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="FYP.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -195,6 +198,7 @@
     <ClCompile Include="NPC_Kanine.cpp" />
     <ClCompile Include="NPC_Rabbit.cpp" />
     <ClCompile Include="NPC_Stag.cpp" />
+    <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Popup.cpp" />
     <ClCompile Include="SceneManager.cpp" />
