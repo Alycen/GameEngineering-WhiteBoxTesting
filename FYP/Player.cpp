@@ -47,24 +47,12 @@ void Player::Init(float x, float y)
 	m_headSprite.setOrigin(20.0f, 40.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 	// m_headSprite.setScale(xScale, yScale);
-
-	// Bounding Circle
-	/*m_playerBounds.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 5.5), m_bodySprite.getOrigin().y);
-	m_playerBounds.setRadius(m_bodySprite.getLocalBounds().height / 2);
-	m_playerBounds.setFillColor(sf::Color::Transparent);
-	m_playerBounds.setOutlineColor(sf::Color::Red);
-	m_playerBounds.setOutlineThickness(3);*/
 	
 	// Mouse / Paw
 	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
 	m_pawTexture.setSmooth(true);
 	m_paw.setTexture(m_pawTexture);
 	m_paw.setOrigin(m_paw.getLocalBounds().width / 2, m_paw.getLocalBounds().height / 2);
-	/*m_pawBounds.setOrigin(21.5f, 21.5f);
-	m_pawBounds.setRadius(21.5f);
-	m_pawBounds.setFillColor(sf::Color::Transparent);
-	m_pawBounds.setOutlineColor(sf::Color::Black);
-	m_pawBounds.setOutlineThickness(3);*/
 
 	// Player Temp Bark Sound
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
@@ -190,6 +178,7 @@ void Player::Update()
 		targ.y = (m_position.y + m_selectedPosition.y) / 2;
 
 		Camera::GetInstance()->setViewPosition(targ);
+
 		sf::Vector2f target = Closest(m_position, targ);
 		sf::Vector2f diff = m_position - target;
 		if (diff.x*diff.x + diff.y*diff.y > 180000)

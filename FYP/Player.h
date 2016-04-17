@@ -37,9 +37,6 @@ private:
 	bool m_running = false;
 	bool m_smell = false;
 
-	//sf::CircleShape m_pawBounds;
-	//sf::CircleShape m_playerBounds;
-
 	sf::CircleShape m_smellCircle;
 	float m_radius;
 
@@ -92,9 +89,6 @@ public:
 	void SetSelected(bool selected) { m_selected = select; }
 	sf::Vector2f GetSelectedNPC() { return m_selectedPosition; }
 	bool GetSelected() { return m_selected; }
-
-	//sf::CircleShape GetBoundingCircle() { return m_playerBounds; }
-	//sf::CircleShape GetBoundingPaw() { return m_pawBounds; }
 
 	sf::Sprite GetSprite() { return m_bodySprite; }
 	sf::Sprite GetHeadSprite() { return m_headSprite; }

@@ -22,20 +22,12 @@ Stag::Stag(float x, float y)
 	m_headSprite.setOrigin(60.0f, 45.0f);
 	m_headSprite.setPosition(m_position.x, m_position.y - DistanceOfNeck);
 
-	// Bounding Circle
-	/*m_boundingCircle.setRadius(m_bodySprite.getLocalBounds().height / 2);
-	m_boundingCircle.setOrigin(m_bodySprite.getOrigin().x + (m_bodySprite.getLocalBounds().width / 2.5), m_bodySprite.getOrigin().y);
-	m_boundingCircle.setFillColor(sf::Color::Transparent);
-	m_boundingCircle.setOutlineColor(sf::Color::Yellow);
-	m_boundingCircle.setOutlineThickness(3);*/
-
 	m_speed = 2.5;
 }
 
 void Stag::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	//m_boundingCircle.setPosition(m_position);
 	Move();
 }
 
