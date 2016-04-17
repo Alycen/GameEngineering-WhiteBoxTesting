@@ -18,9 +18,6 @@
 #include "SFML\Graphics.hpp"
 #include "SFML/OpenGL.hpp" 
 #include "InputManager.h"
-#include "Player.h"
-#include "Camera.h"
-#include "STP\TMXLoader.hpp"
 #include "SceneManager.h"
 
 // -----------------------------------------|
@@ -77,6 +74,10 @@ int main()
 			if (Event.type == sf::Event::MouseButtonPressed && mouse.isButtonPressed(sf::Mouse::Left))
 			{
 				GameScene::GetInstance()->CheckMouseCollision();
+			}
+			if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt))
+			{
+				GameScene::GetInstance()->CheckPlayerSmell();
 			}
 		}
 

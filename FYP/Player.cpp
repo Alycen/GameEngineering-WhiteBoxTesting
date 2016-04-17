@@ -58,6 +58,13 @@ void Player::Init(float x, float y)
 	m_tailSprite.setOrigin(12.0f, 4.0f);
 	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
 
+	m_smellTex.loadFromFile("Assets/Graphics/Actions/Smell.png");
+	m_smellTex.setSmooth(true);
+
+	m_smellSprite.setTexture(m_smellTex);
+	m_smellSprite.setOrigin(m_smellSprite.getGlobalBounds().width / 2, m_smellSprite.getLocalBounds().height / 2);
+	m_smellSprite.setPosition(m_position);
+
 	// Mouse / Paw
 	m_pawTexture.loadFromFile("Assets/Graphics/Player/Paw.png");
 	m_pawTexture.setSmooth(true);
@@ -69,7 +76,7 @@ void Player::Init(float x, float y)
 	//m_barkSound.setBuffer(m_barkBuffer);
 
 	// Smell Area Radius
-	m_radius = 950.0f;
+	//m_radius = 950.0f;
 
 	// Stats
 	m_maxHealth = 100;
@@ -104,6 +111,7 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
+	m_smellSprite.setPosition(m_position);
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
 	sf::Time frameTime = frameClock.restart();
 
@@ -170,20 +178,20 @@ void Player::Update()
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyDown(sf::Keyboard::RAlt)) 
 	{
 		Smell();
-		//m_selected = true;     // for debugging purposes
 	}
-	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) && m_smellCircle.getRadius() < m_radius) 
+	if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt)) &&  smellScale <= 1) 
 	{
 		m_smell = true;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || m_smellCircle.getRadius() >= m_radius) 
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::RAlt) || smellScale <= 1)
 	{
 		m_smell = false;
+		//smellScale = 0.01f;
 	}
 
 	// Attack Inputs
 	// Slash
-	if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::E))
+	if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::E) && !m_attacking)
 	{
 		m_attacking = true;
 		m_animatedSprite.play(*m_currentAnimation);
@@ -251,12 +259,13 @@ void Player::Update()
 
 void Player::Smell() 
 {
-	//smellCircle.setOrigin(position);
+	/*//smellCircle.setOrigin(position);
 	m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
 	m_smellCircle.setRadius(0.0f);
 	m_smellCircle.setFillColor(sf::Color::Transparent);
 	m_smellCircle.setOutlineColor(sf::Color::White);
-	m_smellCircle.setOutlineThickness(3);
+	m_smellCircle.setOutlineThickness(3);*/
+	smellScale = 0.001f;
 }
 
 void Player::Dash()
@@ -290,13 +299,19 @@ void Player::Draw(sf::RenderWindow &win)
 
 	if (m_smell)  
 	{
-		win.draw(m_smellCircle);
-		if (m_smellCircle.getRadius() < m_radius) 
+		win.draw(m_smellSprite);
+		//win.draw(m_smellCircle);
+		//if (m_smellCircle.getRadius() < m_radius) 
+		//{
+		if (smellScale <= 1)
 		{
-			m_smellCircle.setRadius(m_smellCircle.getRadius() + 4.5f);
-			m_smellCircle.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
+			smellScale += 0.005f;
+			m_smellSprite.setScale(smellScale, smellScale);
 		}
-		else if (m_smellCircle.getRadius() >= m_radius) 
+			//m_smellCircle.setRadius(m_smellCircle.getRadius() + 4.5f);
+			//.setPosition(m_position.x - (m_smellCircle.getRadius()), m_position.y - (m_smellCircle.getRadius()));
+		//}
+		else if (/*m_smellCircle.getRadius() >= m_radius || */smellScale >= 1) 
 		{
 			m_smell = false;
 		}

@@ -142,3 +142,14 @@ void GameScene::CheckMouseCollision()
 		}
 	}
 }
+
+void GameScene::CheckPlayerSmell()
+{
+	for each(Critter* c in npcs)
+	{
+		if (Collision::PixelPerfectTest(Player::GetInstance()->GetSmellSprite(), c->GetSprite()))
+		{
+			cout << "Can smell something" << endl;
+		}
+	}
+}

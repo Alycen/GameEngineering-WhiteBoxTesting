@@ -32,15 +32,14 @@ private:
 
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
-	//sf::Vector2f m_headTarget;
-	//sf::Vector2f m_headPoint;
+
 	// Player bools
 	bool m_running = false;
 	bool m_smell = false;
 	bool m_attacking = false;
 
-	sf::CircleShape m_smellCircle;
-	float m_radius;
+	//sf::CircleShape m_smellCircle;
+	//float m_radius;
 	// Player Sounds
 	sf::SoundBuffer m_barkBuffer;
 	sf::Sound m_barkSound;
@@ -51,7 +50,11 @@ private:
 	// Target variables
 	sf::Vector2f m_selectedPosition;
 
-	// Animations / Attacks
+	// Animations / Attacks / Actions
+	sf::Texture m_smellTex;
+	sf::Sprite m_smellSprite;
+	float smellScale = 0.001f;
+
 	sf::Texture m_slashTexture;
 	Animation m_slashAnimation;
 	Animation* m_currentAnimation;
@@ -84,6 +87,10 @@ public:
 	float GetX() { return m_position.x; }
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
+
+	//sf::CircleShape GetSmellCircle() { return m_smellCircle; }
+	sf::Sprite GetSmellSprite() { return m_smellSprite; }
+
 	// Health
 	void SetHealth(float h) { m_health = h; }
 	float GetHealth() { return m_health; }

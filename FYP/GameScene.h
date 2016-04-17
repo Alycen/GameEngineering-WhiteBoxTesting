@@ -28,13 +28,7 @@ private:
 	list<Critter*> npcs;
 
 	int wolfNum, bearNum, stagNum, doeNum, rabbitNum;
-	/*
-	Kanine* testKanine;
-	Bear* testBear;
-	Stag* testStag;
-	Doe* bambisMom;
-	Critter* testBunny;
-	*/
+
 	UI_bar* m_healthbar;
 	UI_bar* m_staminabar;
 
@@ -54,6 +48,8 @@ public:
 	void CheckMouseCollision();
 	void CheckPlayerCollision();
 	void CheckNPCsCollisions();
+
+	void CheckPlayerSmell();
 
 	GameScene::~GameScene()
 	{
