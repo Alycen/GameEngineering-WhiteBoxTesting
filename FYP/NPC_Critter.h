@@ -2,6 +2,7 @@
 #define _NPC_CRITTER_
 
 #include "SFML\Graphics.hpp"
+#include "Player.h"
 
 #define DistanceOfNeck 0
 #define DistanceOfTail 0
@@ -31,13 +32,15 @@ public:
 	Critter::Critter() { }
 	Critter::~Critter() { }
 
+	bool m_selected = false;
+
 	virtual void Critter::Update()
 	{
 
 	}
 	virtual void Critter::Update(sf::Vector2f target)
 	{
-
+		
 	}
 	virtual void Critter::Draw(sf::RenderWindow &win)
 	{

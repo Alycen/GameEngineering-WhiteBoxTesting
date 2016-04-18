@@ -35,6 +35,10 @@ Stag::Stag(float x, float y)
 void Stag::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
+	if (Player::GetInstance()->m_selected == false)
+	{
+		m_selected = false;
+	}
 	Move();
 }
 

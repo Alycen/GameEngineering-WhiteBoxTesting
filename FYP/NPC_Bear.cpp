@@ -43,6 +43,10 @@ void Bear::Update(sf::Vector2f target)
 	
 	//Move();
 	//Flee(target);
+	if (Player::GetInstance()->m_selected == false)
+	{
+		m_selected = false;
+	}
 	Chase(target);
 }
 

@@ -33,6 +33,10 @@ Rabbit::Rabbit(float x, float y)
 void Rabbit::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
+	if (Player::GetInstance()->m_selected == false)
+	{
+		m_selected = false;
+	}
 	Flee(target);
 }
 

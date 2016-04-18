@@ -33,6 +33,10 @@ Kanine::Kanine(float x, float y)
 void Kanine::Update()
 {
 	m_bodySprite.setPosition(m_position.x, m_position.y);
+	if (Player::GetInstance()->m_selected == false)
+	{
+		m_selected = false;
+	}
 	Move();
 }
 

@@ -68,6 +68,10 @@ void GameScene::Update()
 	for each (Critter* c in npcs)
 	{
 		c->Update(Player::GetInstance()->GetPosition());
+		if (c->m_selected)
+		{
+			Player::GetInstance()->SetSelectedNPC(c->GetPosition());
+		}
 	}
 
 	UpdateHealth();
@@ -135,7 +139,7 @@ void GameScene::UpdateStamina()
 	//get the current percent of the players stamina
 	float percent = (playerCurrStamina / playerStaminaFull) * 100;
 
-	// find what value that percent is of the stamina bar
+	// find what value that perce nt is of the stamina bar
 	float staminaBarFull = m_staminabar->GetMaxVal();
 	float value = (staminaBarFull / 100) * percent;
 	m_staminabar->SetValue(value);
@@ -146,10 +150,14 @@ void GameScene::CheckMouseCollision()
 {
 	for each(Critter* c in npcs)
 	{
-		if (Collision::PixelPerfectTest(Player::GetInstance()->GetPawSprite(), c->GetSprite()))
+		if (Collision::PixelPerfectTest(Player::GetInstance()->GetPawSprite(), c->GetSprite()) && InputManager::GetInstance()->IsMouseButtonDown(0))
 		{
-			Player::GetInstance()->SetSelectedNPC(c->GetPosition());
+			for each(Critter* c1 in npcs) // Set all Critters in npcs list to false 
+			{ // This means that if one Critter is selected and the player select a new target, it will swap to th new target
+				c1->m_selected = false;
+			}
 			Player::GetInstance()->m_selected = true;
+			c->m_selected = true;
 		}
 	}
 }
