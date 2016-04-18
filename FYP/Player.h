@@ -78,6 +78,7 @@ public:
 
 	bool m_selected = false;
 	bool isAttacking() { return m_attacking; }
+	bool isSmelling() { return m_smell; }
 
 	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);
 

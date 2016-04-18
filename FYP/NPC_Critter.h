@@ -3,6 +3,7 @@
 
 #include "SFML\Graphics.hpp"
 #include "Player.h"
+#include "Emitter.h"
 
 #define DistanceOfNeck 0
 #define DistanceOfTail 0
@@ -28,6 +29,9 @@ protected:
 
 	int timer = rand() % 300 + 100;
 	int dir = rand() % 7 + 1;
+
+	sf::Color m_colour;
+	Emitter m_emitter;
 public:
 	Critter::Critter() { }
 	Critter::~Critter() { }
@@ -44,6 +48,7 @@ public:
 	}
 	virtual void Critter::Draw(sf::RenderWindow &win)
 	{
+		m_emitter.Draw(win);
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
 		win.draw(m_tailSprite);
@@ -160,6 +165,8 @@ public:
 
 	sf::Sprite GetSprite() { return m_bodySprite; }
 	sf::Sprite GetHeadSprite() { return m_headSprite; }
+
+	sf::Color GetColour() { return m_colour; }
 };
 
 #endif

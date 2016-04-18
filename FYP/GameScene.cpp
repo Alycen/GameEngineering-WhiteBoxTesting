@@ -20,7 +20,6 @@ GameScene* GameScene::GetInstance()
 void GameScene::Init()
 {
 	stagNum = 2;
-	doeNum = 3;
 
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{
@@ -165,10 +164,11 @@ void GameScene::CheckMouseCollision()
 void GameScene::CheckPlayerSmell()
 {
 	for each(Critter* c in npcs)
-	{
-		if (Collision::PixelPerfectTest(Player::GetInstance()->GetSmellSprite(), c->GetSprite()))
+	{// Need to fix for when Player not smelling
+		if (Collision::PixelPerfectTest(Player::GetInstance()->GetSmellSprite(), c->GetSprite()) && Player::GetInstance()->isSmelling())
 		{
-			cout << "Can smell something" << endl;
+			//cout << "Can smell something" << endl;
+
 		}
 	}
 }

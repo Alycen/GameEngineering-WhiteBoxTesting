@@ -30,11 +30,16 @@ Stag::Stag(float x, float y)
 	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
 
 	m_speed = 2.5;
+
+	m_colour = sf::Color::Yellow;
+	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 }
 
 void Stag::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
+	m_emitter.Update(target);
+
 	if (Player::GetInstance()->m_selected == false)
 	{
 		m_selected = false;
