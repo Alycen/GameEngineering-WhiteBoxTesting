@@ -37,6 +37,7 @@ public:
 	Critter::~Critter() { }
 
 	bool m_selected = false;
+	bool smellDetected = false;
 
 	virtual void Critter::Update()
 	{

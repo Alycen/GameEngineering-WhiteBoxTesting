@@ -19,7 +19,7 @@ private:
 
 	int ttl;
 	float m_size;
-	bool isAlive = true;
+	bool isAlive = false;
 public:
 	Particle();
 	Particle(float, float, sf::Color);

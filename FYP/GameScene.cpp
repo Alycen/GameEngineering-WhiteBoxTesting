@@ -168,7 +168,11 @@ void GameScene::CheckPlayerSmell()
 		if (Collision::PixelPerfectTest(Player::GetInstance()->GetSmellSprite(), c->GetSprite()) && Player::GetInstance()->isSmelling())
 		{
 			//cout << "Can smell something" << endl;
-
+			c->smellDetected = true;
+		}
+		else
+		{
+			//c->smellDetected = false;
 		}
 	}
 }

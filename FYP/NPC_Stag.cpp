@@ -38,7 +38,12 @@ Stag::Stag(float x, float y)
 void Stag::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	m_emitter.Update(target);
+	if (smellDetected)
+	{
+		m_emitter.SetAlive(true);
+		m_emitter.SetPosition(m_position);
+		m_emitter.Update(target);
+	}
 
 	if (Player::GetInstance()->m_selected == false)
 	{
