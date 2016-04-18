@@ -20,6 +20,7 @@ GameScene* GameScene::GetInstance()
 void GameScene::Init()
 {
 	stagNum = 2;
+	doeNum = 3;
 
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{
@@ -62,6 +63,8 @@ void GameScene::Init()
 void GameScene::Update()
 {
 	Player::GetInstance()->Update();
+	CheckMouseCollision();
+
 	for each (Critter* c in npcs)
 	{
 		c->Update(Player::GetInstance()->GetPosition());
