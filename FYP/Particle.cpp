@@ -47,6 +47,11 @@ void Particle::Update(sf::Vector2f target)
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;
 	}
+	if (diff.x*diff.x + diff.y*diff.y < 2000)
+	{
+		isAlive = false;
+		//Reset Emitter
+	}
 }
 
 void Particle::Draw(sf::RenderWindow &win)

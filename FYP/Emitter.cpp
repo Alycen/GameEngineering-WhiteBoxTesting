@@ -15,6 +15,14 @@ Emitter::Emitter(float x, float y, sf::Color col)
 	}
 }
 
+void Emitter::Init()
+{
+	for each (Particle* p in particles)
+	{
+		//p->SetPosition(m_position);
+	}
+}
+
 void Emitter::Update()
 {
 }
@@ -33,6 +41,11 @@ void Emitter::Draw(sf::RenderWindow &win)
 	{
 		p->Draw(win);
 	}
+}
+
+void Emitter::SetPosition(sf::Vector2f pos) 
+{ 
+	m_position = pos; 
 }
 
 void Emitter::SetAlive(bool b) 
