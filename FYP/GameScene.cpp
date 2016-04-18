@@ -19,7 +19,7 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Init()
 {
-	stagNum = 2;
+	bearNum = 2;
 
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{

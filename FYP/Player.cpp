@@ -107,6 +107,14 @@ void Player::Init(float x, float y)
 
 // Load stats from txt file()
 // Write stats to txt file()
+/*
+{
+	save map;
+	m_health;
+	m_stamina;
+	m_attack;
+	m_position;
+}*/
 
 void Player::Update()
 {
@@ -208,6 +216,7 @@ void Player::Update()
 	{
 		sf::Vector2f normalised = m_direction / length;
 		m_position += normalised * m_speed;
+
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
 		m_bodySprite.setPosition(m_position);

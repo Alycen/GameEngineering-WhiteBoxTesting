@@ -110,6 +110,16 @@ void Bear::Flee(sf::Vector2f target)	// Run from target
 		m_position += m_direction * m_speed;
 		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 		//Set position of Head and rotation 
+		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+		if (length > 0)
+		{
+			sf::Vector2f normalised = m_direction / length;
+			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+		}
 	}
 }
 
@@ -127,11 +137,22 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 	}
 	else if (diff.x*diff.x + diff.y*diff.y >= 30000 && diff.x*diff.x + diff.y*diff.y < 170000)
 	{
-		m_speed = 3;
+		m_speed = 4.5;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;
 		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+
+		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+		if (length > 0)
+		{
+			sf::Vector2f normalised = m_direction / length;
+			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+		}
 	}
 }
 
