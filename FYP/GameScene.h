@@ -48,7 +48,7 @@ public:
 	void CheckMouseCollision();
 	void CheckPlayerCollision();
 	void CheckNPCsCollisions();
-
+	void CheckPlayerAttack();
 	void CheckLevelChange();
 	void CheckPlayerSmell();
 

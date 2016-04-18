@@ -4,6 +4,8 @@ Kanine::Kanine() {}
 
 Kanine::Kanine(float x, float y)
 {
+	m_health = 60;
+
 	m_position.x = x;
 	m_position.y = y;
 

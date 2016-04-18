@@ -4,6 +4,8 @@ Rabbit::Rabbit() {}
 
 Rabbit::Rabbit(float x, float y)
 {
+	m_health = 10;
+
 	m_position.x = x;
 	m_position.y = y;
 
@@ -33,7 +35,14 @@ Rabbit::Rabbit(float x, float y)
 void Rabbit::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	Flee(target);
+	if (m_health <= 0)
+	{ // Ded
+	  //cout << "IM DED" << endl;
+	}
+	else
+	{
+		Flee(target);
+	}
 }
 
 void Rabbit::Flee(sf::Vector2f target)

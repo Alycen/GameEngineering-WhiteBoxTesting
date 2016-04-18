@@ -81,6 +81,11 @@ void GameScene::Update()
 		}
 	}
 
+	if (Player::GetInstance()->isAttacking())
+	{
+		CheckPlayerAttack();
+	}
+
 	// check player doesnt leave bounding area
 	for each(Critter* c in npcs)
 	{
@@ -172,4 +177,15 @@ void GameScene::CheckLevelChange()
 			Player::GetInstance()->SetPosition(levelSwitch.getSpawn(levelSwitch.GetID());
 	}*/
 	
+}
+
+void GameScene::CheckPlayerAttack()
+{
+	for each(Critter* c in npcs)
+	{
+		if (Collision::BoundingBoxTest(Player::GetInstance()->GetAttackArea(), c->GetSprite()))
+		{
+			c->DecreaseHealth(1.0f);
+		}
+	}
 }

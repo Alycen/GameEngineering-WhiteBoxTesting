@@ -4,6 +4,8 @@ Doe::Doe() {}
 
 Doe::Doe(float x, float y)
 {
+	m_health = 30;
+
 	m_position.x = x;
 	m_position.y = y;
 
@@ -33,7 +35,14 @@ Doe::Doe(float x, float y)
 void Doe::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	Flee(target);
+	if (m_health <= 0)
+	{ // Ded
+		//cout << "IM DED" << endl;
+	}
+	else
+	{
+		Flee(target);
+	}
 }
 
 void Doe::Flee(sf::Vector2f target)
@@ -48,7 +57,7 @@ void Doe::Flee(sf::Vector2f target)
 	}
 	else
 	{
-		m_speed = 9;
+		m_speed = 8.25f;
 		m_rotation = atan2(diff.y, diff.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;

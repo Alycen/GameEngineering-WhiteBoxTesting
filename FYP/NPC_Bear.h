@@ -11,9 +11,6 @@ class Bear : public Critter
 {
 private:
 	float m_speed = 3;
-
-	float m_attackDamage;
-	float m_health;
 public:
 	Bear();
 	Bear(float, float);

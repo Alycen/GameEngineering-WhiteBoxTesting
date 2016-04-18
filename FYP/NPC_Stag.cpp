@@ -4,6 +4,8 @@ Stag::Stag() {}
 
 Stag::Stag(float x, float y)
 {
+	m_health = 70;
+
 	m_position.x = x;
 	m_position.y = y;
 
@@ -35,7 +37,23 @@ Stag::Stag(float x, float y)
 void Stag::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	Move();
+	
+	if (m_health <= 0)
+	{ // Ded
+		cout << "IM DED" << endl;
+	}
+	else if (m_health < 70 && m_health >= 20)
+	{
+		Chase(target);
+	}
+	else if (m_health < 20 && m_health > 0)
+	{
+		Flee(target);
+	}
+	else 
+	{
+		Move();
+	}
 }
 
 void Stag::Move()
@@ -77,4 +95,20 @@ void Stag::Move()
 		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	timer--;
+}
+
+void Stag::Chase(sf::Vector2f target)
+{
+	target = Closest(m_position, target);
+	sf::Vector2f diff = m_position - target;
+	if (diff.x*diff.x + diff.y*diff.y < 15000)
+		m_speed = 0;
+	else if (diff.x*diff.x + diff.y*diff.y >= 15000)
+	{
+		m_speed = 5;
+		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
+		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
+		m_position += m_direction * m_speed;
+		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+	}
 }

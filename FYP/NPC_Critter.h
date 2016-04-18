@@ -2,6 +2,8 @@
 #define _NPC_CRITTER_
 
 #include "SFML\Graphics.hpp"
+#include <iostream>
+using namespace std;
 
 #define DistanceOfNeck 0
 #define DistanceOfTail 0
@@ -44,6 +46,12 @@ public:
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
 		win.draw(m_tailSprite);
+	}
+
+	virtual void DecreaseHealth(float val)
+	{
+		m_health -= val;
+		cout << m_health << endl;
 	}
 
 	// AI Behaviour
@@ -98,7 +106,7 @@ public:
 		}
 		else
 		{
-			m_speed = 3;
+			m_speed = 4.75;
 			m_rotation = atan2(diff.y, diff.x);
 			m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 			m_position += m_direction * m_speed;

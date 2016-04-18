@@ -4,6 +4,8 @@ Bear::Bear() {}
 
 Bear::Bear(float x, float y) 
 {
+	m_health = 100.0f;
+
 	m_position.x = x;
 	m_position.y = y;
 

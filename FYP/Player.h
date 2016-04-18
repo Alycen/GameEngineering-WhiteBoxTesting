@@ -55,7 +55,8 @@ private:
 	sf::Sprite m_smellSprite;
 	float smellScale = 0.001f;
 
-	sf::Texture m_slashTexture;
+	sf::Texture m_slashTexture, m_attackAreaTex;
+	sf::Sprite m_attackArea;
 	Animation m_slashAnimation;
 	Animation* m_currentAnimation;
 	// Animated Sprite
@@ -112,6 +113,7 @@ public:
 	sf::Sprite GetSprite() { return m_bodySprite; }
 	sf::Sprite GetHeadSprite() { return m_headSprite; }
 	sf::Sprite GetPawSprite() { return m_paw; }
+	sf::Sprite GetAttackArea() { return m_attackArea; }
 	
 	~Player()
 	{
