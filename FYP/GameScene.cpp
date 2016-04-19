@@ -25,10 +25,11 @@ void GameScene::Init()
 	stagNum = 1;
 	wolfNum = 4;
 
-	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
+	if (!m_backgroundMusic.openFromFile("Assets/Audio/Background/relaxation.ogg"))
 	{
 		// handle error
 	}
+
 	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
 
 	//m_backgroundMusic.setVolume(10);

@@ -209,7 +209,7 @@ void Player::Update()
 
 	// Attack Inputs
 	// Slash
-	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::E) && !m_attacking)
+	if ((InputManager::GetInstance()->IsKeyDown(sf::Keyboard::E) || InputManager::GetInstance()->IsMouseButtonDown(1)) && !m_attacking)
 	{
 		m_attacking = true;
 		m_animatedSprite.play(*m_currentAnimation);

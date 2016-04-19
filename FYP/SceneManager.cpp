@@ -27,7 +27,7 @@ void SceneManager::Init()
 	GameScene::GetInstance()->Init();
 
 	
-	if (!m_backgroundMusic.openFromFile("Assets/Audio/Rust.ogg"))
+	if (!m_backgroundMusic.openFromFile("Assets/Audio/Background/mystic.ogg"))
 	{
 		// handle error
 	}
