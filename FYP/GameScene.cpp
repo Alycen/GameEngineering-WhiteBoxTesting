@@ -23,7 +23,7 @@ void GameScene::Init()
 	doeNum = 3;
 	bearNum = 2;
 	stagNum = 1;
-
+	wolfNum = 4;
 
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{

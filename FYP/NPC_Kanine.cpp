@@ -30,6 +30,13 @@ Kanine::Kanine(float x, float y)
 	m_tailSprite.setTexture(m_tailTexture);
 	m_tailSprite.setOrigin(12.0f, 4.0f);
 	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
+
+	m_selectedTex.loadFromFile("Assets/Graphics/NPC/selectedKanine.png");
+	m_selectedTex.setSmooth(true);
+
+	m_selectedSprite.setTexture(m_selectedTex);
+	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
+	m_selectedSprite.setPosition(m_position.x, m_position.y);
 }
 
 void Kanine::Update()
@@ -44,6 +51,8 @@ void Kanine::Update()
 
 void Kanine::Draw(sf::RenderWindow &win)
 {
+	if (m_selected)
+		win.draw(m_selectedSprite);
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
 	win.draw(m_tailSprite);
