@@ -17,10 +17,13 @@ public:
 	Kanine(float, float);
 
 	void Update();
+	void Update(sf::Vector2f);
 	void Draw(sf::RenderWindow&);
 	
 	// AI Behaviours
 	void Move();
+	void Chase(sf::Vector2f);
+	void Flee(sf::Vector2f);
 
 	// Get / Sets
 	void SetPosition(sf::Vector2f pos) { m_position = pos; }

@@ -45,13 +45,9 @@ public:
 	bool smellDetected = false;
 
 	virtual void Critter::Update()
-	{
-
-	}
+	{}
 	virtual void Critter::Update(sf::Vector2f target)
-	{
-		
-	}
+	{}
 	virtual void Critter::Draw(sf::RenderWindow &win)
 	{
 		m_emitter.Draw(win);
