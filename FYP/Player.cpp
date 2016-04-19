@@ -119,6 +119,23 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
+	if (m_position.x < 100)
+	{
+		m_position.x = 100;
+	}
+	if (m_position.x > 5300)
+	{
+		m_position.x = 5300;
+	}
+	if (m_position.y < 100)
+	{
+		m_position.y = 100;
+	}
+	if (m_position.y > 5300)
+	{
+		m_position.y = 5300;
+	}
+
 	m_smellSprite.setPosition(m_position);
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
 	sf::Time frameTime = frameClock.restart();
@@ -127,17 +144,17 @@ void Player::Update()
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
 	{
-		m_direction.x--;
+			m_direction.x--;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::A)) 
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::A))
 	{
-		m_direction.x++;
+			m_direction.x++;
 	}
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::D)) 
 	{
 		m_direction.x++;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::D)) 
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::D))
 	{
 		m_direction.x--;
 	}
@@ -147,7 +164,7 @@ void Player::Update()
 	{
 		m_direction.y--;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::W)) 
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::W))
 	{
 		m_direction.y++;
 	}
@@ -155,7 +172,7 @@ void Player::Update()
 	{
 		m_direction.y++;
 	}
-	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::S)) 
+	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::S))
 	{
 		m_direction.y--;
 	}
@@ -178,6 +195,7 @@ void Player::Update()
 	{
 		m_running = false;
 	}
+
 	// Modify Speed if Player is running or not
 	if (m_running && m_stamina > 1 && moving) 
 	{
