@@ -15,6 +15,7 @@
 #include "STP\TMXLoader.hpp"
 #include "UI_bar.h"
 #include "Collision.h"
+#include "Popup.h"
 
 class GameScene
 {
@@ -33,6 +34,7 @@ private:
 	UI_bar* m_staminabar;
 
 	tmx::TileMap* m_map;
+
 public:
 	static GameScene* GetInstance();
 
