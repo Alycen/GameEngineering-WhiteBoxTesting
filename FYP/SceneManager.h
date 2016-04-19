@@ -4,6 +4,7 @@
 #include "SplashScene.h"
 #include "MainMenuScene.h"
 #include "GameScene.h"
+#include "InGameMenu.h"
 
 class SceneManager
 {

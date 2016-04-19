@@ -144,11 +144,11 @@ void Player::Update()
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
 	{
-			m_direction.x--;
+		m_direction.x--;
 	}
 	else if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::A))
 	{
-			m_direction.x++;
+		m_direction.x++;
 	}
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::D)) 
 	{

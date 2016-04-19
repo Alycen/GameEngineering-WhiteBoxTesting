@@ -57,7 +57,7 @@ void MainMenuScene::Init()
 	m_menu[3].setFont(m_font);
 	m_menu[3].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[3].setStyle(sf::Text::Bold);
-	m_menu[3].setColor(sf::Color::White);
+	m_menu[3].setColor(sf::Color::Cyan);
 	m_menu[3].setString("New Game");
 	m_menu[3].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 1));
 

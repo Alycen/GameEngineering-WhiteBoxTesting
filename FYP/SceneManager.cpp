@@ -3,7 +3,7 @@
 bool SceneManager::instanceFlag = false;
 SceneManager* SceneManager::instance = NULL;
 
-int SPLASH = 0, MAIN = 1, GAME = 2;
+int SPLASH = 0, MAIN = 1, GAME = 2, INGAMEMENU = 3;
 
 SceneManager* SceneManager::GetInstance()
 {
@@ -25,15 +25,12 @@ void SceneManager::Init()
 	SplashScene::GetInstance()->Init();
 	MainMenuScene::GetInstance()->Init();
 	GameScene::GetInstance()->Init();
-
+	InGameMenu::GetInstance()->Init();
 	
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/Background/mystic.ogg"))
 	{
 		// handle error
 	}
-
-	//m_menuBackgroundMusic.setVolume(10);
-	//m_menuBackgroundMusic.setLoop(true);
 
 	m_backgroundMusic.setVolume(20);
 	m_backgroundMusic.play();
@@ -61,10 +58,14 @@ void SceneManager::Update()
 		SplashScene::GetInstance()->Update();
 		break;
 	case 1:
+		//InGameMenu::GetInstance()->Update();
 		MainMenuScene::GetInstance()->Update();
 		break;
 	case 2:
 		GameScene::GetInstance()->Update();
+		break;
+	case 3:
+		//
 		break;
 	}
 }
@@ -77,6 +78,7 @@ void SceneManager::Draw(sf::RenderWindow &win)
 	}
 	else if (m_currentScene == 1)
 	{
+		//InGameMenu::GetInstance()->Draw(win);
 		MainMenuScene::GetInstance()->Draw(win);
 	}
 	else if (m_currentScene == 2)
