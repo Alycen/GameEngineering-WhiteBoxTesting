@@ -27,7 +27,7 @@
 // Settings							|	 2 h|
 // Particles						|	 2 h|
 // Popups							|	 1 h|
-// Attack							|	 2 h|
+// --Attack--						|	 ---|
 // Player stay within level bounds	|	 2 h|
 // Level switch						|	 2 h|
 // Load / Save Level				|	 8 h|
@@ -35,12 +35,6 @@
 // -----------------------------------------|
 //											|
 // AI Behaviours 						    |
-// -> Move() - Wander						|
-// -> Stare() - Rotate towards, dont move	|		
-// -> Follow() - Slowly follow				|
-// -> Chase() - Quickly follow				|
-// -> Avoid() - Slowly avoid				|
-// -> Flee() - quickly avoid				|
 // -> Attack() - cause damage				|
 // Dont go outside the level bounds			|
 // -----------------------------------------|
@@ -49,8 +43,10 @@ int main()
 {
 	srand(time(NULL));
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+	
 	//sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Beasts of Burden", sf::Style::None);
 	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");//, sf::Style::None);
+	
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);
 

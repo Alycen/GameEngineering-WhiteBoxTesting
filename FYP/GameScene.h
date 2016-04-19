@@ -35,6 +35,7 @@ private:
 
 	tmx::TileMap* m_map;
 
+	bool inGameMenu = false;
 public:
 	static GameScene* GetInstance();
 
@@ -53,6 +54,8 @@ public:
 	void CheckPlayerAttack();
 	void CheckLevelChange();
 	void CheckPlayerSmell();
+
+	void InGameMenu();
 
 	GameScene::~GameScene()
 	{

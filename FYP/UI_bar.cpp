@@ -58,14 +58,13 @@ void UI_bar::Draw(sf::RenderWindow &win)
 
 	//Leave border positions as is
 	m_left_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 20), windowCentre.y - ((windowSize.y / 2) - m_y));
-	m_mid_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 33), windowCentre.y - ((windowSize.y / 2) - m_y));
-	m_right_pos = sf::Vector2f(windowCentre.x - (m_length * 2.3), windowCentre.y - ((windowSize.y / 2) - m_y));
-
+	m_mid_pos = sf::Vector2f((m_left_sprite.getGlobalBounds().width + m_right_sprite.getGlobalBounds().width) + 2, windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_right_pos = sf::Vector2f((m_left_sprite.getGlobalBounds().width + m_mid_sprite.getGlobalBounds().width + m_right_sprite.getGlobalBounds().width) + 2, windowCentre.y - ((windowSize.y / 2) - m_y));
+	
 	// Need modifiable Length variable for here
 	m_left_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2) - 22), windowCentre.y - ((windowSize.y / 2) - m_y));
-	//Below needs modifying
-	m_mid_filling_pos = sf::Vector2f(windowCentre.x - ((windowSize.x / 2.01) - 30), windowCentre.y - ((windowSize.y / 2) - m_y));
-	m_right_filling_pos = sf::Vector2f(windowCentre.x - (m_length * 2.3), windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_mid_filling_pos = sf::Vector2f((m_left_filling_sprite.getGlobalBounds().width + m_right_filling_sprite.getGlobalBounds().width) + 10, windowCentre.y - ((windowSize.y / 2) - m_y));
+	m_right_filling_pos = sf::Vector2f((m_left_filling_sprite.getGlobalBounds().width + m_mid_filling_sprite.getGlobalBounds().width + m_right_filling_sprite.getGlobalBounds().width) + 10, windowCentre.y - ((windowSize.y / 2) - m_y));
 
 	if (isVisible)
 	{
