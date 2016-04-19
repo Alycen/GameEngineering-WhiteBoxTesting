@@ -27,7 +27,7 @@ void Player::Init(float x, float y)
 
 	// Player Body Sprite
 	// Body Texture
-	m_bodyTexture.loadFromFile("Assets/Graphics/Player/body.png");
+	m_bodyTexture.loadFromFile("Assets/Graphics/Player/body1.png");
 	m_bodyTexture.setSmooth(true);
 
 	// Body Sprite
@@ -39,7 +39,7 @@ void Player::Init(float x, float y)
 
 	// Player Head Sprite
 	// Head Texture
-	m_headTexture.loadFromFile("Assets/Graphics/Player/head.png");
+	m_headTexture.loadFromFile("Assets/Graphics/Player/head1.png");
 	m_headTexture.setSmooth(true);
 
 	// Head Sprite
@@ -50,7 +50,7 @@ void Player::Init(float x, float y)
 	
 	// Player Tail Sprite
 	// Tail Texture
-	m_tailTexture.loadFromFile("Assets/Graphics/Player/tail.png");
+	m_tailTexture.loadFromFile("Assets/Graphics/Player/tail1.png");
 	m_tailTexture.setSmooth(true);
 
 	// Tail Sprite
@@ -111,7 +111,7 @@ void Player::Init(float x, float y)
 /*
 {
 	save map;
-	m_health;
+	m_health;`
 	m_stamina;
 	m_attack;
 	m_position;
