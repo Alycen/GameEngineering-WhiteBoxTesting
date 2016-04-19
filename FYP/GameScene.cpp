@@ -19,7 +19,7 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Init()
 {
-	stagNum = 2;
+	bearNum = 2;
 
 	if (!m_backgroundMusic.openFromFile("Assets/Audio/backGround.ogg"))
 	{
@@ -85,6 +85,11 @@ void GameScene::Update()
 		{
 			// 
 		}
+	}
+
+	if (Player::GetInstance()->isAttacking())
+	{
+		CheckPlayerAttack();
 	}
 
 	// check player doesnt leave bounding area
@@ -187,4 +192,15 @@ void GameScene::CheckLevelChange()
 			Player::GetInstance()->SetPosition(levelSwitch.getSpawn(levelSwitch.GetID());
 	}*/
 	
+}
+
+void GameScene::CheckPlayerAttack()
+{
+	for each(Critter* c in npcs)
+	{
+		if (Collision::BoundingBoxTest(Player::GetInstance()->GetAttackArea(), c->GetSprite()))
+		{
+			c->DecreaseHealth(Player::GetInstance()->GetAttackDamage());
+		}
+	}
 }

@@ -83,10 +83,13 @@ void Player::Init(float x, float y)
 	m_stamina = m_maxStamina;
 
 	// Attack Damage 
+	m_attackDamage = 1.0f;
 
 	// Attack animations
 	// texture
 	m_slashTexture.loadFromFile("Assets/Graphics/Actions/Slash.png");
+	m_attackAreaTex.loadFromFile("Assets/Graphics/Actions/attackArea.png");
+	m_attackArea.setTexture(m_attackAreaTex);
 	// animation
 	m_slashAnimation.setSpriteSheet(m_slashTexture);
 	m_slashAnimation.addFrame(sf::IntRect(0, 144, 64, 35));
@@ -105,6 +108,14 @@ void Player::Init(float x, float y)
 
 // Load stats from txt file()
 // Write stats to txt file()
+/*
+{
+	save map;
+	m_health;
+	m_stamina;
+	m_attack;
+	m_position;
+}*/
 
 void Player::Update()
 {
@@ -187,7 +198,7 @@ void Player::Update()
 
 	// Attack Inputs
 	// Slash
-	if (InputManager::GetInstance()->IsKeyReleased(sf::Keyboard::E) && !m_attacking)
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::E) && !m_attacking)
 	{
 		m_attacking = true;
 		m_animatedSprite.play(*m_currentAnimation);
@@ -206,6 +217,7 @@ void Player::Update()
 	{
 		sf::Vector2f normalised = m_direction / length;
 		m_position += normalised * m_speed;
+
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
 		m_bodySprite.setPosition(m_position);
@@ -218,6 +230,9 @@ void Player::Update()
 
 		m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
 		m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+		m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 
 	if (m_selected)

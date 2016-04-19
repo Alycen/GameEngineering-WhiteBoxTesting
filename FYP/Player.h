@@ -6,7 +6,7 @@
 #include "SFML/Audio.hpp"
 #include "InputManager.h"
 #include "Camera.h"
-#include "NPC_Critter.h"
+//#include "NPC_Critter.h"
 #include "AnimateSprite.h"
 
 #define DistanceOfNeck 35.5
@@ -47,6 +47,7 @@ private:
 	float m_maxHealth, m_health;
 	float m_maxStamina, m_stamina;
 	float m_speed;
+	float m_attackDamage;
 	// Target variables
 	sf::Vector2f m_selectedPosition;
 
@@ -55,7 +56,8 @@ private:
 	sf::Sprite m_smellSprite;
 	float smellScale = 0.001f;
 
-	sf::Texture m_slashTexture;
+	sf::Texture m_slashTexture, m_attackAreaTex;
+	sf::Sprite m_attackArea;
 	Animation m_slashAnimation;
 	Animation* m_currentAnimation;
 	// Animated Sprite
@@ -90,6 +92,8 @@ public:
 	void SetY(float y) { m_position.y = y; }
 	float GetY() { return m_position.y; }
 
+	float GetAttackDamage() { return m_attackDamage; }
+
 	sf::Sprite GetSmellSprite() { return m_smellSprite; }
 	//sf::Sprite GetAttackingSprite() { return  }
 
@@ -113,6 +117,7 @@ public:
 	sf::Sprite GetSprite() { return m_bodySprite; }
 	sf::Sprite GetHeadSprite() { return m_headSprite; }
 	sf::Sprite GetPawSprite() { return m_paw; }
+	sf::Sprite GetAttackArea() { return m_attackArea; }
 	
 	~Player()
 	{

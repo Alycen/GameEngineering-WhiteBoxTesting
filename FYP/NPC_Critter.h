@@ -4,6 +4,8 @@
 #include "SFML\Graphics.hpp"
 #include "Player.h"
 #include "Emitter.h"
+#include <iostream>
+using namespace std;
 
 #define DistanceOfNeck 0
 #define DistanceOfTail 0
@@ -53,6 +55,12 @@ public:
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
 		win.draw(m_tailSprite);
+	}
+
+	virtual void DecreaseHealth(float val)
+	{
+		m_health -= val;
+		cout << m_health << endl;
 	}
 
 	// AI Behaviour
@@ -107,12 +115,22 @@ public:
 		}
 		else
 		{
-			m_speed = 3;
+			m_speed = 4.75;
 			m_rotation = atan2(diff.y, diff.x);
 			m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 			m_position += m_direction * m_speed;
 			m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 			//Set position of Head and rotation 
+			float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+			if (length > 0)
+			{
+				sf::Vector2f normalised = m_direction / length;
+				m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+				m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+				m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+				m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+			}
 		}
 	}
 	virtual void Chase(sf::Vector2f target)
@@ -128,6 +146,17 @@ public:
 			m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 			m_position += m_direction * m_speed;
 			m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+
+			float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+			if (length > 0)
+			{
+				sf::Vector2f normalised = m_direction / length;
+				m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+				m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+				m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+				m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+			}
 		}
 	}
 	virtual void Attack()

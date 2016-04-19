@@ -4,6 +4,8 @@ Rabbit::Rabbit() {}
 
 Rabbit::Rabbit(float x, float y)
 {
+	m_health = 10;
+
 	m_position.x = x;
 	m_position.y = y;
 
@@ -37,7 +39,14 @@ void Rabbit::Update(sf::Vector2f target)
 	{
 		m_selected = false;
 	}
-	Flee(target);
+	if (m_health <= 0)
+	{ // Ded
+	  //cout << "IM DED" << endl;
+	}
+	else
+	{
+		Flee(target);
+	}
 }
 
 void Rabbit::Flee(sf::Vector2f target)
@@ -58,6 +67,16 @@ void Rabbit::Flee(sf::Vector2f target)
 		m_position += m_direction * m_speed;
 		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 		//Set position of Head and rotation 
+		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+		if (length > 0)
+		{
+			sf::Vector2f normalised = m_direction / length;
+			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+		}
 	}
 }
 

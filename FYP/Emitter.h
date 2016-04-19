@@ -3,7 +3,6 @@
 
 #include "Particle.h"
 #include <list>
-// if you use #include "Player.h" - causes strange issues
 
 class Emitter
 {
