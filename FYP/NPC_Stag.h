@@ -16,6 +16,7 @@ public:
 	void Update(sf::Vector2f);
 	void Move();
 	void Chase(sf::Vector2f);
+	void Flee(sf::Vector2f);
 };
 
 #endif

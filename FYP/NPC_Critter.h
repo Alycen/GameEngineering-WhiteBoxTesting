@@ -55,6 +55,8 @@ public:
 	virtual void Critter::Draw(sf::RenderWindow &win)
 	{
 		m_emitter.Draw(win);
+		if (m_selected)
+			win.draw(m_selectedSprite);
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
 		win.draw(m_tailSprite);
@@ -96,9 +98,13 @@ public:
 		if (length > 0) {
 			sf::Vector2f normalised = m_direction / length;
 			m_position += normalised * m_speed;
-			m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
 			m_bodySprite.setPosition(m_position);
+			m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_selectedSprite.setPosition(m_position);
+			m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
 			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
@@ -122,12 +128,18 @@ public:
 			m_rotation = atan2(diff.y, diff.x);
 			m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 			m_position += m_direction * m_speed;
-			m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+			//m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 			//Set position of Head and rotation 
 			float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 			if (length > 0)
 			{
 				sf::Vector2f normalised = m_direction / length;
+				m_bodySprite.setPosition(m_position);
+				m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+				m_selectedSprite.setPosition(m_position);
+				m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
 				m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 				m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
@@ -148,12 +160,18 @@ public:
 			m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
 			m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 			m_position += m_direction * m_speed;
-			m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+			//m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 
 			float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 			if (length > 0)
 			{
 				sf::Vector2f normalised = m_direction / length;
+				m_bodySprite.setPosition(m_position);
+				m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+				m_selectedSprite.setPosition(m_position);
+				m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
 				m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 				m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 

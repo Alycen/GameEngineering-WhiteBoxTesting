@@ -31,6 +31,13 @@ Stag::Stag(float x, float y)
 	m_tailSprite.setOrigin(9.0f, 3.0f);
 	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
 
+	m_selectedTex.loadFromFile("Assets/Graphics/NPC/selectedStag.png");
+	m_selectedTex.setSmooth(true);
+
+	m_selectedSprite.setTexture(m_selectedTex);
+	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
+	m_selectedSprite.setPosition(m_position.x, m_position.y);
+
 	m_speed = 2.5;
 
 	m_colour = sf::Color::Yellow;
@@ -39,7 +46,7 @@ Stag::Stag(float x, float y)
 
 void Stag::Update(sf::Vector2f target)
 {
-	m_bodySprite.setPosition(m_position);
+	//m_bodySprite.setPosition(m_position);
 	if (smellDetected)
 	{
 		m_emitter.SetAlive(true);
@@ -99,9 +106,13 @@ void Stag::Move()
 	if (length > 0) {
 		sf::Vector2f normalised = m_direction / length;
 		m_position += normalised * m_speed;
+		m_bodySprite.setPosition(m_position);
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
-		m_bodySprite.setPosition(m_position);
+		m_selectedSprite.setPosition(m_position);
+		m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
@@ -123,12 +134,54 @@ void Stag::Chase(sf::Vector2f target)
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;
-		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+		//m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 
 		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 		if (length > 0) 
 		{
 			sf::Vector2f normalised = m_direction / length;
+			m_bodySprite.setPosition(m_position);
+			m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_selectedSprite.setPosition(m_position);
+			m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
+			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
+			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+		}
+	}
+}
+
+void Stag::Flee(sf::Vector2f target)
+{
+	target = Closest(m_position, target);
+	sf::Vector2f diff = m_position - target;
+	if (diff.x*diff.x + diff.y*diff.y > 200000)
+	{
+		Move();
+		m_speed = 3;
+	}
+	else
+	{
+		m_speed = 4.75;
+		m_rotation = atan2(diff.y, diff.x);
+		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
+		m_position += m_direction * m_speed;
+		//m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
+		//Set position of Head and rotation 
+		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
+		if (length > 0)
+		{
+			sf::Vector2f normalised = m_direction / length;
+			m_bodySprite.setPosition(m_position);
+			m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_selectedSprite.setPosition(m_position);
+			m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
 			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 

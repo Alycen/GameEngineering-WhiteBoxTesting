@@ -30,11 +30,17 @@ Doe::Doe(float x, float y)
 	m_tailSprite.setTexture(m_tailTexture);
 	m_tailSprite.setOrigin(7.0f, 3.0f);
 	m_tailSprite.setPosition(m_position.x, m_position.y - DistanceOfTail);
+
+	m_selectedTex.loadFromFile("Assets/Graphics/NPC/selectedDoe.png");
+	m_selectedTex.setSmooth(true);
+
+	m_selectedSprite.setTexture(m_selectedTex);
+	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
+	m_selectedSprite.setPosition(m_position.x, m_position.y);
 }
 
 void Doe::Update(sf::Vector2f target)
 {
-	m_bodySprite.setPosition(m_position);
 	if (Player::GetInstance()->m_selected == false)
 	{
 		m_selected = false;
@@ -65,12 +71,16 @@ void Doe::Flee(sf::Vector2f target)
 		m_rotation = atan2(diff.y, diff.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;
-		m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
-		//Set position of Head and rotation 
 		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 		if (length > 0)
 		{
 			sf::Vector2f normalised = m_direction / length;
+			m_bodySprite.setPosition(m_position);
+			m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_selectedSprite.setPosition(m_position);
+			m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
 			m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 			m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
@@ -109,9 +119,12 @@ void Doe::Move()
 	if (length > 0) {
 		sf::Vector2f normalised = m_direction / length;
 		m_position += normalised * m_speed;
+		m_bodySprite.setPosition(m_position);
 		m_bodySprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
-		m_bodySprite.setPosition(m_position);
+		m_selectedSprite.setPosition(m_position);
+		m_selectedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
 		m_headSprite.setPosition(m_position + (normalised * (float)DistanceOfNeck));
 		m_headSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 
