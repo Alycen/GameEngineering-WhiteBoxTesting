@@ -169,9 +169,10 @@ void Player::Update()
 		m_running = false;
 	}
 	// Modify Speed if Player is running or not
-	if (m_running) 
+	if (m_running && m_stamina > 1) 
 	{
 		m_speed = 10.0f;
+		m_stamina -= 0.25f;
 	}
 	//else if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Space)))
 	//{
@@ -180,6 +181,10 @@ void Player::Update()
 	else
 	{
 		m_speed = 4.5f;
+		if (m_stamina < m_maxStamina)
+		{
+			m_stamina += 0.125f;
+		}
 	}
 
 	// Smell

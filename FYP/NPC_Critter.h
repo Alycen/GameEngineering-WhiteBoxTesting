@@ -20,6 +20,9 @@ protected:
 	sf::Sprite m_headSprite;
 	sf::Sprite m_tailSprite;
 
+	sf::Texture m_selectedTex;
+	sf::Sprite m_selectedSprite;
+
 	sf::Vector2f m_position;
 	sf::Vector2f m_direction;
 
