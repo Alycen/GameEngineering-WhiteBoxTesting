@@ -122,6 +122,7 @@ void Player::Update()
 	m_smellSprite.setPosition(m_position);
 	m_paw.setPosition(InputManager::GetInstance()->GetMousePosWorld());
 	sf::Time frameTime = frameClock.restart();
+	bool moving;
 
 	//X-Axis
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::A)) 
@@ -159,6 +160,15 @@ void Player::Update()
 		m_direction.y--;
 	}
 
+	if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::W) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::A) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::S) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::D))
+	{
+		moving = true;
+	}
+	else
+	{
+		moving = false;
+	}
+
 	// Run
 	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::LShift)) 
 	{
@@ -169,19 +179,15 @@ void Player::Update()
 		m_running = false;
 	}
 	// Modify Speed if Player is running or not
-	if (m_running && m_stamina > 1) 
+	if (m_running && m_stamina > 1 && moving) 
 	{
 		m_speed = 10.0f;
 		m_stamina -= 0.25f;
 	}
-	//else if ((InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::Space)))
-	//{
-	//	m_speed = 22.0f;
-	//}
 	else
 	{
 		m_speed = 4.5f;
-		if (m_stamina < m_maxStamina)
+		if (m_stamina < m_maxStamina )
 		{
 			m_stamina += 0.125f;
 		}

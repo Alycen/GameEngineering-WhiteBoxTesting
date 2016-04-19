@@ -101,7 +101,7 @@ void GameScene::Update()
 	{
 		if (Collision::PixelPerfectTest(Player::GetInstance()->GetSprite(), c->GetSprite()))
 		{
-			cout << "Player colliding" << endl;
+			//cout << "Player colliding" << endl;
 		}
 	}
 }
