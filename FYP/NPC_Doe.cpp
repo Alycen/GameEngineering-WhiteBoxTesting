@@ -44,12 +44,12 @@ void Doe::Update(sf::Vector2f target)
 	if (Player::GetInstance()->m_selected == false)
 	{
 		m_selected = false;
-		m_dead = true;
 	}
 	if (m_health <= 0)
 	{ // Ded
 		//cout << "IM DED" << endl;
 		m_selected = false;
+		m_dead = true;
 	}
 	else
 	{

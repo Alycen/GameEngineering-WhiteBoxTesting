@@ -4,11 +4,16 @@
 #include "SFML\Graphics.hpp"
 #include "Player.h"
 #include "Emitter.h"
+#include "AnimateSprite.h"
 #include <iostream>
+#include <time.h>
+#include <chrono>
+
 using namespace std;
 
 #define DistanceOfNeck 0
 #define DistanceOfTail 0
+#define DistanceOfAttack 0
 
 class Critter
 {
@@ -38,6 +43,25 @@ protected:
 	sf::Color m_deathCol = sf::Color(255, 200, 200, 50);
 	sf::Color m_colour;
 	Emitter m_emitter;
+
+	bool m_attacking = false;
+
+	sf::Texture m_slashTexture, m_bashTexture, m_attackAreaTex;
+	sf::Sprite m_attackArea;
+
+	Animation m_slashAnimation;
+	Animation m_bashAnimation;
+	Animation* m_currentAnimation;
+	// Animated Sprite
+	AnimatedSprite m_animatedSprite;
+
+	// Clock
+	sf::Clock frameClock;
+	sf::Time frameTime;
+	typedef std::chrono::high_resolution_clock Clock;
+	typedef std::chrono::milliseconds milliseconds;
+
+	Clock::time_point lastHit;
 public:
 	Critter::Critter() { }
 	Critter::~Critter() { }
@@ -45,6 +69,7 @@ public:
 	bool m_selected = false;
 	bool smellDetected = false;
 	bool m_dead = false;
+	bool isAttacking() { return m_attacking; }
 
 	virtual void Critter::Update()
 	{}
@@ -200,10 +225,6 @@ public:
 				m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 			}
 		}
-	}
-	virtual void Attack()
-	{
-
 	}
 	virtual void KeepDistance(sf::Vector2f target)
 	{

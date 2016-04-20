@@ -38,6 +38,25 @@ Stag::Stag(float x, float y)
 	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
 	m_selectedSprite.setPosition(m_position.x, m_position.y);
 
+	// Attack animations
+	// texture
+	m_bashTexture.loadFromFile("Assets/Graphics/Actions/bashSheet.png");
+	m_attackAreaTex.loadFromFile("Assets/Graphics/Actions/attackArea.png");
+	m_attackArea.setTexture(m_attackAreaTex);
+	// animation
+	m_bashAnimation.setSpriteSheet(m_bashTexture);
+	m_bashAnimation.addFrame(sf::IntRect(0, 144, 64, 35));
+	m_bashAnimation.addFrame(sf::IntRect(0, 108, 64, 35));
+	m_bashAnimation.addFrame(sf::IntRect(0, 72, 64, 35));
+	m_bashAnimation.addFrame(sf::IntRect(0, 36, 64, 35));
+	m_bashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+
+	m_currentAnimation = &m_bashAnimation;
+
+	m_animatedSprite = AnimatedSprite(sf::seconds(0.085), true, false);
+	m_animatedSprite.setOrigin(32, 14);
+	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
+
 	m_speed = 2.5;
 
 	m_colour = sf::Color::Yellow;
@@ -47,6 +66,8 @@ Stag::Stag(float x, float y)
 void Stag::Update(sf::Vector2f target)
 {
 	//m_bodySprite.setPosition(m_position);
+	frameTime = frameClock.restart();
+
 	if (smellDetected)
 	{
 		m_emitter.SetAlive(true);
@@ -148,11 +169,30 @@ void Stag::Move()
 
 void Stag::Chase(sf::Vector2f target)
 {
+	time_t now;
+	
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
-	if (diff.x*diff.x + diff.y*diff.y < 15000)
+	if (m_attacking)
+	{
+		m_animatedSprite.update(frameTime);
+		m_animatedSprite.move(m_direction * frameTime.asSeconds());
+
+		if (!m_animatedSprite.isPlaying())
+		{
+			m_attacking = false;
+		}
+	}
+
+	if (diff.x*diff.x + diff.y*diff.y < 18000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	{
+		m_animatedSprite.play(*m_currentAnimation);
+		lastHit = Clock::now();
+		m_attacking = true;
 		m_speed = 0;
-	else if (diff.x*diff.x + diff.y*diff.y >= 15000)
+		Player::GetInstance()->DecreaseHealth(10);
+	}
+	else if (diff.x*diff.x + diff.y*diff.y >= 18000)
 	{
 		m_speed = 5;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
@@ -175,6 +215,12 @@ void Stag::Chase(sf::Vector2f target)
 
 			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
 			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+			m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+			m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 		}
 	}
 }
@@ -212,5 +258,27 @@ void Stag::Flee(sf::Vector2f target)
 			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
 			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 		}
+	}
+}
+
+
+void Stag::Draw(sf::RenderWindow &win)
+{
+	m_emitter.Draw(win);
+	if (m_selected)
+		win.draw(m_selectedSprite);
+	if (m_health <= 0)
+	{
+		m_bodySprite.setColor(m_deathCol);
+		m_headSprite.setColor(m_deathCol);
+		m_tailSprite.setColor(m_deathCol);
+	}
+	win.draw(m_bodySprite);
+	win.draw(m_headSprite);
+	win.draw(m_tailSprite);
+
+	if (m_attacking)
+	{
+		win.draw(m_animatedSprite);
 	}
 }

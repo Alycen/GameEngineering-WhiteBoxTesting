@@ -5,6 +5,7 @@
 
 #define DistanceOfNeck 58
 #define DistanceOfTail -55
+#define DistanceOfAttack 120
 
 class Stag : public Critter
 {
@@ -17,6 +18,8 @@ public:
 	void Move();
 	void Chase(sf::Vector2f);
 	void Flee(sf::Vector2f);
+	void Attack(sf::Time);
+	void Draw(sf::RenderWindow&);
 };
 
 #endif

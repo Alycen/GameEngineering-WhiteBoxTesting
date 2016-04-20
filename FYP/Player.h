@@ -58,6 +58,7 @@ private:
 
 	sf::Texture m_slashTexture, m_attackAreaTex;
 	sf::Sprite m_attackArea;
+
 	Animation m_slashAnimation;
 	Animation* m_currentAnimation;
 	// Animated Sprite
@@ -102,11 +103,15 @@ public:
 	float GetHealth() { return m_health; }
 	void SetMaxHealth(float h) { m_maxHealth = h; }
 	float GetMaxHealth() { return m_maxHealth; }
+	void DecreaseHealth(float val) { m_health -= val; }
+	void IncreaseHealth(float val) { m_health += val; }
 	// Stamina
 	void SetStamina(float s) { m_stamina = s; }
 	float GetStamina() { return m_stamina; }
 	void SetMaxStamina(float s) { m_maxStamina = s; }
 	float GetMaxStamina() { return m_maxStamina; }
+	void DecreaseStamina(float val) { m_stamina -= val; }
+	void IncreaseStamina(float val) { m_stamina += val; }
 
 	//NPC target
 	void SetSelectedNPC(sf::Vector2f target) { m_selectedPosition = target; }
