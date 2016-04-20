@@ -59,6 +59,9 @@ public:
 	void CheckLevelChange();
 	void CheckPlayerSmell();
 
+	int GetLevel() { return level; }
+	void SetLevel(int l) { level = l; }
+
 	void Reset();
 
 	GameScene::~GameScene()

@@ -87,18 +87,20 @@ void Bear::Update(sf::Vector2f target)
 
 	m_injuredSound.setPosition(m_position.x, m_position.y, 0);
 	m_deathSound.setPosition(m_position.x, m_position.y, 0);
-	if (!m_dead)
+	if (!m_dead) // If the Beat isnt Dead : 
 	{
-		if (smellDetected)
+		Chase(target);
+
+		if (smellDetected) // If the Players Smell  radius collided with the bear
 		{
 			m_emitter.SetAlive(true);
 			m_emitter.SetPosition(m_position);
 		}
 		m_emitter.Update(target);
 
-		if (Player::GetInstance()->m_selected == false)
+		if (Player::GetInstance()->m_selected == false) // if the player has not selected anything
 		{
-			m_selected = false;
+			m_selected = false;		// Bear is not selected
 		}
 
 		if (m_health <= 0)
@@ -107,16 +109,17 @@ void Bear::Update(sf::Vector2f target)
 			m_dead = true;
 			m_attacking = false;
 		}
-		else
-		{
-			Chase(target);
-		}
 
 		if (m_health == 0)
 		{
 			m_deathSound.setMinDistance(500);
 			m_deathSound.setPosition(m_position.x, m_position.y, 0);
 			m_deathSound.play();
+
+			Player::GetInstance()->IncreaseHealth(40);
+			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 5);
+			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 5);
+			Player::GetInstance()->SetAttackDamage(Player::GetInstance()->GetAttackDamage() + 0.2f);
 		}
 	}
 }
@@ -262,19 +265,12 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 			m_attacking = false;
 		}
 	}
-	if (diff.x*diff.x + diff.y*diff.y < 17000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
-	{
-		m_speed = 0;
-		m_animatedSprite.play(*m_currentAnimation);
-		lastHit = Clock::now();
-		m_attacking = true;
-		Player::GetInstance()->DecreaseHealth(20);
-	}
-	else if (diff.x*diff.x + diff.y*diff.y >= 170000)
+
+	if (diff.x*diff.x + diff.y*diff.y >= 170000)
 	{
 		Move();
 	}
-	else if (diff.x*diff.x + diff.y*diff.y >= 17000 && diff.x*diff.x + diff.y*diff.y < 170000)
+	else if (diff.x*diff.x + diff.y*diff.y >= 15000 && diff.x*diff.x + diff.y*diff.y < 170000)
 	{
 		m_speed = 4.5;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
@@ -304,6 +300,14 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 			m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
 			m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 		}
+	}
+	else if (Collision::CircleTest(m_headSprite, Player::GetInstance()->GetSprite()) && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	{
+		m_speed = 0;
+		m_animatedSprite.play(*m_currentAnimation);
+		lastHit = Clock::now();
+		m_attacking = true;
+		Player::GetInstance()->DecreaseHealth(20);
 	}
 }
 

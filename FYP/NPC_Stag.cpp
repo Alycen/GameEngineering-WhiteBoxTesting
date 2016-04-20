@@ -97,12 +97,11 @@ void Stag::Update(sf::Vector2f target)
 		}
 	
 		if (m_health <= 0)
-		{ // Ded
-			//cout << "IM DED" << endl;
+		{ 
 			m_selected = false;
 			m_dead = true;
 		}
-		else if (m_health < 70 && m_health >= 20)
+		else if (m_health < 70 && m_health >= 20) // If the player attacked the Stag
 		{
 			Chase(target);
 		}
@@ -120,6 +119,10 @@ void Stag::Update(sf::Vector2f target)
 			m_deathSound.setMinDistance(500);
 			m_deathSound.setPosition(m_position.x, m_position.y, 0);
 			m_deathSound.play();
+
+			Player::GetInstance()->IncreaseHealth(20);
+			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 3);
+			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 3);
 		}
 	}
 }
@@ -210,7 +213,7 @@ void Stag::Chase(sf::Vector2f target)
 		}
 	}
 
-	if (diff.x*diff.x + diff.y*diff.y < 18000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	if (Collision::CircleTest(m_headSprite, Player::GetInstance()->GetSprite()) && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
 	{
 		m_animatedSprite.play(*m_currentAnimation);
 		lastHit = Clock::now();
@@ -224,7 +227,6 @@ void Stag::Chase(sf::Vector2f target)
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;
-		//m_bodySprite.setRotation(m_rotation * 180 / (22.0f / 7.0f) + 90.0f);
 
 		float length = sqrt((m_direction.x * m_direction.x) + (m_direction.y * m_direction.y));
 		if (length > 0) 

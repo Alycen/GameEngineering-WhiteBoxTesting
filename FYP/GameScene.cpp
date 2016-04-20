@@ -70,23 +70,18 @@ void GameScene::Update()
 		m_levelExit2.setPosition(40, 2500);
 		m_levelExit3.setPosition(5250, 2500);
 
-		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 	}
 	else if (level == 2)
 	{
 		m_levelExit1.setPosition(5250, 2500);
 		m_levelExit2.setPosition(-2000, -2000);
 		m_levelExit3.setPosition(-1000, -1000);
-
-		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 	}
 	else if (level == 3)
 	{
 		m_levelExit1.setPosition(40, 2500);
 		m_levelExit2.setPosition(-2000, -2000);
 		m_levelExit3.setPosition(-1000, -1000);
-
-		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 	}
 
 	for each (Critter* c in npcs)
@@ -219,11 +214,13 @@ void GameScene::CheckLevelChange()
 	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit1))
 	{
 		if (level == 2)
-			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit1.getPosition().x - 100, 2500));
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit1.getPosition().x - 300, 2700));
 		else
-			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit1.getPosition().x + 100, 2500));
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit1.getPosition().x + 300, 2700));
 
 		level = 1;
+
+		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 
 		wolfNum = 5;
 		rabbitNum = 6;
@@ -234,11 +231,13 @@ void GameScene::CheckLevelChange()
 	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit2))
 	{
 		if (level == 1)
-			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x + 100, 2500));
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x + 300, 2700));
 		else
-			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x - 100, 2500));
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x - 300, 2700));
 
 		level = 2;
+
+		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 
 		bearNum = 5;
 		rabbitNum = 4;
@@ -250,11 +249,13 @@ void GameScene::CheckLevelChange()
 	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit3))
 	{
 		if (level == 1)
-			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x - 100, 2500));
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit3.getPosition().x - 300, 2700));
 		else
-			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x + 100, 2500));
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit3.getPosition().x + 300, 2700));
 
 		level = 3;
+
+		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 
 		stagNum = 2;
 		doeNum = 6;
@@ -277,7 +278,7 @@ void GameScene::CheckPlayerAttack()
 
 void GameScene::Reset()
 {
-	//Player::GetInstance()->Reset();
+	m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 	npcs.clear();
 
 	for (int i = 0; i < wolfNum; i++)

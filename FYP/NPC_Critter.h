@@ -242,12 +242,7 @@ public:
 			}
 		}
 	}
-	virtual void KeepDistance(sf::Vector2f target)
-	{
 
-	}
-
-	//
 	sf::Vector2f Closest(sf::Vector2f pos, sf::Vector2f target)
 	{
 		float dx = pos.x - target.x, dy = pos.y - target.y, x = target.x, y = target.y;

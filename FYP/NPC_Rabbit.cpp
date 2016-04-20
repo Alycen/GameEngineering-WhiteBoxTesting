@@ -86,6 +86,9 @@ void Rabbit::Update(sf::Vector2f target)
 			m_deathSound.setMinDistance(500);
 			m_deathSound.setPosition(m_position.x, m_position.y, 0);
 			m_deathSound.play();
+			Player::GetInstance()->IncreaseHealth(10);
+			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 1);
+			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 1);
 		}
 	}
 }

@@ -122,6 +122,10 @@ void Player::Init()
 void Player::Update()
 {
 	sf::Listener::setPosition(m_position.x, m_position.y, 0);
+	if (m_health > m_maxHealth)
+		m_health = m_maxHealth;
+	if (m_stamina > m_maxStamina)
+		m_stamina = m_maxStamina;
 
 	if (m_position.x < 100)
 	{
@@ -385,7 +389,7 @@ void Player::Save()
 		savefile << m_position.x << endl;
 		savefile << m_position.y << endl;
 		savefile << m_attackDamage << endl;
-
+		
 		savefile.close();
 	}
 	else cout << "Can't write to save file";
@@ -436,5 +440,5 @@ void Player::Reset()
 	m_stamina = m_maxStamina;
 
 	// Attack Damage 
-	m_attackDamage = 1.0f;
+	m_attackDamage = 0.9f;
 }

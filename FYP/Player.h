@@ -105,6 +105,7 @@ public:
 	float GetY() { return m_position.y; }
 
 	float GetAttackDamage() { return m_attackDamage; }
+	void SetAttackDamage(float val) { m_attackDamage = val; }
 
 	sf::Sprite GetSmellSprite() { return m_smellSprite; }
 	//sf::Sprite GetAttackingSprite() { return  }

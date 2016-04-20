@@ -109,6 +109,7 @@ void MainMenuScene::Update()
 			exitSelected = true;
 			break;
 		case 3:
+			GameScene::GetInstance()->SetLevel(1);
 			GameScene::GetInstance()->Reset();
 			Player::GetInstance()->Reset();
 			SceneManager::GetInstance()->m_currentScene = 2;
