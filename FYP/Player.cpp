@@ -300,6 +300,11 @@ void Player::Update()
 		m_deathSound.play();
 		Reset();
 	}
+
+	if (m_health < m_maxHealth)
+	{
+		m_health += 0.025f;
+	}
 }
 
 void Player::Smell() 

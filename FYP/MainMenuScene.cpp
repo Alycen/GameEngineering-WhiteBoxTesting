@@ -110,6 +110,7 @@ void MainMenuScene::Update()
 			break;
 		case 3:
 			GameScene::GetInstance()->Reset();
+			Player::GetInstance()->Reset();
 			SceneManager::GetInstance()->m_currentScene = 2;
 			break;
 		case 4:

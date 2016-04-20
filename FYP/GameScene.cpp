@@ -21,6 +21,7 @@ GameScene* GameScene::GetInstance()
 void GameScene::Init()
 {
 	rabbitNum = 4;
+	wolfNum = 5;
 
 	m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 
@@ -62,7 +63,6 @@ void GameScene::Update()
 {
 	Player::GetInstance()->Update();
 	CheckMouseCollision();
-	CheckLevelChange();
 
 	if (level == 1)
 	{
@@ -125,6 +125,8 @@ void GameScene::Update()
 			//cout << "Player colliding" << endl;
 		}
 	}
+	
+	CheckLevelChange();
 }
 
 void GameScene::Draw(sf::RenderWindow &win)
@@ -225,6 +227,8 @@ void GameScene::CheckLevelChange()
 
 		wolfNum = 5;
 		rabbitNum = 6;
+
+		Reset();
 	}
 	// Check if the player is switching to level 2
 	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit2))
@@ -239,6 +243,8 @@ void GameScene::CheckLevelChange()
 		bearNum = 5;
 		rabbitNum = 4;
 		doeNum = 3;
+
+		Reset();
 	}
 	// Check if the player is switching to level 3
 	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit3))
@@ -253,6 +259,8 @@ void GameScene::CheckLevelChange()
 		stagNum = 2;
 		doeNum = 6;
 		rabbitNum = 4;
+
+		Reset();
 	}
 }
 
@@ -269,7 +277,7 @@ void GameScene::CheckPlayerAttack()
 
 void GameScene::Reset()
 {
-	Player::GetInstance()->Reset();
+	//Player::GetInstance()->Reset();
 	npcs.clear();
 
 	for (int i = 0; i < wolfNum; i++)
