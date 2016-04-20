@@ -107,6 +107,7 @@ void Stag::Update(sf::Vector2f target)
 
 void Stag::Move()
 {
+	m_attacking = false;
 	if (timer == 0) {
 		timer = rand() % 300 + 100;
 		dir = rand() % 7 + 1; // may want to tweak the probability here
@@ -227,6 +228,7 @@ void Stag::Chase(sf::Vector2f target)
 
 void Stag::Flee(sf::Vector2f target)
 {
+	m_attacking = false;
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
 	if (diff.x*diff.x + diff.y*diff.y > 200000)

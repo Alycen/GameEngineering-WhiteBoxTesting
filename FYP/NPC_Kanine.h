@@ -7,6 +7,7 @@
 
 #define DistanceOfNeck 35.5
 #define DistanceOfTail -35
+#define DistanceOfAttack 105
 
 class Kanine : public Critter
 {

@@ -40,7 +40,7 @@ protected:
 	int timer = rand() % 300 + 100;
 	int dir = rand() % 7 + 1;
 
-	sf::Color m_deathCol = sf::Color(255, 200, 200, 50);
+	sf::Color m_deathCol = sf::Color(255, 100, 100, 150);
 	sf::Color m_colour;
 	Emitter m_emitter;
 

@@ -37,6 +37,28 @@ Kanine::Kanine(float x, float y)
 	m_selectedSprite.setTexture(m_selectedTex);
 	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
 	m_selectedSprite.setPosition(m_position.x, m_position.y);
+
+	// Attack animations
+	// texture
+	m_slashTexture.loadFromFile("Assets/Graphics/Actions/Slash.png");
+	m_attackAreaTex.loadFromFile("Assets/Graphics/Actions/attackArea.png");
+	m_attackArea.setTexture(m_attackAreaTex);
+	// animation
+	m_slashAnimation.setSpriteSheet(m_slashTexture);
+	m_slashAnimation.addFrame(sf::IntRect(0, 144, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 108, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 72, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 36, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+
+	m_currentAnimation = &m_slashAnimation;
+
+	m_animatedSprite = AnimatedSprite(sf::seconds(0.065), true, false);
+	m_animatedSprite.setOrigin(32, 14);
+	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
+
+	m_colour = sf::Color::White;
 }
 
 void Kanine::Update()
@@ -52,6 +74,8 @@ void Kanine::Update()
 void Kanine::Update(sf::Vector2f target)
 {
 	//m_bodySprite.setPosition(m_position.x, m_position.y);
+	frameTime = frameClock.restart();
+
 	if (Player::GetInstance()->m_selected == false)
 	{
 		m_selected = false;
@@ -77,6 +101,7 @@ void Kanine::Update(sf::Vector2f target)
 
 void Kanine::Flee(sf::Vector2f target)
 {
+	m_attacking = false;
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
 	if (diff.x*diff.x + diff.y*diff.y > 200000)
@@ -113,10 +138,29 @@ void Kanine::Flee(sf::Vector2f target)
 
 void Kanine::Chase(sf::Vector2f target)
 {
+	time_t now;
+
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
-	if (diff.x*diff.x + diff.y*diff.y < 15000)
+	if (m_attacking)
+	{
+		m_animatedSprite.update(frameTime);
+		m_animatedSprite.move(m_direction * frameTime.asSeconds());
+
+		if (!m_animatedSprite.isPlaying())
+		{
+			m_attacking = false;
+		}
+	}
+
+	if (diff.x*diff.x + diff.y*diff.y < 15000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	{
+		m_animatedSprite.play(*m_currentAnimation);
+		lastHit = Clock::now();
+		m_attacking = true;
 		m_speed = 0;
+		Player::GetInstance()->DecreaseHealth(8);
+	}
 	else if (diff.x*diff.x + diff.y*diff.y >= 15000)
 	{
 		m_speed = 5.7;
@@ -140,6 +184,12 @@ void Kanine::Chase(sf::Vector2f target)
 
 			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
 			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+			m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+			m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 		}
 	}
 }
@@ -157,10 +207,15 @@ void Kanine::Draw(sf::RenderWindow &win)
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
 	win.draw(m_tailSprite);
+	if (m_attacking)
+	{
+		win.draw(m_animatedSprite);
+	}
 }
 
 void Kanine::Move()
 {
+	m_attacking = false;
 	if (timer == 0) {
 		timer = rand() % 300 + 100;
 		dir = rand() % 8 + 1; // may want to tweak the probability here
