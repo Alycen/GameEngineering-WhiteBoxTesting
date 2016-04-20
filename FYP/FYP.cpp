@@ -43,8 +43,8 @@ int main()
 	srand(time(NULL));
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 	
-	//sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Beasts of Burden", sf::Style::None);
-	sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");//, sf::Style::None);
+	sf::RenderWindow window(sf::VideoMode(desktop.width, desktop.height, desktop.bitsPerPixel), "Beasts of Burden", sf::Style::None);
+	//sf::RenderWindow window(sf::VideoMode(1400, 900, 32), "FYP");//, sf::Style::None);
 	
 	window.setFramerateLimit(60);
 	window.setVerticalSyncEnabled(true);

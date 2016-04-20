@@ -93,7 +93,8 @@ void SceneManager::Draw(sf::RenderWindow &win)
 	else if (m_currentScene == 3)
 	{
 		GameScene::GetInstance()->Draw(win);
-		win.setView(win.getDefaultView());
 		InGameMenu::GetInstance()->Draw(win);
+		win.setView(Camera::GetInstance()->getView());
+		//win.setView(win.getDefaultView());
 	}
 }

@@ -33,32 +33,32 @@ void InGameMenu::Init()
 	m_menu[0].setStyle(sf::Text::Bold);
 	m_menu[0].setColor(sf::Color::Cyan);
 	m_menu[0].setString("Resume");
-	m_menu[0].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 1));
+	m_menu[0].setPosition(sf::Vector2f((desktop.width / 2) - 200, desktop.height / (NUM_ELEMENTS + 1) * 1));
 
 	m_menu[1].setFont(m_font);
 	m_menu[1].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[1].setStyle(sf::Text::Bold);
 	m_menu[1].setColor(sf::Color::White);
 	m_menu[1].setString("Save");
-	m_menu[1].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 2.5));
+	m_menu[1].setPosition(sf::Vector2f((desktop.width / 2) - 200, desktop.height / (NUM_ELEMENTS + 1) * 1.75));
 
 	m_menu[2].setFont(m_font);
 	m_menu[2].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[2].setStyle(sf::Text::Bold);
 	m_menu[2].setColor(sf::Color::White);
 	m_menu[2].setString("MainMenu");
-	m_menu[2].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 4));
+	m_menu[2].setPosition(sf::Vector2f((desktop.width / 2) - 200, desktop.height / (NUM_ELEMENTS + 1) * 2.5));
 
 	m_menu[3].setFont(m_font);
 	m_menu[3].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[3].setStyle(sf::Text::Bold);
 	m_menu[3].setColor(sf::Color::White);
 	m_menu[3].setString("Exit Game");
-	m_menu[3].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 5.5));
+	m_menu[3].setPosition(sf::Vector2f((desktop.width / 2) - 200, desktop.height / (NUM_ELEMENTS + 1) * 3.25));
 
 	m_selectedItemIndex = 0;
 
-	m_texture.loadFromFile("Assets/Graphics/Menu/logo.png");
+	m_texture.loadFromFile("Assets/Graphics/Menu/inGameFilter.png");
 	m_texture.setSmooth(true);
 
 	m_sprite.setTexture(m_texture);
@@ -103,7 +103,7 @@ void InGameMenu::Update()
 
 void InGameMenu::Draw(sf::RenderWindow &win)
 {
-	//win.draw(m_sprite);
+	win.draw(m_sprite);
 	for (int i = 0; i < NUM_ELEMENTS; i++)
 	{
 		win.draw(m_menu[i]);
