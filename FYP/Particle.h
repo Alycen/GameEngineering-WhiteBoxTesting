@@ -28,7 +28,11 @@ public:
 	void Update(sf::Vector2f);
 	void Draw(sf::RenderWindow&);
 
-	void SetPosition(sf::Vector2f pos) { m_position = pos; }
+	void SetPosition(sf::Vector2f pos) 
+	{ 
+		m_position = pos; 
+		m_sprite.setPosition(m_position);
+	}
 	void SetAlive(bool b) { isAlive = b; }
 	void CheckCollision();
 	sf::Vector2f Closest(sf::Vector2f, sf::Vector2f);

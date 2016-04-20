@@ -60,7 +60,7 @@ Stag::Stag(float x, float y)
 	m_speed = 2.5;
 
 	m_colour = sf::Color::Yellow;
-	//m_emitter = Emitter(m_position.x, m_position.y, m_colour);
+	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 }
 
 void Stag::Update(sf::Vector2f target)
@@ -73,8 +73,8 @@ void Stag::Update(sf::Vector2f target)
 		{
 			m_emitter.SetAlive(true);
 			m_emitter.SetPosition(m_position);
-			m_emitter.Update(target);
 		}
+		m_emitter.Update(target);
 
 		if (Player::GetInstance()->m_selected == false)
 		{

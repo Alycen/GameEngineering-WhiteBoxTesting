@@ -29,9 +29,12 @@ void Emitter::Update()
 
 void Emitter::Update(sf::Vector2f target)
 {
-	for each (Particle* p in particles)
+	if (alive)
 	{
-		p->Update(target);
+		for each (Particle* p in particles)
+		{
+			p->Update(target);
+		}
 	}
 }
 
@@ -46,12 +49,17 @@ void Emitter::Draw(sf::RenderWindow &win)
 void Emitter::SetPosition(sf::Vector2f pos) 
 { 
 	m_position = pos; 
+	for each (Particle* p in particles)
+	{
+		p->SetPosition(m_position);
+	}
 }
 
 void Emitter::SetAlive(bool b) 
 {
+	alive = b;
 	for each (Particle* p in particles)
 	{
-		p->SetAlive(b);
+		p->SetAlive(alive);
 	}
 }

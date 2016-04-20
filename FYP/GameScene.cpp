@@ -20,18 +20,9 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Init()
 {
-	rabbitNum = 4;
-	doeNum = 3;
-	bearNum = 2;
 	stagNum = 1;
-	wolfNum = 4;
-
 
 	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
-
-	//m_backgroundMusic.setVolume(10);
-	//m_backgroundMusic.play();
-	//m_backgroundMusic.setLoop(true);
 
 	Player::GetInstance()->Init(3000,2500);
 	Camera::GetInstance()->Init(1400,900);
@@ -179,7 +170,7 @@ void GameScene::CheckPlayerSmell()
 		}
 		else
 		{
-			//c->smellDetected = false;
+			c->smellDetected = false;
 		}
 	}
 }

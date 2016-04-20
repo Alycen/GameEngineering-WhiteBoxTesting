@@ -11,6 +11,7 @@ private:
 	sf::Vector2f m_position;
 	int size;
 public:
+	bool alive = false;
 	Emitter();
 	Emitter(float, float, sf::Color);
 
