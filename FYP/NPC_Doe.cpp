@@ -37,23 +37,36 @@ Doe::Doe(float x, float y)
 	m_selectedSprite.setTexture(m_selectedTex);
 	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
 	m_selectedSprite.setPosition(m_position.x, m_position.y);
+
+	m_colour = sf::Color::Yellow;
+	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 }
 
 void Doe::Update(sf::Vector2f target)
 {
-	if (Player::GetInstance()->m_selected == false)
+	if (!m_dead)
 	{
-		m_selected = false;
-	}
-	if (m_health <= 0)
-	{ // Ded
-		//cout << "IM DED" << endl;
-		m_selected = false;
-		m_dead = true;
-	}
-	else
-	{
-		Flee(target);
+		if (smellDetected)
+		{
+			m_emitter.SetAlive(true);
+			m_emitter.SetPosition(m_position);
+		}
+		m_emitter.Update(target);
+
+		if (Player::GetInstance()->m_selected == false)
+		{
+			m_selected = false;
+		}
+		if (m_health <= 0)
+		{ // Ded
+			//cout << "IM DED" << endl;
+			m_selected = false;
+			m_dead = true;
+		}
+		else
+		{
+			Flee(target);
+		}
 	}
 }
 

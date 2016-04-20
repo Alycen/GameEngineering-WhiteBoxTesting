@@ -20,7 +20,7 @@ GameScene* GameScene::GetInstance()
 
 void GameScene::Init()
 {
-	stagNum = 1;
+	wolfNum = 4;
 
 	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
 

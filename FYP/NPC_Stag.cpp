@@ -59,7 +59,7 @@ Stag::Stag(float x, float y)
 
 	m_speed = 2.5;
 
-	m_colour = sf::Color::Yellow;
+	m_colour = sf::Color(255,162,68,100);
 	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 }
 

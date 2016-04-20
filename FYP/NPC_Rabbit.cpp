@@ -38,6 +38,8 @@ Rabbit::Rabbit(float x, float y)
 	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
 	m_selectedSprite.setPosition(m_position.x, m_position.y);
 
+	m_colour = sf::Color::Green;
+	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 }
 
 void Rabbit::Update(sf::Vector2f target)
@@ -46,19 +48,28 @@ void Rabbit::Update(sf::Vector2f target)
 	{
 		m_selected = false;
 	}
-	if (m_health <= 0)
-	{ // Ded
-	  //cout << "IM DED" << endl;
-		m_selected = false;
-		m_dead = true;
-	}
-	else
+	if (!m_dead)
 	{
-		Flee(target);
-	}
-	if (m_health == 0)
-	{
-		//play dead sound
+		if (smellDetected)
+		{
+			m_emitter.SetAlive(true);
+			m_emitter.SetPosition(m_position);
+		}
+		m_emitter.Update(target);
+		if (m_health <= 0)
+		{ // Ded
+		  //cout << "IM DED" << endl;
+			m_selected = false;
+			m_dead = true;
+		}
+		else
+		{
+			Flee(target);
+		}
+		if (m_health == 0)
+		{
+			//play dead sound
+		}
 	}
 }
 

@@ -59,6 +59,7 @@ Bear::Bear(float x, float y)
 	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
 
 	m_colour = sf::Color::Red;
+	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 
 	//Sounds
 	m_injuredBuffer.loadFromFile("Assets/Audio/NPC/Bear/bearSound.wav");
@@ -85,27 +86,36 @@ void Bear::Update(sf::Vector2f target)
 	frameTime = frameClock.restart();
 
 	m_deathSound.setPosition(m_position.x, m_position.y, 0);
+	if (!m_dead)
+	{
+		if (smellDetected)
+		{
+			m_emitter.SetAlive(true);
+			m_emitter.SetPosition(m_position);
+		}
+		m_emitter.Update(target);
 
-	if (Player::GetInstance()->m_selected == false)
-	{
-		m_selected = false;
-	}
-	
+		if (Player::GetInstance()->m_selected == false)
+		{
+			m_selected = false;
+		}
 
-	if (m_health <= 0)
-	{
-		m_selected = false;
-		m_dead = true;
-		m_attacking = false;
-	}
-	else
-	{
-		Chase(target);
+		if (m_health <= 0)
+		{
+			m_selected = false;
+			m_dead = true;
+			m_attacking = false;
+		}
+		else
+		{
+			Chase(target);
+		}
 	}
 }
 
 void Bear::Draw(sf::RenderWindow &win)
 {
+	m_emitter.Draw(win);
 	if (m_selected)
 		win.draw(m_selectedSprite);
 	if (m_health <= 0)

@@ -59,6 +59,7 @@ Kanine::Kanine(float x, float y)
 	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
 
 	m_colour = sf::Color::White;
+	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
 }
 
 void Kanine::Update()
@@ -78,6 +79,13 @@ void Kanine::Update(sf::Vector2f target)
 
 	if (!m_dead)
 	{
+		if (smellDetected)
+		{
+			m_emitter.SetAlive(true);
+			m_emitter.SetPosition(m_position);
+		}
+		m_emitter.Update(target);
+
 		if (Player::GetInstance()->m_selected == false)
 		{
 			m_selected = false;
@@ -199,6 +207,7 @@ void Kanine::Chase(sf::Vector2f target)
 
 void Kanine::Draw(sf::RenderWindow &win)
 {
+	m_emitter.Draw(win);
 	if (m_selected)
 		win.draw(m_selectedSprite);
 	if (m_health <= 0)
