@@ -104,6 +104,9 @@ void Player::Init(float x, float y)
 	m_animatedSprite = AnimatedSprite(sf::seconds(0.065), true, false);
 	m_animatedSprite.setOrigin(32, 14);
 	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
+
+	sf::Listener::setDirection(0, -1, 0);
+	sf::Listener::setUpVector(0, 0, 1);
 }
 
 // Load stats from txt file()
@@ -119,6 +122,8 @@ void Player::Init(float x, float y)
 
 void Player::Update()
 {
+	sf::Listener::setPosition(m_position.x, m_position.y, 0);
+
 	if (m_position.x < 100)
 	{
 		m_position.x = 100;

@@ -67,41 +67,43 @@ void Stag::Update(sf::Vector2f target)
 {
 	//m_bodySprite.setPosition(m_position);
 	frameTime = frameClock.restart();
-
-	if (smellDetected)
+	if (!m_dead)
 	{
-		m_emitter.SetAlive(true);
-		m_emitter.SetPosition(m_position);
-		m_emitter.Update(target);
-	}
+		if (smellDetected)
+		{
+			m_emitter.SetAlive(true);
+			m_emitter.SetPosition(m_position);
+			m_emitter.Update(target);
+		}
 
-	if (Player::GetInstance()->m_selected == false)
-	{
-		m_selected = false;
-	}
+		if (Player::GetInstance()->m_selected == false)
+		{
+			m_selected = false;
+		}
 	
-	if (m_health <= 0)
-	{ // Ded
-		//cout << "IM DED" << endl;
-		m_selected = false;
-		m_dead = true;
-	}
-	else if (m_health < 70 && m_health >= 20)
-	{
-		Chase(target);
-	}
-	else if (m_health < 20 && m_health > 0)
-	{
-		Flee(target);
-	}
-	else 
-	{
-		Move();
-	}
+		if (m_health <= 0)
+		{ // Ded
+			//cout << "IM DED" << endl;
+			m_selected = false;
+			m_dead = true;
+		}
+		else if (m_health < 70 && m_health >= 20)
+		{
+			Chase(target);
+		}
+		else if (m_health < 20 && m_health > 0)
+		{
+			Flee(target);
+		}
+		else 
+		{
+			Move();
+		}
 
-	if (m_health == 0)
-	{
-		//play dead sound
+		if (m_health == 0)
+		{
+			//play dead sound
+		}
 	}
 }
 
@@ -164,6 +166,12 @@ void Stag::Move()
 
 		m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
 		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+		m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+		m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	timer--;
 }

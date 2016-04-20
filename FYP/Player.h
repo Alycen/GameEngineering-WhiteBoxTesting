@@ -103,7 +103,10 @@ public:
 	float GetHealth() { return m_health; }
 	void SetMaxHealth(float h) { m_maxHealth = h; }
 	float GetMaxHealth() { return m_maxHealth; }
-	void DecreaseHealth(float val) { m_health -= val; }
+	void DecreaseHealth(float val) {
+		cout << val << endl;
+		m_health -= val; 
+	}
 	void IncreaseHealth(float val) { m_health += val; }
 	// Stamina
 	void SetStamina(float s) { m_stamina = s; }
@@ -123,6 +126,8 @@ public:
 	sf::Sprite GetHeadSprite() { return m_headSprite; }
 	sf::Sprite GetPawSprite() { return m_paw; }
 	sf::Sprite GetAttackArea() { return m_attackArea; }
+
+	void Reset();
 	
 	~Player()
 	{

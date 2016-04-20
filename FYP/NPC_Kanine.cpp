@@ -76,26 +76,29 @@ void Kanine::Update(sf::Vector2f target)
 	//m_bodySprite.setPosition(m_position.x, m_position.y);
 	frameTime = frameClock.restart();
 
-	if (Player::GetInstance()->m_selected == false)
+	if (!m_dead)
 	{
-		m_selected = false;
-	}
-	if (m_health <= 0)
-	{ // Ded
-		m_selected = false;
-		m_dead = true;
-	}
-	else if (m_health < 60 && m_health >= 20)
-	{
-		Chase(target);
-	}
-	else if (m_health < 20 && m_health > 0)
-	{
-		Flee(target);
-	}
-	else
-	{
-		Move();
+		if (Player::GetInstance()->m_selected == false)
+		{
+			m_selected = false;
+		}
+		if (m_health <= 0)
+		{ // Ded
+			m_selected = false;
+			m_dead = true;
+		}
+		else if (m_health < 60 && m_health >= 20)
+		{
+			Chase(target);
+		}
+		else if (m_health < 20 && m_health > 0)
+		{
+			Flee(target);
+		}
+		else
+		{
+			Move();
+		}
 	}
 }
 

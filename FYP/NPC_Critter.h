@@ -40,7 +40,7 @@ protected:
 	int timer = rand() % 300 + 100;
 	int dir = rand() % 7 + 1;
 
-	sf::Color m_deathCol = sf::Color(255, 100, 100, 150);
+	sf::Color m_deathCol = sf::Color(160, 100, 100, 150);
 	sf::Color m_colour;
 	Emitter m_emitter;
 
@@ -62,6 +62,14 @@ protected:
 	typedef std::chrono::milliseconds milliseconds;
 
 	Clock::time_point lastHit;
+
+	// Sounds
+	sf::SoundBuffer m_injuredBuffer;
+	sf::Sound m_injuredSound;
+	//sf
+	sf::SoundBuffer m_deathBuffer;
+	sf::Sound m_deathSound;
+
 public:
 	Critter::Critter() { }
 	Critter::~Critter() { }
@@ -260,6 +268,8 @@ public:
 	sf::Sprite GetHeadSprite() { return m_headSprite; }
 
 	sf::Color GetColour() { return m_colour; }
+
+	void Reset();
 };
 
 #endif

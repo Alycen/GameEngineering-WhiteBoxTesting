@@ -59,6 +59,18 @@ Bear::Bear(float x, float y)
 	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
 
 	m_colour = sf::Color::Red;
+
+	//Sounds
+	m_injuredBuffer.loadFromFile("Assets/Audio/NPC/Bear/bearSound.wav");
+	m_injuredSound.setBuffer(m_injuredBuffer);
+	m_injuredSound.setRelativeToListener(false);
+	m_injuredSound.setPosition(200, 200, 0);
+	m_injuredSound.setAttenuation(5);
+
+	m_deathBuffer.loadFromFile("Assets/Audio/NPC/Bear/bearDead.wav");
+	m_deathSound.setBuffer(m_deathBuffer);
+	m_deathSound.setRelativeToListener(false);
+	m_deathSound.setAttenuation(10);
 }
 
 void Bear::Update()
@@ -71,6 +83,8 @@ void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
 	frameTime = frameClock.restart();
+
+	m_deathSound.setPosition(m_position.x, m_position.y, 0);
 
 	if (Player::GetInstance()->m_selected == false)
 	{
@@ -168,6 +182,12 @@ void Bear::Move() // Wander - Needs modifying - find out how m_direction is used
 
 		m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
 		m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+		m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+		m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+		m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 	}
 	timer--;
 }
@@ -223,20 +243,24 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 			m_attacking = false;
 		}
 	}
-
-	if (diff.x*diff.x + diff.y*diff.y < 30000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	if (diff.x*diff.x + diff.y*diff.y < 17000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
 	{
+		m_speed = 0;
 		m_animatedSprite.play(*m_currentAnimation);
 		lastHit = Clock::now();
 		m_attacking = true;
-		m_speed = 0;
 		Player::GetInstance()->DecreaseHealth(20);
+
+		m_injuredSound.setMinDistance(500);
+		//m_injuredSound.setPosition(m_position.x, m_position.y, 0);
+		m_injuredSound.play();
+		cout << "Playing Sound" << endl;
 	}
 	else if (diff.x*diff.x + diff.y*diff.y >= 170000)
 	{
 		Move();
 	}
-	else if (diff.x*diff.x + diff.y*diff.y >= 30000 && diff.x*diff.x + diff.y*diff.y < 170000)
+	else if (diff.x*diff.x + diff.y*diff.y >= 17000 && diff.x*diff.x + diff.y*diff.y < 170000)
 	{
 		m_speed = 4.5;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
