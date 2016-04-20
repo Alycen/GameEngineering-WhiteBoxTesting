@@ -66,6 +66,13 @@ private:
 
 	// Clock
 	sf::Clock frameClock;
+
+	//Sounds
+	sf::SoundBuffer m_hitBuffer;
+	sf::Sound m_hitSound;
+
+	sf::SoundBuffer m_deathBuffer;
+	sf::Sound m_deathSound;
 public:
 	static Player* GetInstance();
 	void Init(float, float);
@@ -106,6 +113,11 @@ public:
 	void DecreaseHealth(float val) {
 		cout << val << endl;
 		m_health -= val; 
+		int i = rand() % 3 + 1;
+		if (i == 1)
+		{
+			m_hitSound.play();
+		}
 	}
 	void IncreaseHealth(float val) { m_health += val; }
 	// Stamina

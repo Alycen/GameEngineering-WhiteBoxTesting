@@ -41,6 +41,8 @@ void UI_bar::Update()
 	{
 		m_mid_filling_sprite.setScale(m_fillingScale, m_scale);
 	}
+	if (m_fillingScale < 0)
+		m_fillingScale = 0;
 
 	m_left_sprite.setPosition(m_left_pos);
 	m_mid_sprite.setPosition(m_mid_pos);

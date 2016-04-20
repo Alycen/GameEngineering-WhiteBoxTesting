@@ -64,7 +64,7 @@ Bear::Bear(float x, float y)
 	m_injuredBuffer.loadFromFile("Assets/Audio/NPC/Bear/bearSound.wav");
 	m_injuredSound.setBuffer(m_injuredBuffer);
 	m_injuredSound.setRelativeToListener(false);
-	m_injuredSound.setPosition(200, 200, 0);
+	//m_injuredSound.setPosition(200, 200, 0);
 	m_injuredSound.setAttenuation(5);
 
 	m_deathBuffer.loadFromFile("Assets/Audio/NPC/Bear/bearDead.wav");
@@ -96,6 +96,7 @@ void Bear::Update(sf::Vector2f target)
 	{
 		m_selected = false;
 		m_dead = true;
+		m_attacking = false;
 	}
 	else
 	{
@@ -120,6 +121,13 @@ void Bear::Draw(sf::RenderWindow &win)
 	if (m_attacking)
 	{
 		win.draw(m_animatedSprite);
+	}
+
+	if (m_health == 0)
+	{
+		m_deathSound.setMinDistance(500);
+		m_deathSound.setPosition(m_position.x, m_position.y, 0);
+		m_deathSound.play();
 	}
 }
 
@@ -250,11 +258,6 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 		lastHit = Clock::now();
 		m_attacking = true;
 		Player::GetInstance()->DecreaseHealth(20);
-
-		m_injuredSound.setMinDistance(500);
-		//m_injuredSound.setPosition(m_position.x, m_position.y, 0);
-		m_injuredSound.play();
-		cout << "Playing Sound" << endl;
 	}
 	else if (diff.x*diff.x + diff.y*diff.y >= 170000)
 	{

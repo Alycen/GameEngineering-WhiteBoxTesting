@@ -105,8 +105,17 @@ void Player::Init(float x, float y)
 	m_animatedSprite.setOrigin(32, 14);
 	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
 
-	sf::Listener::setDirection(0, -1, 0);
+	sf::Listener::setDirection(0, 1, 0);
 	sf::Listener::setUpVector(0, 0, 1);
+
+	m_hitBuffer.loadFromFile("Assets/Audio/NPC/hit.wav");
+	m_hitSound.setBuffer(m_hitBuffer);
+	m_hitSound.setRelativeToListener(true);
+	m_hitSound.setVolume(70);
+
+	m_deathBuffer.loadFromFile("Assets/Audio/NPC/playerDead.wav");
+	m_deathSound.setBuffer(m_deathBuffer);
+	m_deathSound.setRelativeToListener(true);
 }
 
 // Load stats from txt file()
@@ -295,6 +304,11 @@ void Player::Update()
 	else if (!m_selected)
 	{
 		Camera::GetInstance()->setViewPosition(m_position);
+	}
+	if (m_health == 0)
+	{
+		m_deathSound.play();
+		//Reset();
 	}
 }
 

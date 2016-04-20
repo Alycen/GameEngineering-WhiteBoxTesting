@@ -66,10 +66,12 @@ protected:
 	// Sounds
 	sf::SoundBuffer m_injuredBuffer;
 	sf::Sound m_injuredSound;
-	//sf
+
 	sf::SoundBuffer m_deathBuffer;
 	sf::Sound m_deathSound;
 
+	sf::SoundBuffer m_soundBuffer;
+	sf::Sound m_sound;
 public:
 	Critter::Critter() { }
 	Critter::~Critter() { }
@@ -102,7 +104,13 @@ public:
 	virtual void DecreaseHealth(float val)
 	{
 		m_health -= val;
-		cout << m_health << endl;
+		int i = rand() % 50 + 1;
+		if (i == 1)
+		{
+			m_injuredSound.setMinDistance(500);
+			m_injuredSound.setPosition(m_position.x, m_position.y, 0);
+			m_injuredSound.play();
+		}
 	}
 
 	// AI Behaviour
