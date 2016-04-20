@@ -49,10 +49,16 @@ void Rabbit::Update(sf::Vector2f target)
 	if (m_health <= 0)
 	{ // Ded
 	  //cout << "IM DED" << endl;
+		m_selected = false;
+		//Player::GetInstance()->m_selected = false;
 	}
 	else
 	{
 		Flee(target);
+	}
+	if (m_health == 0)
+	{
+		//play dead sound
 	}
 }
 

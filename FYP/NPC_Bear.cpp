@@ -56,7 +56,16 @@ void Bear::Update(sf::Vector2f target)
 	{
 		m_selected = false;
 	}
-	Chase(target);
+	
+
+	if (m_health <= 0)
+	{
+		m_selected = false;
+	}
+	else
+	{
+		Chase(target);
+	}
 }
 
 void Bear::Draw(sf::RenderWindow &win)

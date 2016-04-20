@@ -35,6 +35,7 @@ protected:
 	int timer = rand() % 300 + 100;
 	int dir = rand() % 7 + 1;
 
+	sf::Color m_deathCol = sf::Color(255, 200, 200, 50);
 	sf::Color m_colour;
 	Emitter m_emitter;
 public:
@@ -53,6 +54,12 @@ public:
 		m_emitter.Draw(win);
 		if (m_selected)
 			win.draw(m_selectedSprite);
+		if (m_health <= 0)
+		{
+			m_bodySprite.setColor(m_deathCol);
+			m_headSprite.setColor(m_deathCol);
+			m_tailSprite.setColor(m_deathCol);
+		}
 		win.draw(m_bodySprite);
 		win.draw(m_headSprite);
 		win.draw(m_tailSprite);

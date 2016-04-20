@@ -80,10 +80,12 @@ void SceneManager::Draw(sf::RenderWindow &win)
 	if (m_currentScene == 0)
 	{
 		SplashScene::GetInstance()->Draw(win);
+		win.setView(win.getDefaultView());
 	}
 	else if (m_currentScene == 1)
 	{
 		MainMenuScene::GetInstance()->Draw(win);
+		win.setView(win.getDefaultView());
 	}
 	else if (m_currentScene == 2)
 	{

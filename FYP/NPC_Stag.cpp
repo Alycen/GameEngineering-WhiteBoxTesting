@@ -62,6 +62,8 @@ void Stag::Update(sf::Vector2f target)
 	if (m_health <= 0)
 	{ // Ded
 		//cout << "IM DED" << endl;
+		m_selected = false;
+		//Player::GetInstance()->m_selected = false;
 	}
 	else if (m_health < 70 && m_health >= 20)
 	{
@@ -74,6 +76,11 @@ void Stag::Update(sf::Vector2f target)
 	else 
 	{
 		Move();
+	}
+
+	if (m_health == 0)
+	{
+		//play dead sound
 	}
 }
 
