@@ -24,7 +24,7 @@ void GameScene::Init()
 
 	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
 
-	Player::GetInstance()->Init(3000,2500);
+	Player::GetInstance()->Init();
 	Camera::GetInstance()->Init(1400,900);
 
 	for (int i = 0; i < wolfNum; i++)

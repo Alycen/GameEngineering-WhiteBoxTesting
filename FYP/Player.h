@@ -8,6 +8,10 @@
 #include "Camera.h"
 //#include "NPC_Critter.h"
 #include "AnimateSprite.h"
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 #define DistanceOfNeck 35.5
 #define DistanceOfTail -35
@@ -75,7 +79,7 @@ private:
 	sf::Sound m_deathSound;
 public:
 	static Player* GetInstance();
-	void Init(float, float);
+	void Init();
 
 	void Update();
 	void Draw(sf::RenderWindow&);
@@ -140,6 +144,8 @@ public:
 	sf::Sprite GetAttackArea() { return m_attackArea; }
 
 	void Reset();
+	void Save();
+	void Load();
 	
 	~Player()
 	{

@@ -20,11 +20,8 @@ Player* Player::GetInstance()
 	}
 }
 
-void Player::Init(float x, float y)
+void Player::Init()
 {
-	m_position.x = x;
-	m_position.y = y;
-
 	// Player Body Sprite
 	// Body Texture
 	m_bodyTexture.loadFromFile("Assets/Graphics/Player/body1.png");
@@ -75,15 +72,7 @@ void Player::Init(float x, float y)
 	//m_barkBuffer.loadFromFile("Assets/Audio/Player/.wav");
 	//m_barkSound.setBuffer(m_barkBuffer);
 
-	// Stats
-	m_maxHealth = 100;
-	m_health = m_maxHealth;
-
-	m_maxStamina = 120;
-	m_stamina = m_maxStamina;
-
-	// Attack Damage 
-	m_attackDamage = 1.0f;
+	
 
 	// Attack animations
 	// texture
@@ -116,6 +105,7 @@ void Player::Init(float x, float y)
 	m_deathBuffer.loadFromFile("Assets/Audio/NPC/playerDead.wav");
 	m_deathSound.setBuffer(m_deathBuffer);
 	m_deathSound.setRelativeToListener(true);
+
 }
 
 // Load stats from txt file()
@@ -375,4 +365,73 @@ sf::Vector2f Player::Closest(sf::Vector2f pos, sf::Vector2f target)
 		y = target.y + 1800 * (dy / abs(dy));
 	}
 	return sf::Vector2f(x, y);
+}
+
+void Player::Save()
+{
+	ofstream savefile("SaveFiles/save1.txt");
+
+	if (savefile.is_open())
+	{
+		savefile << m_health << endl;
+		savefile << m_maxHealth << endl;
+		savefile << m_stamina << endl;
+		savefile << m_maxStamina << endl;
+		savefile << m_position.x << endl;
+		savefile << m_position.y << endl;
+		savefile << m_attackDamage << endl;
+
+		savefile.close();
+	}
+	else cout << "Can't write to save file";
+}
+
+void Player::Load()
+{
+	cout << "LOAD" << endl;
+	string line;
+	ifstream savefile("SaveFiles/save1.txt");
+	vector<string> data;
+
+	if (savefile.is_open())
+	{
+		while (!savefile.eof())
+		{
+			getline(savefile, line);
+			data.push_back(line);
+		}
+		savefile.close();
+		if (data.size() == 1)
+		{
+			Reset();
+			cout << m_health << "\n" << m_maxHealth << "\n" << m_stamina << "\n" << m_maxStamina << "\n" << m_position.x << "\n" << m_position.y << "\n" << m_attackDamage << endl;
+		}
+		else
+		{
+			m_health = stof(data.at(0));
+			m_maxHealth = stof(data.at(1));
+			m_stamina = stof(data.at(2));
+			m_maxStamina = stof(data.at(3));
+			m_position.x = stof(data.at(4));
+			m_position.y = stof(data.at(5));
+			m_attackDamage = stof(data.at(6));	
+		}
+	}
+	else cout << "Can't open save file";
+}
+
+void Player::Reset()
+{
+	m_position.x = 3000;
+	m_position.y = 2500;
+
+	// Stats
+	m_maxHealth = 100;
+	m_health = m_maxHealth;
+
+	m_maxStamina = 120;
+	m_stamina = m_maxStamina;
+
+	// Attack Damage 
+	m_attackDamage = 1.0f;
 }

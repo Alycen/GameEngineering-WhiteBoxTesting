@@ -35,7 +35,6 @@ void MainMenuScene::Init()
 	m_menu[0].setStyle(sf::Text::Bold);
 	m_menu[0].setColor(sf::Color::Cyan);
 	m_menu[0].setString("Play");
-	//m_menu[0].setPosition(sf::Vector2f(desktop.width / 6 , (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 1));
 	m_menu[0].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 1));
 
 	m_menu[1].setFont(m_font);
@@ -43,7 +42,6 @@ void MainMenuScene::Init()
 	m_menu[1].setStyle(sf::Text::Bold);
 	m_menu[1].setColor(sf::Color::White);
 	m_menu[1].setString("Settings");
-	//m_menu[1].setPosition(sf::Vector2f(desktop.width / 6, (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 2.5));
 	m_menu[1].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 2.5));
 
 	m_menu[2].setFont(m_font);
@@ -51,7 +49,6 @@ void MainMenuScene::Init()
 	m_menu[2].setStyle(sf::Text::Bold);
 	m_menu[2].setColor(sf::Color::White);
 	m_menu[2].setString("Exit");
-	//m_menu[2].setPosition(sf::Vector2f(desktop.width / 6, (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 4));
 	m_menu[2].setPosition(sf::Vector2f(200 / 2, 400 / (NUM_OF_ELEMENTS + 1) * 4));
 
 	m_menu[3].setFont(m_font);
@@ -114,11 +111,13 @@ void MainMenuScene::Update()
 			break;
 		case 3:
 			cout << "NEW GAME PRESSED" << endl;
-			//gameSelected = true;
 			SceneManager::GetInstance()->m_currentScene = 2;
+			//GameScene::GetInstance()->Reset();
 			break;
 		case 4:
 			cout << "LOAD GAME PRESSED" << endl;
+			Player::GetInstance()->Load();
+			SceneManager::GetInstance()->m_currentScene = 2;
 			break;
 		case 5:
 			cout << "BACK PRESSED" << endl;
