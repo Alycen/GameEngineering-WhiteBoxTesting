@@ -160,7 +160,7 @@ void GameScene::CheckMouseCollision()
 {
 	for each(Critter* c in npcs)
 	{
-		if (Collision::PixelPerfectTest(Player::GetInstance()->GetPawSprite(), c->GetSprite()) && InputManager::GetInstance()->IsMouseButtonDown(0))
+		if ((Collision::PixelPerfectTest(Player::GetInstance()->GetPawSprite(), c->GetSprite()) && InputManager::GetInstance()->IsMouseButtonDown(0)) && !c->m_dead)
 		{
 			for each(Critter* c1 in npcs) // Set all Critters in npcs list to false 
 			{ // This means that if one Critter is selected and the player select a new target, it will swap to th new target

@@ -44,6 +44,7 @@ public:
 
 	bool m_selected = false;
 	bool smellDetected = false;
+	bool m_dead = false;
 
 	virtual void Critter::Update()
 	{}

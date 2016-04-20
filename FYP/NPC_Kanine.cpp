@@ -59,7 +59,7 @@ void Kanine::Update(sf::Vector2f target)
 	if (m_health <= 0)
 	{ // Ded
 		m_selected = false;
-		//Player::GetInstance()->m_selected = false;
+		m_dead = true;
 	}
 	else if (m_health < 60 && m_health >= 20)
 	{
@@ -148,6 +148,12 @@ void Kanine::Draw(sf::RenderWindow &win)
 {
 	if (m_selected)
 		win.draw(m_selectedSprite);
+	if (m_health <= 0)
+	{
+		m_bodySprite.setColor(m_deathCol);
+		m_headSprite.setColor(m_deathCol);
+		m_tailSprite.setColor(m_deathCol);
+	}
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
 	win.draw(m_tailSprite);

@@ -50,7 +50,7 @@ void Rabbit::Update(sf::Vector2f target)
 	{ // Ded
 	  //cout << "IM DED" << endl;
 		m_selected = false;
-		//Player::GetInstance()->m_selected = false;
+		m_dead = true;
 	}
 	else
 	{
