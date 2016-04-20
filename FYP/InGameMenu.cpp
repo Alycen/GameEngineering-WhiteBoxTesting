@@ -82,19 +82,15 @@ void InGameMenu::Update()
 		switch (GetPressedItem())
 		{
 		case 0:
-			cout << "Resume" << endl;
 			SceneManager::GetInstance()->SetScene(2);
 			break;
 		case 1:
-			cout << "Save" << endl;
-			backSelected = false;
+			Player::GetInstance()->Save();
 			break;
 		case 2:
-			cout << "Main Menu" << endl;
 			SceneManager::GetInstance()->SetScene(1);
 			break;
 		case 3:
-			cout << "Exit Game" << endl;
 			MainMenuScene::GetInstance()->exitSelected = true;
 			break;
 		}

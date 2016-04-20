@@ -388,7 +388,6 @@ void Player::Save()
 
 void Player::Load()
 {
-	cout << "LOAD" << endl;
 	string line;
 	ifstream savefile("SaveFiles/save1.txt");
 	vector<string> data;
@@ -404,7 +403,6 @@ void Player::Load()
 		if (data.size() == 1)
 		{
 			Reset();
-			cout << m_health << "\n" << m_maxHealth << "\n" << m_stamina << "\n" << m_maxStamina << "\n" << m_position.x << "\n" << m_position.y << "\n" << m_attackDamage << endl;
 		}
 		else
 		{

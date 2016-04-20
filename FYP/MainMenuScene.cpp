@@ -106,21 +106,17 @@ void MainMenuScene::Update()
 			//gameSelected = false;
 			break;
 		case 2:
-			cout << "EXIT PRESSED" << endl;
 			exitSelected = true;
 			break;
 		case 3:
-			cout << "NEW GAME PRESSED" << endl;
+			GameScene::GetInstance()->Reset();
 			SceneManager::GetInstance()->m_currentScene = 2;
-			//GameScene::GetInstance()->Reset();
 			break;
 		case 4:
-			cout << "LOAD GAME PRESSED" << endl;
 			Player::GetInstance()->Load();
 			SceneManager::GetInstance()->m_currentScene = 2;
 			break;
 		case 5:
-			cout << "BACK PRESSED" << endl;
 			m_selectedItemIndex = 0;
 			first_scene = true;
 			break;

@@ -55,7 +55,7 @@ public:
 	void CheckLevelChange();
 	void CheckPlayerSmell();
 
-	void InGameMenu();
+	void Reset();
 
 	GameScene::~GameScene()
 	{

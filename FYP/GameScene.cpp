@@ -197,3 +197,30 @@ void GameScene::CheckPlayerAttack()
 		}
 	}
 }
+
+void GameScene::Reset()
+{
+	Player::GetInstance()->Reset();
+	npcs.clear();
+
+	for (int i = 0; i < wolfNum; i++)
+	{
+		npcs.push_back(new Kanine(1000, 1000));
+	}
+	for (int i = 0; i < bearNum; i++)
+	{
+		npcs.push_back(new Bear(2000, 2000));
+	}
+	for (int i = 0; i < stagNum; i++)
+	{
+		npcs.push_back(new Stag(3000, 3000));
+	}
+	for (int i = 0; i < doeNum; i++)
+	{
+		npcs.push_back(new Doe(3000, 3000));
+	}
+	for (int i = 0; i < rabbitNum; i++)
+	{
+		npcs.push_back(new Rabbit(4000, 4000));
+	}
+}

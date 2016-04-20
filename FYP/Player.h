@@ -115,7 +115,6 @@ public:
 	void SetMaxHealth(float h) { m_maxHealth = h; }
 	float GetMaxHealth() { return m_maxHealth; }
 	void DecreaseHealth(float val) {
-		cout << val << endl;
 		m_health -= val; 
 		int i = rand() % 3 + 1;
 		if (i == 1)
