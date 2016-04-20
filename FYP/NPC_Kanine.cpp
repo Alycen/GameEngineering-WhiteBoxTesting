@@ -60,6 +60,18 @@ Kanine::Kanine(float x, float y)
 
 	m_colour = sf::Color::White;
 	m_emitter = Emitter(m_position.x, m_position.y, m_colour);
+
+	//Sounds
+	m_injuredBuffer.loadFromFile("Assets/Audio/NPC/growl.wav");
+	m_injuredSound.setBuffer(m_injuredBuffer);
+	m_injuredSound.setRelativeToListener(false);
+	//m_injuredSound.setPosition(200, 200, 0);
+	m_injuredSound.setAttenuation(5);
+
+	m_deathBuffer.loadFromFile("Assets/Audio/NPC/playerDead.wav");
+	m_deathSound.setBuffer(m_deathBuffer);
+	m_deathSound.setRelativeToListener(false);
+	m_deathSound.setAttenuation(10);
 }
 
 void Kanine::Update()
@@ -77,6 +89,8 @@ void Kanine::Update(sf::Vector2f target)
 	//m_bodySprite.setPosition(m_position.x, m_position.y);
 	frameTime = frameClock.restart();
 
+	m_injuredSound.setPosition(m_position.x, m_position.y, 0);
+	m_deathSound.setPosition(m_position.x, m_position.y, 0);
 	if (!m_dead)
 	{
 		if (smellDetected)
@@ -106,6 +120,12 @@ void Kanine::Update(sf::Vector2f target)
 		else
 		{
 			Move();
+		}
+		if (m_health == 0)
+		{
+			m_deathSound.setMinDistance(500);
+			m_deathSound.setPosition(m_position.x, m_position.y, 0);
+			m_deathSound.play();
 		}
 	}
 }

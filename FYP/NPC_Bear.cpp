@@ -85,6 +85,7 @@ void Bear::Update(sf::Vector2f target)
 	m_bodySprite.setPosition(m_position);
 	frameTime = frameClock.restart();
 
+	m_injuredSound.setPosition(m_position.x, m_position.y, 0);
 	m_deathSound.setPosition(m_position.x, m_position.y, 0);
 	if (!m_dead)
 	{
@@ -110,6 +111,13 @@ void Bear::Update(sf::Vector2f target)
 		{
 			Chase(target);
 		}
+
+		if (m_health == 0)
+		{
+			m_deathSound.setMinDistance(500);
+			m_deathSound.setPosition(m_position.x, m_position.y, 0);
+			m_deathSound.play();
+		}
 	}
 }
 
@@ -131,13 +139,6 @@ void Bear::Draw(sf::RenderWindow &win)
 	if (m_attacking)
 	{
 		win.draw(m_animatedSprite);
-	}
-
-	if (m_health == 0)
-	{
-		m_deathSound.setMinDistance(500);
-		m_deathSound.setPosition(m_position.x, m_position.y, 0);
-		m_deathSound.play();
 	}
 }
 
