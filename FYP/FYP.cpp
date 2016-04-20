@@ -23,19 +23,9 @@
 // -----------------------------------------|
 // TO DO:									|
 // -----------------------------------------|
-// Sound							|	 1 h|
 // Settings							|	 2 h|
-// Particles						|	 2 h|
-// Popups							|	 1 h|
-// Player stay within level bounds	|	 2 h|
-// Level switch						|	 2 h|
-// Load / Save Level				|	 8 h|
-// LOADING SCENE!!!!!!!!			|	 1 h|
+// Loading Scene					|	 1 h|
 // -----------------------------------------|
-//											|
-// AI Behaviours 						    |
-// -> Attack() - cause damage				|
-// Dont go outside the level bounds			|
 // -----------------------------------------|
 
 int main()
@@ -61,15 +51,10 @@ int main()
 			InputManager::GetInstance()->UpdatePolledEvents(Event);
 
 			if (Event.type == sf::Event::Closed)
-				window.close();
-
-			//if ((Event.type == sf::Event::KeyPressed) && (Event.key.code == sf::Keyboard::Escape))
-			//	window.close();
-
-			/*if (Event.type == sf::Event::MouseButtonPressed && mouse.isButtonPressed(sf::Mouse::Left))
 			{
-				GameScene::GetInstance()->CheckMouseCollision();
-			}*/
+				window.close();
+			}
+
 			if (InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::LAlt) || InputManager::GetInstance()->IsKeyHeld(sf::Keyboard::RAlt))
 			{
 				GameScene::GetInstance()->CheckPlayerSmell();

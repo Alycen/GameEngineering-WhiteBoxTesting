@@ -152,16 +152,16 @@ void Stag::Move()
 		m_direction.y--;
 	}
 
-	else if (dir == 2 && m_position.x < 790) { // Border limits need modifying
+	else if (dir == 2 && m_position.x < 53000) { // Border limits need modifying
 		m_direction.x++;
 	}
-	else if (dir == 1 && m_position.x > 10) {
+	else if (dir == 1 && m_position.x > 30) {
 		m_direction.x--;
 	}
-	else if (dir == 4 && m_position.y < 590) {
+	else if (dir == 4 && m_position.y < 5300) {
 		m_direction.y++;
 	}
-	else if (dir == 3 && m_position.y > 10) {
+	else if (dir == 3 && m_position.y > 30) {
 		m_direction.y--;
 	}
 	else {
