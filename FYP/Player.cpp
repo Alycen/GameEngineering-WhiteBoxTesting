@@ -122,6 +122,7 @@ void Player::Init()
 void Player::Update()
 {
 	sf::Listener::setPosition(m_position.x, m_position.y, 0);
+	cout << m_health << endl;
 	if (m_health > m_maxHealth)
 		m_health = m_maxHealth;
 	if (m_stamina > m_maxStamina)
@@ -299,13 +300,13 @@ void Player::Update()
 	{
 		Camera::GetInstance()->setViewPosition(m_position);
 	}
-	if (m_health == 0)
+	if (m_health <= 0)
 	{
 		m_deathSound.play();
 		Reset();
 	}
 
-	if (m_health < m_maxHealth)
+	if (m_health < m_maxHealth) // Players health slowly regens
 	{
 		m_health += 0.025f;
 	}
@@ -315,26 +316,6 @@ void Player::Smell()
 {
 	// Reset all smell variables
 	smellScale = 0.001f;
-}
-
-void Player::Dash()
-{
-	// No Damage
-}
-
-void Player::Bash()
-{
-	// Damage = 5; (Have it be a multiplier)
-}
-
-void Player::Bite()
-{
-	// Damage = 15
-}
-
-void Player::Slash()
-{
-	// Damage = 20
 }
 
 void Player::Draw(sf::RenderWindow &win)
@@ -427,7 +408,7 @@ void Player::Load()
 	else cout << "Can't open save file";
 }
 
-void Player::Reset()
+void Player::Reset() // If you die or start a new game, your stats reset
 {
 	m_position.x = 3000;
 	m_position.y = 2500;

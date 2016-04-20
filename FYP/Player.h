@@ -84,11 +84,7 @@ public:
 	void Update();
 	void Draw(sf::RenderWindow&);
 
-	void Smell(); // Alt Key / Left Bumper
-	void Dash(); // Space Bar / Right bumper?
-	void Bash();
-	void Bite(); // Right Click / Right Trigger
-	void Slash(); // Left Click / Left Trigger
+	void Smell(); // Alt Key 
 
 	bool m_selected = false;
 	bool isAttacking() { return m_attacking; }

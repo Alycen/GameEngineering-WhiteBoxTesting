@@ -184,7 +184,7 @@ void Kanine::Chase(sf::Vector2f target)
 		}
 	}
 
-	if (diff.x*diff.x + diff.y*diff.y < 15000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	if (Collision::CircleTest(m_headSprite, Player::GetInstance()->GetSprite()) && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
 	{
 		m_animatedSprite.play(*m_currentAnimation);
 		lastHit = Clock::now();
