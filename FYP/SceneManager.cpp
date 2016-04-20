@@ -34,7 +34,7 @@ void SceneManager::Init()
 	}
 
 	m_backgroundMusic.setVolume(20);
-	m_backgroundMusic.play();
+	//m_backgroundMusic.play();
 	m_backgroundMusic.setLoop(true);
 }
 

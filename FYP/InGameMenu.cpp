@@ -99,6 +99,11 @@ void InGameMenu::Update()
 			break;
 		}
 	}
+
+	if (InputManager::GetInstance()->IsKeyDown(sf::Keyboard::Escape))
+	{
+		SceneManager::GetInstance()->SetScene(2);
+	}
 }
 
 void InGameMenu::Draw(sf::RenderWindow &win)
