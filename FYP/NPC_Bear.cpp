@@ -37,6 +37,28 @@ Bear::Bear(float x, float y)
 	m_selectedSprite.setTexture(m_selectedTex);
 	m_selectedSprite.setOrigin(m_selectedSprite.getLocalBounds().width / 2, m_selectedSprite.getLocalBounds().height / 2);
 	m_selectedSprite.setPosition(m_position.x, m_position.y);
+
+	// Attack animations
+	// texture
+	m_slashTexture.loadFromFile("Assets/Graphics/Actions/Slash.png");
+	m_attackAreaTex.loadFromFile("Assets/Graphics/Actions/attackArea.png");
+	m_attackArea.setTexture(m_attackAreaTex);
+	// animation
+	m_slashAnimation.setSpriteSheet(m_slashTexture);
+	m_slashAnimation.addFrame(sf::IntRect(0, 144, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 108, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 72, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 36, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+	m_slashAnimation.addFrame(sf::IntRect(0, 0, 64, 35));
+
+	m_currentAnimation = &m_slashAnimation;
+
+	m_animatedSprite = AnimatedSprite(sf::seconds(0.065), true, false);
+	m_animatedSprite.setOrigin(32, 14);
+	m_animatedSprite.setPosition(m_position.x, m_position.y - DistanceOfAttack);
+
+	m_colour = sf::Color::Red;
 }
 
 void Bear::Update()
@@ -48,10 +70,8 @@ void Bear::Update()
 void Bear::Update(sf::Vector2f target)
 {
 	m_bodySprite.setPosition(m_position);
-	//m_boundingCircle.setPosition(m_position);
-	
-	//Move();
-	//Flee(target);
+	frameTime = frameClock.restart();
+
 	if (Player::GetInstance()->m_selected == false)
 	{
 		m_selected = false;
@@ -82,6 +102,11 @@ void Bear::Draw(sf::RenderWindow &win)
 	win.draw(m_bodySprite);
 	win.draw(m_headSprite);
 	win.draw(m_tailSprite);
+
+	if (m_attacking)
+	{
+		win.draw(m_animatedSprite);
+	}
 }
 
 void Bear::Move() // Wander - Needs modifying - find out how m_direction is used in flee and modify for this
@@ -182,11 +207,28 @@ void Bear::Flee(sf::Vector2f target)	// Run from target
 
 void Bear::Chase(sf::Vector2f target)	// Chase target
 {
+	time_t now;
+
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
-	if (diff.x*diff.x + diff.y*diff.y < 30000)
+	if (m_attacking)
 	{
+		m_animatedSprite.update(frameTime);
+		m_animatedSprite.move(m_direction * frameTime.asSeconds());
+
+		if (!m_animatedSprite.isPlaying())
+		{
+			m_attacking = false;
+		}
+	}
+
+	if (diff.x*diff.x + diff.y*diff.y < 30000 && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
+	{
+		m_animatedSprite.play(*m_currentAnimation);
+		lastHit = Clock::now();
+		m_attacking = true;
 		m_speed = 0;
+		Player::GetInstance()->DecreaseHealth(20);
 	}
 	else if (diff.x*diff.x + diff.y*diff.y >= 170000)
 	{
@@ -215,13 +257,14 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 
 			m_tailSprite.setPosition(m_position + (normalised * (float)DistanceOfTail));
 			m_tailSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_animatedSprite.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+			m_animatedSprite.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
+
+			m_attackArea.setPosition(m_position + (normalised * (float)DistanceOfAttack));
+			m_attackArea.setRotation(atan2(normalised.y, normalised.x) * 180 / (22.0f / 7.0f) + 90.0f);
 		}
 	}
-}
-
-void Bear::Attack()	//
-{
-
 }
 
 void Bear::KeepDistance(sf::Vector2f target)

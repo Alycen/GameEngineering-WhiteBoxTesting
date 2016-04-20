@@ -6,6 +6,7 @@
 
 #define DistanceOfNeck 60.5
 #define DistanceOfTail -65
+#define DistanceOfAttack 110
 
 class Bear : public Critter
 {

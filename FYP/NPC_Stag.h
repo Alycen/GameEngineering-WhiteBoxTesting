@@ -18,7 +18,6 @@ public:
 	void Move();
 	void Chase(sf::Vector2f);
 	void Flee(sf::Vector2f);
-	void Attack(sf::Time);
 	void Draw(sf::RenderWindow&);
 };
 
