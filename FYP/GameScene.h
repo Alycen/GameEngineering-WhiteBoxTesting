@@ -36,6 +36,10 @@ private:
 	tmx::TileMap* m_map;
 
 	bool inGameMenu = false;
+	int level = 1;
+
+	sf::Texture m_levelExitTex;
+	sf::Sprite m_levelExit1, m_levelExit2, m_levelExit3;
 public:
 	static GameScene* GetInstance();
 

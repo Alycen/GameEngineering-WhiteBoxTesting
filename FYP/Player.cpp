@@ -298,7 +298,7 @@ void Player::Update()
 	if (m_health == 0)
 	{
 		m_deathSound.play();
-		//Reset();
+		Reset();
 	}
 }
 

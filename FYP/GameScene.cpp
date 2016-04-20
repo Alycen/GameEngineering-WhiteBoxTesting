@@ -22,7 +22,7 @@ void GameScene::Init()
 {
 	rabbitNum = 4;
 
-	m_map = new tmx::TileMap("Assets/Tiled/test.tmx");
+	m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
 
 	Player::GetInstance()->Init();
 	Camera::GetInstance()->Init(1400,900);
@@ -50,12 +50,44 @@ void GameScene::Init()
 
 	m_healthbar = new UI_bar(20, "Health", Player::GetInstance()->GetHealth()); 
 	m_staminabar = new UI_bar(50, "Stamina", Player::GetInstance()->GetStamina());
+
+	m_levelExitTex.loadFromFile("Assets/Graphics/Actions/levelExit.png");
+	
+	m_levelExit1.setTexture(m_levelExitTex);
+	m_levelExit2.setTexture(m_levelExitTex);
+	m_levelExit3.setTexture(m_levelExitTex);
 }
 
 void GameScene::Update()
 {
 	Player::GetInstance()->Update();
 	CheckMouseCollision();
+	CheckLevelChange();
+
+	if (level == 1)
+	{
+		m_levelExit1.setPosition(-1000, -1000);
+		m_levelExit2.setPosition(40, 2500);
+		m_levelExit3.setPosition(5250, 2500);
+
+		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
+	}
+	else if (level == 2)
+	{
+		m_levelExit1.setPosition(5250, 2500);
+		m_levelExit2.setPosition(-2000, -2000);
+		m_levelExit3.setPosition(-1000, -1000);
+
+		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
+	}
+	else if (level == 3)
+	{
+		m_levelExit1.setPosition(40, 2500);
+		m_levelExit2.setPosition(-2000, -2000);
+		m_levelExit3.setPosition(-1000, -1000);
+
+		m_map = new tmx::TileMap("Assets/Tiled/map" + to_string(level) + ".tmx");
+	}
 
 	for each (Critter* c in npcs)
 	{
@@ -102,6 +134,10 @@ void GameScene::Draw(sf::RenderWindow &win)
 	{
 		c->Draw(win);
 	}
+
+	win.draw(m_levelExit1);
+	win.draw(m_levelExit2);
+	win.draw(m_levelExit3);
 
 	Player::GetInstance()->Draw(win);
 
@@ -177,14 +213,47 @@ void GameScene::CheckPlayerSmell()
 
 void GameScene::CheckLevelChange()
 {
-	/*Check if player collides with level switch 
+	// Check if the player is switching to level 1
+	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit1))
 	{
-		level switch.getID()
-		m_map = new tmx::TileMap("Assets/Tiled/"+std::to_string(levelswitch.getID()+".tmx");
-		if (Player::GetInstance()->GetPosition() != levelSwitch.getSpawn(levelSwitch.GetID()
-			Player::GetInstance()->SetPosition(levelSwitch.getSpawn(levelSwitch.GetID());
-	}*/
-	
+		if (level == 2)
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit1.getPosition().x - 100, 2500));
+		else
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit1.getPosition().x + 100, 2500));
+
+		level = 1;
+
+		wolfNum = 5;
+		rabbitNum = 6;
+	}
+	// Check if the player is switching to level 2
+	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit2))
+	{
+		if (level == 1)
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x + 100, 2500));
+		else
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x - 100, 2500));
+
+		level = 2;
+
+		bearNum = 5;
+		rabbitNum = 4;
+		doeNum = 3;
+	}
+	// Check if the player is switching to level 3
+	if (Collision::BoundingBoxTest(Player::GetInstance()->GetSprite(), m_levelExit3))
+	{
+		if (level == 1)
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x - 100, 2500));
+		else
+			Player::GetInstance()->SetPosition(sf::Vector2f(m_levelExit2.getPosition().x + 100, 2500));
+
+		level = 3;
+
+		stagNum = 2;
+		doeNum = 6;
+		rabbitNum = 4;
+	}
 }
 
 void GameScene::CheckPlayerAttack()
