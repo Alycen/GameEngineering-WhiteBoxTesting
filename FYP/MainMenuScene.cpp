@@ -114,8 +114,8 @@ void MainMenuScene::Update()
 			break;
 		case 3:
 			cout << "NEW GAME PRESSED" << endl;
-			gameSelected = true;
-			//SceneManager::GetInstance()->m_currentScene = 2;
+			//gameSelected = true;
+			SceneManager::GetInstance()->m_currentScene = 2;
 			break;
 		case 4:
 			cout << "LOAD GAME PRESSED" << endl;

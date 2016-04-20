@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "SceneManager.h"
 
 bool GameScene::instanceFlag = false;
 GameScene* GameScene::instance = NULL;

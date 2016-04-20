@@ -5,7 +5,7 @@
 #include "SFML\OpenGL.hpp"
 #include "InputManager.h"
 
-#define NUM_OF_ELEMENTS 4
+#define NUM_ELEMENTS 4
 
 class InGameMenu
 {
@@ -15,7 +15,7 @@ private:
 
 	int m_selectedItemIndex;
 	sf::Font m_font;
-	sf::Text m_menu[NUM_OF_ELEMENTS];
+	sf::Text m_menu[NUM_ELEMENTS];
 
 	InGameMenu() {}
 

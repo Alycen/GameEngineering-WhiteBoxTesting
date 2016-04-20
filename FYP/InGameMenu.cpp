@@ -33,29 +33,28 @@ void InGameMenu::Init()
 	m_menu[0].setStyle(sf::Text::Bold);
 	m_menu[0].setColor(sf::Color::Cyan);
 	m_menu[0].setString("Resume");
-	m_menu[0].setPosition(sf::Vector2f(desktop.width / 2, 400 / (NUM_OF_ELEMENTS + 1) * 1));
+	m_menu[0].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 1));
 
 	m_menu[1].setFont(m_font);
 	m_menu[1].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[1].setStyle(sf::Text::Bold);
 	m_menu[1].setColor(sf::Color::White);
 	m_menu[1].setString("Save");
-	m_menu[1].setPosition(sf::Vector2f(desktop.width, 400 / (NUM_OF_ELEMENTS + 1) * 2.5));
+	m_menu[1].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 2.5));
 
 	m_menu[2].setFont(m_font);
 	m_menu[2].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[2].setStyle(sf::Text::Bold);
 	m_menu[2].setColor(sf::Color::White);
 	m_menu[2].setString("MainMenu");
-	//m_menu[2].setPosition(sf::Vector2f(desktop.width / 6, (desktop.height / 2) / (NUM_OF_ELEMENTS + 1) * 4));
-	m_menu[2].setPosition(sf::Vector2f(desktop.width, 400 / (NUM_OF_ELEMENTS + 1) * 4));
+	m_menu[2].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 4));
 
 	m_menu[3].setFont(m_font);
 	m_menu[3].setScale(sf::Vector2f(1.5, 1.5));
 	m_menu[3].setStyle(sf::Text::Bold);
 	m_menu[3].setColor(sf::Color::White);
 	m_menu[3].setString("Exit Game");
-	m_menu[3].setPosition(sf::Vector2f(desktop.width, 400 / (NUM_OF_ELEMENTS + 1) * 5.5));
+	m_menu[3].setPosition(sf::Vector2f((desktop.width / 2) - 200, 400 / (NUM_ELEMENTS + 1) * 5.5));
 
 	m_selectedItemIndex = 0;
 
@@ -84,15 +83,19 @@ void InGameMenu::Update()
 		{
 		case 0:
 			cout << "Resume" << endl;
+			SceneManager::GetInstance()->SetScene(2);
 			break;
 		case 1:
 			cout << "Save" << endl;
+			backSelected = false;
 			break;
 		case 2:
 			cout << "Main Menu" << endl;
+			SceneManager::GetInstance()->SetScene(1);
 			break;
 		case 3:
 			cout << "Exit Game" << endl;
+			MainMenuScene::GetInstance()->exitSelected = true;
 			break;
 		}
 	}
@@ -101,7 +104,7 @@ void InGameMenu::Update()
 void InGameMenu::Draw(sf::RenderWindow &win)
 {
 	//win.draw(m_sprite);
-	for (int i = 0; i < NUM_OF_ELEMENTS; i++)
+	for (int i = 0; i < NUM_ELEMENTS; i++)
 	{
 		win.draw(m_menu[i]);
 	}
@@ -119,7 +122,7 @@ void InGameMenu::MoveUp()
 
 void InGameMenu::MoveDown()
 {
-	if (m_selectedItemIndex + 1 < NUM_OF_ELEMENTS)
+	if (m_selectedItemIndex + 1 < NUM_ELEMENTS)
 	{
 		m_menu[m_selectedItemIndex].setColor(sf::Color::White);
 		m_selectedItemIndex++;
