@@ -421,5 +421,5 @@ void Player::Reset() // If you die or start a new game, your stats reset
 	m_stamina = m_maxStamina;
 
 	// Attack Damage 
-	m_attackDamage = 0.9f;
+	m_attackDamage = 1.0f;
 }

@@ -103,7 +103,7 @@ void Bear::Update(sf::Vector2f target)
 			m_selected = false;		// Bear is not selected
 		}
 
-		if (m_health <= 0)
+		if (m_health < 0)
 		{
 			m_selected = false;
 			m_dead = true;
@@ -116,7 +116,7 @@ void Bear::Update(sf::Vector2f target)
 			m_deathSound.setPosition(m_position.x, m_position.y, 0);
 			m_deathSound.play();
 
-			Player::GetInstance()->IncreaseHealth(40);
+			Player::GetInstance()->IncreaseHealth(30);
 			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 5);
 			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 5);
 			Player::GetInstance()->SetAttackDamage(Player::GetInstance()->GetAttackDamage() + 0.2f);
@@ -220,7 +220,7 @@ void Bear::Flee(sf::Vector2f target)	// Run from target
 	target = Closest(m_position, target);
 	sf::Vector2f diff = m_position - target;
 	if (diff.x*diff.x + diff.y*diff.y > 200000)
-		m_speed = 0;
+		m_speed = 1;
 	else
 	{
 		m_speed = 3;
@@ -272,7 +272,7 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 	}
 	else if (diff.x*diff.x + diff.y*diff.y >= 15000 && diff.x*diff.x + diff.y*diff.y < 170000)
 	{
-		m_speed = 4.5;
+		m_speed = 5;
 		m_rotation = atan2(target.y - m_position.y, target.x - m_position.x);
 		m_direction = sf::Vector2f(cos(m_rotation), sin(m_rotation));
 		m_position += m_direction * m_speed;
@@ -303,7 +303,7 @@ void Bear::Chase(sf::Vector2f target)	// Chase target
 	}
 	else if (Collision::CircleTest(m_headSprite, Player::GetInstance()->GetSprite()) && std::chrono::duration_cast<milliseconds>(Clock::now() - lastHit).count() > 1000)
 	{
-		m_speed = 0;
+		m_speed = 1;
 		m_animatedSprite.play(*m_currentAnimation);
 		lastHit = Clock::now();
 		m_attacking = true;
