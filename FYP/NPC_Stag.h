@@ -2,6 +2,7 @@
 #define _NPC_STAG_
 
 #include "NPC_Critter.h"
+#include <assert.h>
 
 #define DistanceOfNeck 58
 #define DistanceOfTail -55
@@ -15,6 +16,8 @@ public:
 	Stag();
 	Stag(float, float);
 	void Update(sf::Vector2f);
+	void CheckStag(sf::Vector2f);
+	void CheckStagUnitTest(sf::Vector2f);
 	void Move();
 	void Chase(sf::Vector2f);
 	void Flee(sf::Vector2f);

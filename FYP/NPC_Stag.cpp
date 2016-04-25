@@ -81,49 +81,117 @@ void Stag::Update(sf::Vector2f target)
 
 	m_injuredSound.setPosition(m_position.x, m_position.y, 0);
 	m_deathSound.setPosition(m_position.x, m_position.y, 0);
-	if (!m_dead)
-	{
-		if (smellDetected)
-		{
-			m_emitter.SetAlive(true);
-			m_emitter.SetPosition(m_position);
-		}
-		m_emitter.Update(target);
 
-		if (Player::GetInstance()->m_selected == false)
+
+	#ifdef DEBUG
+		CheckStagUnitTest(target);
+	#else
+		CheckStag(target);
+	#endif
+}
+
+void Stag::CheckStag(sf::Vector2f target)
+{
+	if (!m_dead) 
+	{
+		m_emitter.Update(target); 
+
+		if (smellDetected) 
 		{
-			m_selected = false;
+			m_emitter.SetAlive(true); 
+			m_emitter.SetPosition(m_position); 
 		}
-	
+
+		if (Player::GetInstance()->m_selected == false) 
+		{
+			m_selected = false; 
+		}
+
 		if (m_health <= 0)
-		{ 
+		{
 			m_selected = false;
-			m_dead = true;
+			m_dead = true; 
 		}
-		else if (m_health < 70 && m_health >= 20) // If the player attacked the Stag
+		else if (m_health < 70 && m_health >= 20) // If the player attacked the Stag 
 		{
-			Chase(target);
+			Chase(target); 
 		}
-		else if (m_health < 20 && m_health > 0)
+		else if (m_health < 20 && m_health > 0) 
 		{
-			Flee(target);
+			Flee(target); 
 		}
 		else 
 		{
-			Move();
+			Move(); 
 		}
 
-		if (m_health == 0)
+		if (m_health == 0) 
 		{
-			m_deathSound.setMinDistance(500);
-			m_deathSound.setPosition(m_position.x, m_position.y, 0);
-			m_deathSound.play();
+			m_deathSound.setMinDistance(500); 
+			m_deathSound.setPosition(m_position.x, m_position.y, 0); 
+			m_deathSound.play(); 
 
-			Player::GetInstance()->IncreaseHealth(20);
-			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 3);
-			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 3);
+			Player::GetInstance()->IncreaseHealth(20); 
+			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 3); 
+			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 3); 
 		}
 	}
+}
+
+void Stag::CheckStagUnitTest(sf::Vector2f target)
+{
+	if (!m_dead) // 1
+	{
+		assert(!m_dead);
+		m_emitter.Update(target); //2
+
+		if (smellDetected) //3
+		{
+			assert(smellDetected);
+			m_emitter.SetAlive(true); //4
+			m_emitter.SetPosition(m_position); // 5
+		}
+
+		if (Player::GetInstance()->m_selected == false) //6
+		{
+			assert(Player::GetInstance()->m_selected == false);
+			m_selected = false; //7
+		}
+
+		if (m_health <= 0) //8
+		{
+			assert(m_health <= 0);
+			m_selected = false; //9
+			m_dead = true; //10
+		}
+		else if (m_health < 70 && m_health >= 20) // If the player attacked the Stag - 11
+		{
+			assert(m_health < 70 && m_health >= 20);
+			Chase(target); //12
+		}
+		else if (m_health < 20 && m_health > 0) //13
+		{
+			assert(m_health < 20 && m_health > 0);
+			Flee(target); //14
+		}
+		else //15
+		{
+			assert(m_health == 70);
+			Move(); //16
+		}
+
+		if (m_health == 0) // 17
+		{
+			assert(m_health == 0);
+			m_deathSound.setMinDistance(500); //18
+			m_deathSound.setPosition(m_position.x, m_position.y, 0); //19
+			m_deathSound.play(); //20
+
+			Player::GetInstance()->IncreaseHealth(20); //21
+			Player::GetInstance()->SetMaxHealth(Player::GetInstance()->GetMaxHealth() + 3); //22
+			Player::GetInstance()->SetMaxStamina(Player::GetInstance()->GetMaxStamina() + 3); //23
+		}
+	}//24
 }
 
 void Stag::Move()
