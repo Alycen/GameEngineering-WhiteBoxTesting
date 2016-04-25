@@ -122,7 +122,7 @@ void Player::Init()
 void Player::Update()
 {
 	sf::Listener::setPosition(m_position.x, m_position.y, 0);
-	cout << m_health << endl;
+
 	if (m_health > m_maxHealth)
 		m_health = m_maxHealth;
 	if (m_stamina > m_maxStamina)

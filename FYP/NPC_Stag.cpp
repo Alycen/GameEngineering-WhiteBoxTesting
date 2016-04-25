@@ -77,7 +77,6 @@ Stag::Stag(float x, float y)
 
 void Stag::Update(sf::Vector2f target)
 {
-	//m_bodySprite.setPosition(m_position);
 	frameTime = frameClock.restart();
 
 	m_injuredSound.setPosition(m_position.x, m_position.y, 0);
